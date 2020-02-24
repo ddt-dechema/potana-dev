@@ -1,1 +1,1 @@
-See live example: https://Carbon4PUR.github.io/mapping-dev/examples/min_map/index.html
+See live example: https://ddt-dechema.github.io/potana-dev/
