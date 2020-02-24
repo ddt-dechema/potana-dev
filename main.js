@@ -76,7 +76,7 @@ function showMap() {
 
 }
 
-/*zum einladen von geoJson Daten */
+/*zum einladen von geoJson-Linien Daten */
 function showDataLayer(data) {
     map.lineLayer = L.geoJson(data, {
         style: function (feature) {
@@ -104,7 +104,7 @@ function showDataLayer(data) {
 
 document.addEventListener('DOMContentLoaded', (event) => {
     showMap()
-/* zum einladen von GeoJson daten*/
+/* zum einladen von GeoJson-Linien daten*/
     fetch('lines.json')
     .then(
         (response) => {
