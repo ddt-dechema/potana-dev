@@ -77,7 +77,7 @@ function showMap() {
 }
 
 /*zum einladen von geoJson-Linien Daten */
-function showDataLayer(data) {
+function showLineLayer(data) {
     map.lineLayer = L.geoJson(data, {
         style: function (feature) {
             return {
@@ -127,7 +127,7 @@ function addPopupHandler(feature) {
 document.addEventListener('DOMContentLoaded', (event) => {
     showMap()
 /* zum einladen von GeoJson-Linien daten*/
-    fetch('lines.json')
+    fetch('lines.json'),
 /* zum einladen von GeoJson-Punktquellen daten*/
     fetch('data.json')
     .then(
@@ -138,4 +138,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
             console.error(reject)
         })
     .then(showDataLayer)
+    .then(showLineLayer)
 })
