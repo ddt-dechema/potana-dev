@@ -31,7 +31,7 @@ function showMap() {
             light: {
                 layer: L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap<\/a>, &copy; <a href="https://carto.com/attribution">CARTO<\/a>, <a href="http://prtr.ec.europa.eu">E-PRTR</a>'
-                }).addto(map),
+                }).addTo(map),
                 /* ".addto(map)" hinzufügen, wenn man das defaultmäßig haben will */
                 button: document.getElementById('map-layout-light')
             },
