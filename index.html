@@ -165,7 +165,7 @@
 		<div class="sidebar-content" id="sidebarcontent">
 			<div class="sidebar-pane" id="info-content">
 				<h1 class="sidebar-header">
-					Carbon4PUR replication map
+					Kopernikus P2X - Potenzialanalyse
 					<span class="sidebar-close" id="sidebar-close-info-span"><svg class="svgicon" viewbox="0 0 32 32">
 							<use xlink:href="#icon-play3"></use>
 						</svg></span>
@@ -193,7 +193,7 @@
 					zu ändern:
 				</p>
 				<div class="buttons">
-						<button class="button is-small" style="width: 38%;" id="ethylene-pipeline-button">(Show ethylene pipelines)</button>
+						<button class="button is-small" style="width: 38%;" id="pv-button">(Show pv potentials)</button>
 				</div>
 			</div>
 			<div class="sidebar-pane" id="wind-content">
@@ -208,7 +208,7 @@
 					zu ändern:
 				</p>
 				<div class="buttons">
-						<button class="button is-small" style="width: 38%;" id="ethylene-pipeline-button">(Show ethylene pipelines)</button>
+						<button class="button is-small" style="width: 38%;" id="wind-button">(Show wind potentials)</button>
 				</div>
 			</div>
 			<div class="sidebar-pane" id="water-content">
@@ -223,7 +223,7 @@
 					zu ändern:
 				</p>
 				<div class="buttons">
-						<button class="button is-small" style="width: 38%;" id="ethylene-pipeline-button">(Show ethylene pipelines)</button>
+						<button class="button is-small" style="width: 38%;" id="water-button">(Show water potentials)</button>
 				</div>
 			</div>
 			<div class="sidebar-pane" id="emitter-content">
@@ -237,8 +237,13 @@
 				<p>Hier kann man erklären, was die Karte macht. Als kleines Gimmick hier ein Button, um das Kartenlayout
 					zu ändern:
 				</p>
-				<div class="buttons">
-						<button class="button is-small" style="width: 38%;" id="ethylene-pipeline-button">(Show ethylene pipelines)</button>
+				<div class="filterGroup">
+					Emission type:
+					<div class="buttons" id="gas-type-buttons">
+						<a id="pollutant-filter-CO2-button"
+							class="button is-activated is-small"><span>CO<sub>2</sub></span></a>
+						<a id="pollutant-filter-CO-button" class="button is-activated is-small">CO</a>
+					</div>
 				</div>
 			</div>
 			<div class="sidebar-pane" id="infra-content">
@@ -253,8 +258,8 @@
 					zu ändern:
 				</p>
 				<div class="buttons">
-						<button class="button is-small" style="width: 38%;" id="ethylene-pipeline-button">(Show pipelines)</button>
-						<button class="button is-small" style="width: 38%;" id="propylene-pipeline-button">(Show pipelines)</button>
+						<button class="button is-small" style="width: 38%;" id="ethylene-button">(Show ethylene pipelines)</button>
+						<button class="button is-small" style="width: 38%;" id="propylene-button">(Show propylene pipelines)</button>
 				</div>
 			</div>
 			<div class="sidebar-pane" id="legal-content">

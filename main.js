@@ -78,17 +78,23 @@ function showMap() {
 
 /***********************/
 /* Einladen der Button-Informationen */
-let ethylenePipelineButton = document.getElementById('ethylene-pipeline-button'),
-propylenePipelineButton = document.getElementById('propylene-pipeline-button')
-/* Farbe der Pipelines*/
+let ethyleneButton = document.getElementById('ethylene-button'),
+propyleneButton = document.getElementById('propylene-button'),
+pvButton = document.getElementById('pv-button'),
+windButton = document.getElementById('wind-button'),
+waterButton = document.getElementById('water-button'),
+/*emitterButton = document.getElementById('emitter-button'),*/
+pollutantFilterCO2Button = document.getElementById('pollutant-filter-CO2-button'),
+pollutantFilterCOButton = document.getElementById('pollutant-filter-CO-button')
 
+/* Farbe der Pipelines*/
 function pipelineStyle(feature) {
     return {
         color: feature.properties.type[1] == 54 ? "green" : "red", //Outline color
     };
 }
 
-/* toggle-bility der Daten */
+/* toggle-bility von Linien Daten */
 function togglePipeline(event, type) {
     event.target.classList.toggle('is-info')
     if (event.target.classList.contains('is-info')) {
@@ -110,13 +116,33 @@ function togglePipeline(event, type) {
     }
 
 }
-ethylenePipelineButton.addEventListener('click', (event) => {
+ethyleneButton.addEventListener('click', (event) => {
     togglePipeline(event, 'ethylene')
 })
-propylenePipelineButton.addEventListener('click', event => {
+propyleneButton.addEventListener('click', event => {
     togglePipeline(event, 'propylene')
 })
 
+
+/* toggle-bility von Punktquellen Daten */
+function toggleEmitter(button) {
+    return function () {
+        button.classList.toggle('is-activated')
+        if (button.classList.contains('is-activated')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
+        else button.style.background = '#fff'
+        getFilteredTotals()
+        toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
+    }
+}
+function toggleFilterEmittersByPollutant(pollutant) {
+    if (map.hasLayer(markers[pollutant])) {
+        map.removeLayer(markers[pollutant])
+    } else {
+        map.addLayer(markers[pollutant])
+    }
+}
+pollutantFilterCO2Button.addEventListener('click', returnTogglePollutantFilter(pollutantFilterCO2Button))
+pollutantFilterCOButton.addEventListener('click', returnTogglePollutantFilter(pollutantFilterCOButton))
 
 /*zum einladen von geoJson-Linien Daten */
 function showLineLayer(data) {
@@ -188,7 +214,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         })
     .then(showLineLayer)*/
 /* zum einladen von GeoJson-Punktquellen daten*/
-    fetch('data.json')
+    fetch('emissions.json')
     .then(
         (response) => {
             return response.json()
