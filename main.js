@@ -1,43 +1,108 @@
-var map = L.map('map').setView([51.505, -0.09], 13);
+// define global variables
+let map
 
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+function showMap() {
+    /* allows us to create filters within a Leaflet GeoJSON layer */
+    L.GeoJSON.include({
+        setFilter: function (originalData, _) {
+            this.options.filter = _
+            this.clearLayers()
+            this.addData(originalData)
+            return this
+        }
+    })
 
-L.marker([51.5, -0.09]).addTo(map)
-		.bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-        .openPopup();
-        
-        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox/streets-v11',
-            tileSize: 512,
-            zoomOffset: -1,
-            accessToken: 'your.mapbox.access.token'
-        }).addTo(mymap);
+    /* Set up the map with initial center and zoom level */
+    map = L.map('map', {
+        center: [51.65892, 6.41601], // roughly show Europe
+        zoom: 5, // roughly show Europe (from 1 to 18 -- decrease to zoom out, increase to zoom in)
+        scrollWheelZoom: false,
+        zoomControl: false // to put the zoom butons on the right
+    })
 
-var marker = L.marker([51.5, -0.09]).addTo(mymap);
+    /* Add the zoom buttons */
+    L.control.zoom({
+        position: 'topright'
+    }).addTo(map)
 
-var circle = L.circle([51.508, -0.11], {
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.5,
-    radius: 500
-}).addTo(mymap);
+    /* Set up a layout object with different map styles and a toggle function */
+    map.layout = {
+        items: {
+            light: {
+                layer: L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap<\/a>, &copy; <a href="https://carto.com/attribution">CARTO<\/a>, <a href="http://prtr.ec.europa.eu">E-PRTR</a>'
+                }),
+                button: document.getElementById('map-layout-light')
+            },
+            green: {
+                layer: L.tileLayer('https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png?apikey=9a85f60a13be4bf7bed59b5ffc0f4d86', {
+                    attribution: 'Maps &copy; <a href="https://www.thunderforest.com">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, <a href="http://prtr.ec.europa.eu">E-PRTR</a>'
+                }).addTo(map),
+                button: document.getElementById('map-layout-green')
+            }
+        },
+        toggle: function () {
+            for (layout in map.layout.items) {
+                let l = map.layout.items[layout]
+                l.button.classList.toggle('is-info')
+                if (l.button.classList.contains('is-info')) {
+                    map.addLayer(l.layer)
+                } else {
+                    map.removeLayer(l.layer)
+                }
+            }
+        }
+    }
+    for (layout in map.layout.items) {
+        let l = map.layout.items[layout]
+        l.button.addEventListener('click', map.layout.toggle)
+    }
 
+    /* Add the sidebar 
+    map.sidebar = L.control.sidebar('sidebar', {
+        position: 'left'
+    }).addTo(map)*/
 
-var polygon = L.polygon([
-    [51.509, -0.08],
-    [51.503, -0.06],
-    [51.51, -0.047]
-]).addTo(mymap);
+    /* On the map, scrolling should zoom */
+    map.on('focus', () => {
+        map.scrollWheelZoom.enable()
+    })
+    /* Outside of the map, scrolling should not zoom */
+    map.on('blur', () => {
+        map.scrollWheelZoom.disable()
+    })
 
-marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-circle.bindPopup("I am a circle.");
-polygon.bindPopup("I am a polygon.");
+}
 
-var popup = L.popup()
-    .setLatLng([51.5, -0.09])
-    .setContent("I am a standalone popup.")
-    .openOn(mymap);
+function showDataLayer(data) {
+    L.geoJson(data, {
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, {
+                radius: 30,
+                color: feature.properties.color,
+                fillColor: feature.properties.color,
+                weight: 1,
+                opacity: 0.7,
+                fillOpacity: 0.4
+            }).bindPopup(addPopupHandler(feature))
+        }
+    }).addTo(map)
+}
+
+function addPopupHandler(feature) {
+    return `<h2>${feature.properties.FacilityName}</h2>
+        ${feature.properties.CountryName}`
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    showMap()
+    fetch('data.json')
+        .then(
+            (response) => {
+                return response.json()
+            },
+            (reject) => {
+                console.error(reject)
+            })
+        .then(showDataLayer)
+})
