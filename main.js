@@ -77,30 +77,30 @@ function showMap() {
 }
 
 /*zum einladen von geoJson-Linien Daten */
-// function showDataLayer(data) {
-//     map.lineLayer = L.geoJson(data, {
-//         style: function (feature) {
-//             return {
-//                 weight: feature.properties.diameter / 10,
-//                 color: feature.properties.color
-//             }
+function showDataLayer(data) {
+    map.lineLayer = L.geoJson(data, {
+        style: function (feature) {
+            return {
+                weight: feature.properties.diameter / 10,
+                color: feature.properties.color
+            }
 
-//         },
-//         onEachFeature: function (feature, layer) {
-//             var popup = L.popup();
-//             popup.setContent('text');
-//             layer.on('click', function (e) {
-//                 L.popup()
-//                     .setLatLng(e.latlng)
-//                     .setContent(`<h2>${layer.feature.properties.name}</h2>
-//             <i>${layer.feature.properties.ort}</i>
-//             <br><b>Diameter:</b> ${layer.feature.properties.diameter}
-//             <br><b>Flow:</b> ${layer.feature.properties.flow}`)
-//                     .openOn(map);
-//             });
-//         }
-//     }).addTo(map)
-// }
+        },
+        onEachFeature: function (feature, layer) {
+            var popup = L.popup();
+            popup.setContent('text');
+            layer.on('click', function (e) {
+                L.popup()
+                    .setLatLng(e.latlng)
+                    .setContent(`<h2>${layer.feature.properties.name}</h2>
+            <i>${layer.feature.properties.ort}</i>
+            <br><b>Diameter:</b> ${layer.feature.properties.diameter}
+            <br><b>Flow:</b> ${layer.feature.properties.flow}`)
+                    .openOn(map);
+            });
+        }
+    }).addTo(map)
+}
 
 /*zum einladen von geoJson-Punktquellen Daten */
 function showDataLayer(data) {
@@ -127,7 +127,7 @@ function addPopupHandler(feature) {
 document.addEventListener('DOMContentLoaded', (event) => {
     showMap()
 /* zum einladen von GeoJson-Linien daten*/
-    /*fetch('lines.json')*/
+    fetch('lines.json')
 /* zum einladen von GeoJson-Punktquellen daten*/
     fetch('data.json')
     .then(
