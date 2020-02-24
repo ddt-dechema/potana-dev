@@ -40,7 +40,8 @@
 	<!-- Map takes whole screen -->
 	<div id="map"></div>
 
-	<div id="sidebar" class="sidebar">
+	<!-- let it start collapsed-->
+	<div id="sidebar" class="sidebar collapsed">
 		<!-- Nav tabs -->
 		<div class="sidebar-tabs">
 			<ul role="tablist" id="maintablist">
@@ -48,6 +49,71 @@
 					<a href="#info-content" role="tab" aria-label="Information about the tool">
 						<svg class="svgicon" viewbox="0 0 32 32">
 							<use xlink:href="#icon-info"></use>
+						</svg>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- hinzufügen weitere "Tabs", die aber effektiv als Button funktionieren sollen-->
+		<div class="sidebar-tabs">
+			<ul role="tablist" id="maintablist">
+				<li class="active" id="info-tab-li">
+					<a href="#info-content" role="tab" aria-label="Information about the tool">
+						<svg class="svgicon" viewbox="0 0 32 32">
+							<use xlink:href="#icon-info"></use>
+						</svg>
+					</a>
+				</li>
+				<li id="consumer-tab-li"> <!-- langfristig für PV-Potenzial-->
+					<a href="#consumer-content" role="tab" aria-label="Filter by PV-Potential">
+						<svg class="svgicon" viewbox="0 0 32 32">
+							<use xlink:href="#icon-consumer"></use>
+						</svg>
+					</a>
+				</li>
+				<li id="consumer-tab-li"> <!-- langfristig für Wind-Potenzial-->
+					<a href="#consumer-content" role="tab" aria-label="Filter by Wind-Potential">
+						<svg class="svgicon" viewbox="0 0 32 32">
+							<use xlink:href="#icon-consumer"></use>
+						</svg>
+					</a>
+				</li>
+				<li id="consumer-tab-li"> <!-- langfristig für Wasser-Potenzial-->
+					<a href="#consumer-content" role="tab" aria-label="Filter by Water Potential">
+						<svg class="svgicon" viewbox="0 0 32 32">
+							<use xlink:href="#icon-consumer"></use>
+						</svg>
+					</a>
+				</li>
+				<li id="emitter-tab-li"> <!-- langfristig für Punktquellen-->
+					<a href="#emitter-content" role="tab" aria-label="Filter by Emitter">
+						<svg class="svgicon" viewbox="0 0 32 32">
+							<use xlink:href="#icon-emitter"></use>
+						</svg>
+					</a>
+				</li>
+				<li id="consumer-tab-li"> <!-- langfristig für Infrastruktur-->
+					<a href="#consumer-content" role="tab" aria-label="Filter by Infrastructure">
+						<svg class="svgicon" viewbox="0 0 32 32">
+							<use xlink:href="#icon-consumer"></use>
+						</svg>
+					</a>
+				</li>
+			</ul>
+
+			<ul role="tablist">
+				<li id="legal-tab-li">
+					<a href="#legal-content" role="tab" aria-label="Legal information, Copyrights, data">
+						<svg class="svgicon" viewbox="0 0 32 32">
+							<use xlink:href="#icon-paragraph"></use>
+						</svg>
+					</a>
+				</li>
+				<li id="settings-tab-li">
+					<a href="#settings-content" role="tab" aria-label="Advanced settings">
+						<svg class="svgicon" viewbox="0 0 32 32">
+							<use xlink:href="#icon-settings"></use>
 						</svg>
 					</a>
 				</li>
@@ -68,8 +134,8 @@
 				</p>
 				<div class="filterGroup">
 					<div class="buttons has-addons">
-						<a class="button is-info is-small" id="map-layout-green">Blue-Green</a>
-						<a class="button is-small" id="map-layout-light">Light Grey</a>
+						<a class="button  is-small" id="map-layout-green">Blue-Green</a>
+						<a class="button is-info is-small" id="map-layout-light">Light Grey</a>
 					</div>
 				</div>
 			</div>
