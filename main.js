@@ -76,6 +76,47 @@ function showMap() {
 
 }
 
+/***********************/
+/* Einladen der Button-Informationen */
+let ethylenePipelineButton = document.getElementById('ethylene-pipeline-button'),
+propylenePipelineButton = document.getElementById('propylene-pipeline-button'),
+/* Farbe der Pipelines*/
+function pipelineStyle(feature) {
+    return {
+        color: feature.properties.type[1] == 54 ? "green" : "red", //Outline color
+    };
+}
+
+/* toggle-bility der Daten */
+function togglePipeline(event, type) {
+    event.target.classList.toggle('is-info')
+    if (event.target.classList.contains('is-info')) {
+        fetch('pipeline-' + type + '.json')
+            .then((response) => {
+                    return response.json()
+                },
+                (reject) => {
+                    console.error(reject)
+                })
+            .then((geojson) => {
+                globalPipelines[type] = L.geoJson(geojson, {
+                    style: pipelineStyle
+                })
+                globalPipelines[type].addTo(map)
+            })
+    } else {
+        map.removeLayer(globalPipelines[type])
+    }
+
+}
+ethylenePipelineButton.addEventListener('click', (event) => {
+    togglePipeline(event, 'ethylene')
+})
+propylenePipelineButton.addEventListener('click', event => {
+    togglePipeline(event, 'propylene')
+})
+
+
 /*zum einladen von geoJson-Linien Daten */
 function showLineLayer(data) {
     map.lineLayer = L.geoJson(data, {
@@ -117,15 +158,34 @@ function showDataLayer(data) {
         }
     }).addTo(map)
 }
+
 function addPopupHandler(feature) {
     return `<h2>${feature.properties.FacilityName}</h2>
         ${feature.properties.CountryName}`
 }
 
+/***********************/
+/* Load data functions */
+/***********************/
 
+// keep reference to the markers for filtering
+var markers = {}
+var chemicalParkMarkers = {}
+var globalPipelines = {}
 
+/*  */
 document.addEventListener('DOMContentLoaded', (event) => {
     showMap()
+/* zum einladen von GeoJson-Linien daten*/
+    /*fetch('lines.json')
+    .then(
+        (response) => {
+            return response.json()
+        },
+        (reject) => {
+            console.error(reject)
+        })
+    .then(showLineLayer)*/
 /* zum einladen von GeoJson-Punktquellen daten*/
     fetch('data.json')
     .then(
@@ -136,15 +196,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
             console.error(reject)
         })
     .then(showDataLayer)
-/* zum einladen von GeoJson-Linien daten*/
-    fetch('lines.json')
-    .then(
-        (response) => {
-            return response.json()
-        },
-        (reject) => {
-            console.error(reject)
-        })
-    .then(showLineLayer)
-
 })
