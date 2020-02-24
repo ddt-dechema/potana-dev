@@ -9,7 +9,7 @@
 	 <!-- Make sure you put this AFTER Leaflet's CSS -->
 	<script src="vendor/leaflet.js"></script>
 	<!-- main.js mit den eigentlichen Infos muss immer als letztes aufgerufen werden -->
-	s<script src="main.js"></script>
+	<script src="main.js"></script>
 	<style>
 		#mapid { height: 180px; }
 	</style>
@@ -18,44 +18,12 @@
 <body>
 
 	<!-- Map takes whole screen -->
+	<h1 class="sidebar-header">
+		Kopernikus - Potenzialebenen-Analyse
+	</h1>
 	<div id="mapid"></div>
 
-	<div id="sidebar" class="sidebar">
-		<!-- Nav tabs -->
-		<div class="sidebar-tabs">
-			<ul role="tablist" id="maintablist">
-				<li class="active" id="info-tab-li">
-					<a href="#info-content" role="tab" aria-label="Information about the tool">
-						<svg class="svgicon" viewbox="0 0 32 32">
-							<use xlink:href="#icon-info"></use>
-						</svg>
-					</a>
-				</li>
-			</ul>
-		</div>
-		<!-- Tab panes -->
-		<div class="sidebar-content" id="sidebarcontent">
-			<div class="sidebar-pane active" id="info-content">
-				<h1 class="sidebar-header">
-					Kopernikus - Potenzialebenen-Analyse
-					<span class="sidebar-close" id="sidebar-close-info-span"><svg class="svgicon" viewbox="0 0 32 32">
-							<use xlink:href="#icon-play3"></use>
-						</svg></span>
-				</h1>
-				<h2>Information on this map</h2>
-				<p>Hier kann man erklären, was die Karte macht. Als kleines Gimmick hier ein Button, um das Kartenlayout
-					zu ändern:
-				</p>
-				<div class="filterGroup">
-					<div class="buttons has-addons">
-						<a class="button is-info is-small" id="map-layout-green">Blue-Green</a>
-						<a class="button is-small" id="map-layout-light">Light Grey</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
+	
 </body>
 
 </html>
