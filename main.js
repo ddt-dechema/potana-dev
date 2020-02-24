@@ -126,16 +126,6 @@ function addPopupHandler(feature) {
 
 document.addEventListener('DOMContentLoaded', (event) => {
     showMap()
-/* zum einladen von GeoJson-Linien daten*/
-    fetch('lines.json')
-    .then(
-        (response) => {
-            return response.json()
-        },
-        (reject) => {
-            console.error(reject)
-        })
-    .then(showLineLayer)
 /* zum einladen von GeoJson-Punktquellen daten*/
     fetch('data.json')
     .then(
@@ -146,4 +136,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
             console.error(reject)
         })
     .then(showDataLayer)
+/* zum einladen von GeoJson-Linien daten*/
+    fetch('lines.json')
+    .then(
+        (response) => {
+            return response.json()
+        },
+        (reject) => {
+            console.error(reject)
+        })
+    .then(showLineLayer)
+
 })
