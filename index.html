@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+
+<head>
+	<title>Hier den Titel eintragen</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<link href="vendor/leaflet.css" rel="stylesheet" />
+	 <!-- Make sure you put this AFTER Leaflet's CSS -->
+	<script src="vendor/leaflet.js"></script>
+	<style>
+		#mapid { height: 180px; }
+	</style>
+</head>
+
+<body>
+
+	<!-- Map takes whole screen -->
+	<div id="map"></div>
+
+	<div id="sidebar" class="sidebar">
+		<!-- Nav tabs -->
+		<div class="sidebar-tabs">
+			<ul role="tablist" id="maintablist">
+				<li class="active" id="info-tab-li">
+					<a href="#info-content" role="tab" aria-label="Information about the tool">
+						<svg class="svgicon" viewbox="0 0 32 32">
+							<use xlink:href="#icon-info"></use>
+						</svg>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<!-- Tab panes -->
+		<div class="sidebar-content" id="sidebarcontent">
+			<div class="sidebar-pane active" id="info-content">
+				<h1 class="sidebar-header">
+					Carbon4PUR replication map
+					<span class="sidebar-close" id="sidebar-close-info-span"><svg class="svgicon" viewbox="0 0 32 32">
+							<use xlink:href="#icon-play3"></use>
+						</svg></span>
+				</h1>
+				<h2>Information on this map</h2>
+				<p>Hier kann man erklären, was die Karte macht. Als kleines Gimmick hier ein Button, um das Kartenlayout
+					zu ändern:
+				</p>
+				<div class="filterGroup">
+					<div class="buttons has-addons">
+						<a class="button is-info is-small" id="map-layout-green">Blue-Green</a>
+						<a class="button is-small" id="map-layout-light">Light Grey</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
