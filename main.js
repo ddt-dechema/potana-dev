@@ -79,8 +79,9 @@ function showMap() {
 /***********************/
 /* Einladen der Button-Informationen */
 let ethylenePipelineButton = document.getElementById('ethylene-pipeline-button'),
-propylenePipelineButton = document.getElementById('propylene-pipeline-button'),
+propylenePipelineButton = document.getElementById('propylene-pipeline-button')
 /* Farbe der Pipelines*/
+
 function pipelineStyle(feature) {
     return {
         color: feature.properties.type[1] == 54 ? "green" : "red", //Outline color
