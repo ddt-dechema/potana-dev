@@ -117,6 +117,12 @@ function showDataLayer(data) {
         }
     }).addTo(map)
 }
+function addPopupHandler(feature) {
+    return `<h2>${feature.properties.FacilityName}</h2>
+        ${feature.properties.CountryName}`
+}
+
+
 
 document.addEventListener('DOMContentLoaded', (event) => {
     showMap()
