@@ -1,2 +1,1 @@
-# potana-dev
-Kopernikus P2X - Potenzialebenen Analyse
+See live example: https://Carbon4PUR.github.io/mapping-dev/examples/min_map/index.html

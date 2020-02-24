@@ -33,13 +33,7 @@ function showMap() {
             attribution: 'Maps &copy; <a href="https://www.thunderforest.com">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, <a href="http://prtr.ec.europa.eu">E-PRTR</a>'
         })
         .addTo(map)
-
-    /* Add the zoom buttons */
-    map.sidebar = L.control.sidebar('sidebar', {
-        position: 'left'
-    }).addTo(map)
-
-
+        
     /* On the map, scrolling should zoom */
     map.on('focus', () => {
         map.scrollWheelZoom.enable()
@@ -48,16 +42,8 @@ function showMap() {
     map.on('blur', () => {
         map.scrollWheelZoom.disable()
     })
-    /* This is to put the emissions in the foreground on high zoom levels */
-    map.on("zoomend", function (e) {
-        for (type in chemicalParkMarkers) {
-            if (e.target._zoom > 7 && !chemicalParkMarkers.isBack) {
-                chemicalParkMarkers[type].bringToBack()
-                chemicalParkMarkers[type].isBack = true
-            } else {
-                chemicalParkMarkers[type].bringToFront()
-                chemicalParkMarkers[type].isBack = false
-            }
-        }
-    })
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    showMap()
+})
