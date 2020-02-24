@@ -83,8 +83,8 @@ propyleneButton = document.getElementById('propylene-button'),
 pvButton = document.getElementById('pv-button'),
 windButton = document.getElementById('wind-button'),
 waterButton = document.getElementById('water-button'),
-/*emitterButton = document.getElementById('emitter-button'),*/
-pollutantFilterCO2Button = document.getElementById('pollutant-filter-CO2-button'),
+emitterButton = document.getElementById('emitter-button')
+/*pollutantFilterCO2Button = document.getElementById('pollutant-filter-CO2-button'),
 pollutantFilterCOButton = document.getElementById('pollutant-filter-CO-button')
 
 /* Farbe der Pipelines*/
@@ -125,27 +125,41 @@ propyleneButton.addEventListener('click', event => {
 
 
 /* toggle-bility von Punktquellen Daten */
-function toggleEmitter(button) {
-    return function () {
-        button.classList.toggle('is-activated')
-        if (button.classList.contains('is-activated')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
-        else button.style.background = '#fff'
-        getFilteredTotals()
-        toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
-    }
-}
-function toggleFilterEmittersByPollutant(pollutant) {
-    if (map.hasLayer(markers[pollutant])) {
-        map.removeLayer(markers[pollutant])
+function toggleEmitter(event) {
+    event.target.classList.toggle('is-info')
+    if (event.target.classList.contains('is-info')) {
+        fetch('data.json')
+            .then((response) => {
+                    return response.json()
+                },
+                (reject) => {
+                    console.error(reject)
+                })
+            .then((geojson) => {
+                markers[type] = L.geoJson(geojson, {
+                    pointToLayer: function (feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 30,
+                            color: feature.properties.color,
+                            fillColor: feature.properties.color,
+                            weight: 1,
+                            opacity: 0.7,
+                            fillOpacity: 0.4
+                        }).bindPopup(addPopupHandler(feature))
+                    }
+                })
+                markers[type].addTo(map)
+            })
     } else {
-        map.addLayer(markers[pollutant])
+        map.removeLayer(markers[type])
     }
 }
-pollutantFilterCO2Button.addEventListener('click', toggleEmitter(pollutantFilterCO2Button))
-pollutantFilterCOButton.addEventListener('click', toggleEmitter(pollutantFilterCOButton))
+
+emitterButton.addEventListener('click')
+
 
 /*zum einladen von geoJson-Linien Daten */
-function showLineLayer(data) {
+/*function showLineLayer(data) {
     map.lineLayer = L.geoJson(data, {
         style: function (feature) {
             return {
@@ -169,7 +183,7 @@ function showLineLayer(data) {
         }
     }).addTo(map)
 }
-
+*/
 /*zum einladen von geoJson-Punktquellen Daten */
 function showDataLayer(data) {
     L.geoJson(data, {
@@ -214,7 +228,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         })
     .then(showLineLayer)*/
 /* zum einladen von GeoJson-Punktquellen daten*/
-    fetch('emissions.json')
+    /*fetch('data.json')
     .then(
         (response) => {
             return response.json()
@@ -222,5 +236,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
         (reject) => {
             console.error(reject)
         })
-    .then(showDataLayer)
+    .then(showDataLayer)*/
 })
