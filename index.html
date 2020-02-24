@@ -5,9 +5,21 @@
 	<title>Hier den Titel eintragen</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
+	<meta name="Description" content="An interactive map to show CO/CO2 emissions from different processes and a non-exhaustive number of chemical parks and polyol plants.
+	Allows the user to interactively filter the data to conclude on possible replication sites for the Carbon4PUR technology to transform CO and CO2 streams to polyurethanes.">
+	<!-- Load Leaflet: instructions at http://leafletjs.com/download.html -->
 	<link href="vendor/leaflet.css" rel="stylesheet" />
 	<link rel="stylesheet" href="vendor/leaflet-sidebar.min.css" />
+	<!-- A CSS framework for easy styling -->
+	<link href="vendor/bulma.min.css" rel="stylesheet" />
+	<link href="vendor/bulma-slider.min.css" rel="stylesheet" />
+
+	<link href="vendor/introjs.min.css" rel="stylesheet" />
+	<!-- Boring layer selection <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.css" integrity="sha256-2nki7eLxn91r/RI3QQq+ArnIltknk6gz4wSoQHFrJnA=" crossorigin="anonymous" /> -->
 	<link href="index.css" rel="stylesheet">
+	<!--link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon"-->
+
 	
 	
 
@@ -60,6 +72,7 @@
 	
 	 <!-- Make sure you put this AFTER Leaflet's CSS -->
 	<script src="vendor/leaflet.js"></script>
+	<script src="vendor/bulma-slider.min.js" defer></script>
 	<script src="vendor/leaflet-sidebar.min.js" defer></script>
 	<!-- main.js mit den eigentlichen Infos muss immer als letztes aufgerufen werden -->
 	<script src="main.js"></script>
