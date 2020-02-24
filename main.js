@@ -31,13 +31,14 @@ function showMap() {
             light: {
                 layer: L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap<\/a>, &copy; <a href="https://carto.com/attribution">CARTO<\/a>, <a href="http://prtr.ec.europa.eu">E-PRTR</a>'
-                }),
+                }).addto(map),
+                /* ".addto(map)" hinzufügen, wenn man das defaultmäßig haben will */
                 button: document.getElementById('map-layout-light')
             },
             green: {
                 layer: L.tileLayer('https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png?apikey=9a85f60a13be4bf7bed59b5ffc0f4d86', {
                     attribution: 'Maps &copy; <a href="https://www.thunderforest.com">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, <a href="http://prtr.ec.europa.eu">E-PRTR</a>'
-                }).addTo(map),
+                }),
                 button: document.getElementById('map-layout-green')
             }
         },
@@ -75,6 +76,42 @@ function showMap() {
 
 }
 
+/*zum einladen von geoJson Daten */
+function showDataLayer(data) {
+    map.lineLayer = L.geoJson(data, {
+        style: function (feature) {
+            return {
+                weight: feature.properties.diameter / 10,
+                color: feature.properties.color
+            }
+
+        },
+        onEachFeature: function (feature, layer) {
+            var popup = L.popup();
+            popup.setContent('text');
+            layer.on('click', function (e) {
+                L.popup()
+                    .setLatLng(e.latlng)
+                    .setContent(`<h2>${layer.feature.properties.name}</h2>
+            <i>${layer.feature.properties.ort}</i>
+            <br><b>Diameter:</b> ${layer.feature.properties.diameter}
+            <br><b>Flow:</b> ${layer.feature.properties.flow}`)
+                    .openOn(map);
+            });
+        }
+    }).addTo(map)
+}
+
 document.addEventListener('DOMContentLoaded', (event) => {
     showMap()
+/* zum einladen von GeoJson daten*/
+    fetch('lines.json')
+    .then(
+        (response) => {
+            return response.json()
+        },
+        (reject) => {
+            console.error(reject)
+        })
+    .then(showDataLayer)
 })
