@@ -141,8 +141,8 @@ function toggleFilterEmittersByPollutant(pollutant) {
         map.addLayer(markers[pollutant])
     }
 }
-pollutantFilterCO2Button.addEventListener('click', returnTogglePollutantFilter(pollutantFilterCO2Button))
-pollutantFilterCOButton.addEventListener('click', returnTogglePollutantFilter(pollutantFilterCOButton))
+pollutantFilterCO2Button.addEventListener('click', toggleEmitter(pollutantFilterCO2Button))
+pollutantFilterCOButton.addEventListener('click', toggleEmitter(pollutantFilterCOButton))
 
 /*zum einladen von geoJson-Linien Daten */
 function showLineLayer(data) {
