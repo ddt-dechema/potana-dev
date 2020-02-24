@@ -125,7 +125,7 @@ propyleneButton.addEventListener('click', event => {
 
 
 /* toggle-bility von Punktquellen Daten */
-function toggleEmitter(event) {
+function toggleEmitter(event, type) {
     event.target.classList.toggle('is-info')
     if (event.target.classList.contains('is-info')) {
         fetch('data.json')
@@ -155,7 +155,9 @@ function toggleEmitter(event) {
     }
 }
 
-emitterButton.addEventListener('click')
+emitterButton.addEventListener('click', (event) => {
+    toggleEmitter(event, 'emitter')
+})
 
 
 /*zum einladen von geoJson-Linien Daten */
