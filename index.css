@@ -62,7 +62,7 @@ svg {
 body .sidebar .sidebar-header {
   background-repeat:no-repeat;
   background-size:100% 100%;
-  background-image: url('https://www.carbon4pur.eu/wp-content/themes/carbon4pur/images/gradient-line-min.png');
+  background-image: linear-gradient(to right, #4dafca, #008db4); /* Standard syntax (must be last) */
 }
 body .sidebar-tabs>li.active, .sidebar-tabs>ul>li.active {
   background-color: rgb(0,141,180) !important;
