@@ -8,6 +8,8 @@
 	<link href="vendor/leaflet.css" rel="stylesheet" />
 	 <!-- Make sure you put this AFTER Leaflet's CSS -->
 	<script src="vendor/leaflet.js"></script>
+	<!-- main.js mit den eigentlichen Infos muss immer als letztes aufgerufen werden -->
+	s<script src="main.js"></script>
 	<style>
 		#mapid { height: 180px; }
 	</style>
@@ -16,7 +18,7 @@
 <body>
 
 	<!-- Map takes whole screen -->
-	<div id="map"></div>
+	<div id="mapid"></div>
 
 	<div id="sidebar" class="sidebar">
 		<!-- Nav tabs -->
@@ -35,7 +37,7 @@
 		<div class="sidebar-content" id="sidebarcontent">
 			<div class="sidebar-pane active" id="info-content">
 				<h1 class="sidebar-header">
-					Carbon4PUR replication map
+					Kopernikus - Potenzialebenen-Analyse
 					<span class="sidebar-close" id="sidebar-close-info-span"><svg class="svgicon" viewbox="0 0 32 32">
 							<use xlink:href="#icon-play3"></use>
 						</svg></span>
