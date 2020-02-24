@@ -140,7 +140,7 @@ function toggleEmitter(event, type) {
                     pointToLayer: function (feature, latlng) {
                         return L.circleMarker(latlng, {
                             radius: 30,
-                            color:   #99d1e1,
+                            color:  '#99d1e1',
                             fillColor: feature.properties.color,
                             weight: 1,
                             opacity: 0.7,
