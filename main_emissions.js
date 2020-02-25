@@ -127,6 +127,83 @@ let emissionColors = {
 
 }
 
+/* create scale for the index.html */
+let createScale = () => {
+    var height = 75
+    var width = 130
+    var svg = d3.select("#scale")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+
+    // The scale you use for bubble size
+    var size = d3.scaleSqrt()
+        .domain([0, globalEmissionData.stats.totalMax]) // What's in the data, min-max
+        .range([0, 50]) // Size in pixel
+
+    // Add legend: circles
+    var valuesToShow = [0.1, 5, 20] // [globalEmissionData.stats.totalMax / 100, globalEmissionData.stats.totalMax / 10, globalEmissionData.stats.totalMax]
+    var xCircle = 38
+    var xLabel = 100
+    var yCircle = 74
+    svg
+        .selectAll("legend")
+        .data(valuesToShow)
+        .enter()
+        .append("circle")
+        .attr("cx", xCircle)
+        .attr("cy", function (d) {
+            return yCircle - size(d)
+        })
+        .attr("r", function (d) {
+            return size(d)
+        })
+        .style("fill", "none")
+        .style("stroke", "black")
+        .style("stroke-width", "0.8")
+        .attr("stroke", "black")
+
+    // Add legend: segments
+    svg
+        .selectAll("legend")
+        .data(valuesToShow)
+        .enter()
+        .append("line")
+        .attr('x1', function (d) {
+            return xCircle + size(d)
+        })
+        .attr('x2', xLabel)
+        .attr('y1', function (d) {
+            return yCircle - size(d)
+        })
+        .attr('y2', function (d) {
+            return yCircle - size(d)
+        })
+        .attr('stroke', 'black')
+        .style("stroke", "black")
+        .style("stroke-width", "0.8")
+        .style('stroke-dasharray', ('2,2'))
+
+    // Add legend: labels
+    svg
+        .selectAll("legend")
+        .data(valuesToShow)
+        .enter()
+        .append("text")
+        .attr('x', function (d) {
+            return xLabel + (d >= 10 ? 1 : 7)
+        })
+        .attr('y', function (d) {
+            return yCircle - size(d)
+        })
+        .text(function (d) {
+            return format1Dec(d)
+        }) // to display in Mt
+        .style("font-size", 10)
+        .attr('alignment-baseline', 'middle')
+}
+
+
 
 /******************************** */
 /*  Einbau der Buttons zum Togglen der Emissionen */
