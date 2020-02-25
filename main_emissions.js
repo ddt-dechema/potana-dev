@@ -685,7 +685,7 @@ function updateEmissionsFilter() {
 /****************/
 /* Settings tab */
 let mapLayoutGreen = document.getElementById('map-layout-green'),
-    mapLayoutLight = document.getElementById('map-layout-light'),
+    mapLayoutLight = document.getElementById('map-layout-light')//,
     // mapShowConsumers = document.getElementById('map-show-consumers'),
     // modifyConsumers = document.getElementById('modify-consumers'),
     // modalModifyConsumers = document.getElementById('modal-modify-consumers'),
