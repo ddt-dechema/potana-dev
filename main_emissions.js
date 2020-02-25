@@ -294,7 +294,7 @@ function returnTogglePollutantFilter(button) {
         button.classList.toggle('is-activated')
         if (button.classList.contains('is-activated')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
         else button.style.background = '#fff'
-        getFilteredTotals()
+        //getFilteredTotals()
         toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
     }
 }
