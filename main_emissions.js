@@ -1,3 +1,5 @@
+let format1Dec, formatSI
+
 let globalModel = {
     emissions: {
         categories: {
@@ -113,6 +115,12 @@ let globalModel = {
     }
 }
 
+function loadGlobalDefs() {
+    // show all numbers with 1,000.00 format
+    format1Dec = d3.format(',.1f')
+    formatSI = d3.format(',.3f')
+}
+
 let emissionColors = {
     "CO2, AIR": 'rgb(241, 177, 48)',
     "CO, AIR": 'rgb(234,110,57)'
@@ -144,14 +152,42 @@ function loadPRTRlayers(data) {
         resolve(data)
     })
 }
+/*Add a popup to a GeoJSON feature of a certain type
+*
+* @param {*} feature A GeoJSON feature with geometry and properties
+* @param {string} type The name of the category, in this case "CO2" or "CO" 
+* @returns {string} a DOM string containing the popup
+*/
+function addEmitterPopupHandler(feature) {
+   let nace = globalModel.emissions.categories.naceCategories.items
+   if (feature.properties) {
+       let otherEmission = ''
+       if (feature.properties.co2Amount) otherEmission += formatSI(feature.properties.co2Amount) + ' Megatonnes CO<sub>2</sub>/year'
+       if (feature.properties.coAmount) otherEmission += formatSI(feature.properties.coAmount) + ' Megatonnes CO/year'
+       let thisEmission = formatSI(feature.properties.MTonnes) + ' Megatonnes '
+       if (feature.properties.type == 'CO, AIR') thisEmission += 'CO/year'
+       else thisEmission += 'CO<sub>2</sub>/year'
+       let color = translucidColor(nace[feature.properties.NACEMainEconomicActivityName].color)
+       return `<h2>${feature.properties.FacilityName}</h2>
+                       ${feature.properties.CountryName}                    
+                       <br><b><i>${feature.properties.NACEMainEconomicActivityName}</i></b>
+                       <br>
+                       <div class='popup-em' style='background: ${color}'>
+                       Emissions:
+                       <br>${thisEmission}` + (otherEmission != '' ? `<br />${otherEmission}` : '') + `</div>
+                       <br><br><a href="${feature.properties.FacilityDetails}" target="_blank">More Facility details on E-PRTR page</a>`
 
+   } else {
+       console.log(feature)
+   }
+}
 
 /*************************************************/
 /* And finally load all json data and display it */
 /*************************************************/
 document.addEventListener('DOMContentLoaded', (event) => {
     //showMap()
-    //loadGlobalDefs()
+    loadGlobalDefs()
     fetch('emissions.json')
         .then((response) => {
                 return response.json()
