@@ -83,13 +83,15 @@ propyleneButton = document.getElementById('propylene-button'),
 pvButton = document.getElementById('pv-button'),
 windButton = document.getElementById('wind-button'),
 waterButton = document.getElementById('water-button'),
-emitterButton = document.getElementById('emitter-button')
+emitterButton = document.getElementById('emitter-button'),
+pipelineButton = document.getElementById('pipeline-button')
 /*pollutantFilterCO2Button = document.getElementById('pollutant-filter-CO2-button'),
 pollutantFilterCOButton = document.getElementById('pollutant-filter-CO-button')
 /* Farbe der Pipelines*/
 function pipelineStyle(feature) {
     return {
         color: feature.properties.type[1] == 54 ? "green" : "red", //Outline color
+        // 54 = propylene, 52 = ethylene
     };
 }
 
@@ -122,6 +124,9 @@ propyleneButton.addEventListener('click', event => {
     togglePipeline(event, 'propylene')
 })
 
+pipelineButton.addEventListener('click', event => {
+    togglePipeline(event, 'total')
+})
 
 /* toggle-bility von Punktquellen Daten */
 function toggleEmitter(event, type) {
