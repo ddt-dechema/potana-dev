@@ -289,15 +289,15 @@ pollutantFilterCOButton.style.background = emissionColors["CO, AIR"]
 //     button.classList.add('is-info')
 // }
 
-// function returnTogglePollutantFilter(button) {
-//     return function () {
-//         button.classList.toggle('is-activated')
-//         if (button.classList.contains('is-activated')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
-//         else button.style.background = '#fff'
-//         getFilteredTotals()
-//         toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
-//     }
-// }
+function returnTogglePollutantFilter(button) {
+    return function () {
+        button.classList.toggle('is-activated')
+        if (button.classList.contains('is-activated')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
+        else button.style.background = '#fff'
+        getFilteredTotals()
+        toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
+    }
+}
 
 function toggleFilterEmittersByPollutant(pollutant) {
     if (map.hasLayer(markers[pollutant])) {
