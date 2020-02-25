@@ -108,7 +108,7 @@ let globalModel = {
                         filterButton: document.getElementById('pollutant-filter-CO-button')
                     }
                 }
-            },
+            }/*,
             naceCategories: {
                 buttons: {
                     containerId: 'nace-categories',
@@ -199,7 +199,7 @@ let globalModel = {
                         active: true
                     }
                 }
-            }
+            }*/
         }
     }
 }
@@ -214,21 +214,21 @@ let globalEmissionData, globalChemicalData
 
 /*****************/
 /* Emissions tab */
-let compatFilterManualButton = document.getElementById('compat-filter-manual-button'),
-    compatFilterLoopButton = document.getElementById('compat-filter-loop-button')
-compatFilterCatButton = document.getElementById('compat-filter-cat-button')
-compatFilterButtons = [compatFilterManualButton, compatFilterLoopButton, compatFilterCatButton]
+// let compatFilterManualButton = document.getElementById('compat-filter-manual-button'),
+//     compatFilterLoopButton = document.getElementById('compat-filter-loop-button')
+// compatFilterCatButton = document.getElementById('compat-filter-cat-button')
+// compatFilterButtons = [compatFilterManualButton, compatFilterLoopButton, compatFilterCatButton]
 
 let pollutantFilterCO2Button = document.getElementById('pollutant-filter-CO2-button'),
     pollutantFilterCOButton = document.getElementById('pollutant-filter-CO-button')
 
 
-let co2FilteredSumOutput = document.getElementById('sumCO2'),
-    coFilteredSumOutput = document.getElementById('sumCO'),
-    co2CombinedFilteredSumOutput = document.getElementById('sumCO2combined'),
-    coCombinedFilteredSumOutput = document.getElementById('sumCOcombined')
+// let co2FilteredSumOutput = document.getElementById('sumCO2'),
+//     coFilteredSumOutput = document.getElementById('sumCO'),
+//     co2CombinedFilteredSumOutput = document.getElementById('sumCO2combined'),
+//     coCombinedFilteredSumOutput = document.getElementById('sumCOcombined')
 
-let naceDeselectButton = document.getElementById('nace-deselect-all')
+// let naceDeselectButton = document.getElementById('nace-deselect-all')
 
 /* styling */
 pollutantFilterCO2Button.style.background = emissionColors["CO2, AIR"]
@@ -240,21 +240,21 @@ pollutantFilterCOButton.style.background = emissionColors["CO, AIR"]
  * @param {*} button
  * @param {boolean} [forceState=false] if forceState = "active" force active, if forceState != "active" and != false, force inactive
  */
-function toggleNaceButton(button, forceState = false){
-    let nace = globalModel.emissions.categories.naceCategories
-    if (!forceState){
-        nace.items[button.text].active = !nace.items[button.text].active
-    }
-    else {
-        nace.items[button.text].active = (forceState == "active")
-    }
-    if (nace.items[button.text].active) {
-        button.classList.add('is-activated', nace.items[button.text].style)
-    }
-    else {
-        button.classList.remove('is-activated', nace.items[button.text].style)
-    }
-}
+// function toggleNaceButton(button, forceState = false){
+//     let nace = globalModel.emissions.categories.naceCategories
+//     if (!forceState){
+//         nace.items[button.text].active = !nace.items[button.text].active
+//     }
+//     else {
+//         nace.items[button.text].active = (forceState == "active")
+//     }
+//     if (nace.items[button.text].active) {
+//         button.classList.add('is-activated', nace.items[button.text].style)
+//     }
+//     else {
+//         button.classList.remove('is-activated', nace.items[button.text].style)
+//     }
+// }
 
 
 /**
@@ -262,42 +262,42 @@ function toggleNaceButton(button, forceState = false){
  *
  * @param {event} event the click event on a compat button
  */
-function toggleCompatFilter(event) {
-    let nace = globalModel.emissions.categories.naceCategories.items
-    activateCompatButton(event.target)
-    if (event.target == compatFilterCatButton) {
-        for (name in nace) {
-            nace[name].active = nace[name].catalytic
-            toggleNaceButton(nace[name].button, nace[name].active ? "active" : "not")
-        }
-    } else if (event.target == compatFilterLoopButton) {
-        for (name in nace) {
-            nace[name].active = nace[name].looping
-            toggleNaceButton(nace[name].button, nace[name].active ? "active" : "not")
-        }
-    }
-    updateEmissionsFilter()
-}
-for (var i = 0; i < compatFilterButtons.length; i++) {
-    compatFilterButtons[i].addEventListener('click', toggleCompatFilter)
-}
+// function toggleCompatFilter(event) {
+//     let nace = globalModel.emissions.categories.naceCategories.items
+//     activateCompatButton(event.target)
+//     if (event.target == compatFilterCatButton) {
+//         for (name in nace) {
+//             nace[name].active = nace[name].catalytic
+//             toggleNaceButton(nace[name].button, nace[name].active ? "active" : "not")
+//         }
+//     } else if (event.target == compatFilterLoopButton) {
+//         for (name in nace) {
+//             nace[name].active = nace[name].looping
+//             toggleNaceButton(nace[name].button, nace[name].active ? "active" : "not")
+//         }
+//     }
+//     updateEmissionsFilter()
+// }
+// for (var i = 0; i < compatFilterButtons.length; i++) {
+//     compatFilterButtons[i].addEventListener('click', toggleCompatFilter)
+// }
 
-function activateCompatButton(button) {
-    for (var i = 0; i < compatFilterButtons.length; i++) {
-        compatFilterButtons[i].classList.remove('is-info')
-    }
-    button.classList.add('is-info')
-}
+// function activateCompatButton(button) {
+//     for (var i = 0; i < compatFilterButtons.length; i++) {
+//         compatFilterButtons[i].classList.remove('is-info')
+//     }
+//     button.classList.add('is-info')
+// }
 
-function returnTogglePollutantFilter(button) {
-    return function () {
-        button.classList.toggle('is-activated')
-        if (button.classList.contains('is-activated')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
-        else button.style.background = '#fff'
-        getFilteredTotals()
-        toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
-    }
-}
+// function returnTogglePollutantFilter(button) {
+//     return function () {
+//         button.classList.toggle('is-activated')
+//         if (button.classList.contains('is-activated')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
+//         else button.style.background = '#fff'
+//         getFilteredTotals()
+//         toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
+//     }
+// }
 
 function toggleFilterEmittersByPollutant(pollutant) {
     if (map.hasLayer(markers[pollutant])) {
@@ -310,66 +310,66 @@ pollutantFilterCO2Button.addEventListener('click', returnTogglePollutantFilter(p
 pollutantFilterCOButton.addEventListener('click', returnTogglePollutantFilter(pollutantFilterCOButton))
 
 
-function getFilteredTotals() {
-    let co2sum = 0,
-        cosum = 0,
-        co2sumCombined = 0,
-        cosumCombined = 0,
-        nace = globalModel.emissions.categories.naceCategories.items
-    for (name in nace) {
-        if (nace[name].active) {
-            if (pollutantFilterCOButton.classList.contains('is-activated')) cosum += globalEmissionData.stats.totals['CO, AIR'][name]
-            if (pollutantFilterCO2Button.classList.contains('is-activated')) co2sum += globalEmissionData.stats.totals['CO2, AIR'][name]
-        }
-    }
-    for (f in globalEmissionData['CO, AIR'].features) {
-        let props = globalEmissionData['CO, AIR'].features[f].properties
-        if (pollutantFilterCOButton.classList.contains('is-activated') &&
-            pollutantFilterCO2Button.classList.contains('is-activated') &&
-            nace[props.NACEMainEconomicActivityName].active &&
-            props.co2Amount &&
-            props.co2Amount > 0) {
-            co2sumCombined += props.co2Amount
-            cosumCombined += props.MTonnes
-        }
-    }
-    co2CombinedFilteredSumOutput.style.background = '#ddc'
-    coCombinedFilteredSumOutput.style.background = '#ddc'
-    co2FilteredSumOutput.style.background = '#ddc'
-    coFilteredSumOutput.style.background = '#ddc'
-    setTimeout(function () {
-        co2FilteredSumOutput.style.background = '#fff'
-        coFilteredSumOutput.style.background = '#fff'
-        co2CombinedFilteredSumOutput.style.background = '#fff'
-        coCombinedFilteredSumOutput.style.background = '#fff'
-    }, 500)
-    co2FilteredSumOutput.textContent = format1Dec(co2sum) + ' Megatonnes/year'
-    coFilteredSumOutput.textContent = format1Dec(cosum) + ' Megatonnes/year'
-    co2CombinedFilteredSumOutput.textContent = format1Dec(co2sumCombined) + ' Megatonnes/year'
-    coCombinedFilteredSumOutput.textContent = format1Dec(cosumCombined) + ' Megatonnes/year'
-}
+// function getFilteredTotals() {
+//     let co2sum = 0,
+//         cosum = 0,
+//         co2sumCombined = 0,
+//         cosumCombined = 0,
+//         nace = globalModel.emissions.categories.naceCategories.items
+//     for (name in nace) {
+//         if (nace[name].active) {
+//             if (pollutantFilterCOButton.classList.contains('is-activated')) cosum += globalEmissionData.stats.totals['CO, AIR'][name]
+//             if (pollutantFilterCO2Button.classList.contains('is-activated')) co2sum += globalEmissionData.stats.totals['CO2, AIR'][name]
+//         }
+//     }
+//     for (f in globalEmissionData['CO, AIR'].features) {
+//         let props = globalEmissionData['CO, AIR'].features[f].properties
+//         if (pollutantFilterCOButton.classList.contains('is-activated') &&
+//             pollutantFilterCO2Button.classList.contains('is-activated') &&
+//             nace[props.NACEMainEconomicActivityName].active &&
+//             props.co2Amount &&
+//             props.co2Amount > 0) {
+//             co2sumCombined += props.co2Amount
+//             cosumCombined += props.MTonnes
+//         }
+//     }
+//     co2CombinedFilteredSumOutput.style.background = '#ddc'
+//     coCombinedFilteredSumOutput.style.background = '#ddc'
+//     co2FilteredSumOutput.style.background = '#ddc'
+//     coFilteredSumOutput.style.background = '#ddc'
+//     setTimeout(function () {
+//         co2FilteredSumOutput.style.background = '#fff'
+//         coFilteredSumOutput.style.background = '#fff'
+//         co2CombinedFilteredSumOutput.style.background = '#fff'
+//         coCombinedFilteredSumOutput.style.background = '#fff'
+//     }, 500)
+//     co2FilteredSumOutput.textContent = format1Dec(co2sum) + ' Megatonnes/year'
+//     coFilteredSumOutput.textContent = format1Dec(cosum) + ' Megatonnes/year'
+//     co2CombinedFilteredSumOutput.textContent = format1Dec(co2sumCombined) + ' Megatonnes/year'
+//     coCombinedFilteredSumOutput.textContent = format1Dec(cosumCombined) + ' Megatonnes/year'
+// }
 
-function toggleAllNaceFilter() {
-    let nace = globalModel.emissions.categories.naceCategories
-    if (naceDeselectButton.text == "Deselect all") {
-        activateCompatButton(compatFilterManualButton)
-        naceDeselectButton.text = "Select all"
-        for (name in nace.items) {
-            nace.items[name].active = false
-            nace.items[name].button.classList.remove('is-activated')
-        }
-    } else {
-        activateCompatButton(compatFilterLoopButton)
-        naceDeselectButton.text = "Deselect all"
-        for (name in nace.items) {
-            nace.items[name].active = true
-            nace.items[name].button.classList.add('is-activated')
-        }
-    }
-    updateEmissionsFilter()
+// function toggleAllNaceFilter() {
+//     let nace = globalModel.emissions.categories.naceCategories
+//     if (naceDeselectButton.text == "Deselect all") {
+//         activateCompatButton(compatFilterManualButton)
+//         naceDeselectButton.text = "Select all"
+//         for (name in nace.items) {
+//             nace.items[name].active = false
+//             nace.items[name].button.classList.remove('is-activated')
+//         }
+//     } else {
+//         activateCompatButton(compatFilterLoopButton)
+//         naceDeselectButton.text = "Deselect all"
+//         for (name in nace.items) {
+//             nace.items[name].active = true
+//             nace.items[name].button.classList.add('is-activated')
+//         }
+//     }
+//     updateEmissionsFilter()
 
-}
-naceDeselectButton.addEventListener('click', toggleAllNaceFilter)
+// }
+// naceDeselectButton.addEventListener('click', toggleAllNaceFilter)
 
 
 
@@ -537,15 +537,15 @@ function updateEmissionsFilter() {
             return isVisible
         })
     }
-    getFilteredTotals()
-    getActiveChemPlants()
+    //getFilteredTotals()
+    //getActiveChemPlants()
 }
 
 /**
  * Checks if the feature is within the radius of a chemical cluster that has enough CO emissions
  *
- * @param {*} feature: an emission feature
- * @returns
+//  * @param {*} feature: an emission feature
+//  * @returns
  */
 // function decideIfInVisibleCluster(feature) {
 //     /* used to be 15 / 50000 as of Jan 27 */
@@ -578,9 +578,9 @@ function updateEmissionsFilter() {
 
 /**
  * Returns true if the feature is within the defined distance of an active chemical or polyol plant
- *
- * @param {*} feature: A feature with properties, geometry and
- * @param {string} typeOfChemicalPlant: either 'chemical parks' or 'polyol plants'
+//  *
+//  * @param {*} feature: A feature with properties, geometry and
+//  * @param {string} typeOfChemicalPlant: either 'chemical parks' or 'polyol plants'
  */
 // function decideIfInDistance(feature, typeOfChemicalPlant) {
 //     let minDistance = 99999999 // in meter, must be bigger than the max filter
@@ -597,11 +597,11 @@ function updateEmissionsFilter() {
 /**
  * Toggle if only emissions within defined radius are shown or all
  */
-let toggleRadiusFilter = () => {
-    radiusFilterButton.classList.toggle('is-info')
-    updateEmissionsFilter()
-}
-radiusFilterButton.addEventListener('click', toggleRadiusFilter)
+// let toggleRadiusFilter = () => {
+//     radiusFilterButton.classList.toggle('is-info')
+//     updateEmissionsFilter()
+// }
+// radiusFilterButton.addEventListener('click', toggleRadiusFilter)
 
 
 
@@ -686,17 +686,17 @@ radiusFilterButton.addEventListener('click', toggleRadiusFilter)
 /* Settings tab */
 let mapLayoutGreen = document.getElementById('map-layout-green'),
     mapLayoutLight = document.getElementById('map-layout-light'),
-    mapShowConsumers = document.getElementById('map-show-consumers'),
-    modifyConsumers = document.getElementById('modify-consumers'),
-    modalModifyConsumers = document.getElementById('modal-modify-consumers'),
-    csvChemicalParks = document.getElementById('csv-chemical-parks'),
-    csvPolyolPlants = document.getElementById('csv-polyol-plants'),
-    renewEmissions = document.getElementById('renew-emissions'),
-    modifyConsumersCreateLink = document.getElementById('modify-consumers-create-link'),
-    modifyConsumersCreateJSON = document.getElementById('modify-consumers-create-json'),
-    modifyConsumersLoadData = document.getElementById('modify-consumers-load-data'),
-    closeModalList = document.getElementsByClassName('close-modal'),
-    resetConsumers = document.getElementById('reset-consumers')
+    // mapShowConsumers = document.getElementById('map-show-consumers'),
+    // modifyConsumers = document.getElementById('modify-consumers'),
+    // modalModifyConsumers = document.getElementById('modal-modify-consumers'),
+    // csvChemicalParks = document.getElementById('csv-chemical-parks'),
+    //csvPolyolPlants = document.getElementById('csv-polyol-plants'),
+    //renewEmissions = document.getElementById('renew-emissions'),
+    // modifyConsumersCreateLink = document.getElementById('modify-consumers-create-link'),
+    // modifyConsumersCreateJSON = document.getElementById('modify-consumers-create-json'),
+    // modifyConsumersLoadData = document.getElementById('modify-consumers-load-data'),
+    // closeModalList = document.getElementsByClassName('close-modal'),
+    // resetConsumers = document.getElementById('reset-consumers')
 
 function toggleMapLayout() {
     mapLayoutGreen.classList.toggle('is-info')
@@ -712,355 +712,355 @@ function toggleMapLayout() {
 mapLayoutGreen.addEventListener('click', toggleMapLayout)
 mapLayoutLight.addEventListener('click', toggleMapLayout)
 
-function toggleShowConsumers() {
-    mapShowConsumers.classList.toggle('is-info')
-    polyolFilterButton.classList.remove('is-info')
-    chemParkFilterButton.classList.remove('is-info')
-    steelMillButton.classList.remove('is-info')
-    if (mapShowConsumers.classList.contains('is-info')) {
-        polyolFilterButton.disabled = false
-        chemParkFilterButton.disabled = false
-        steelMillButton.disabled = false
-        for (l in chemicalParkMarkers)
-            map.addLayer(chemicalParkMarkers[l])
-    } else {
-        polyolFilterButton.disabled = true
-        chemParkFilterButton.disabled = true
-        steelMillButton.disabled = true
-        steelMillFilterButton.disabled = true
-        for (l in chemicalParkMarkers)
-            map.removeLayer(chemicalParkMarkers[l])
-    }
-}
-mapShowConsumers.addEventListener('click', toggleShowConsumers)
+// function toggleShowConsumers() {
+//     mapShowConsumers.classList.toggle('is-info')
+//     polyolFilterButton.classList.remove('is-info')
+//     chemParkFilterButton.classList.remove('is-info')
+//     steelMillButton.classList.remove('is-info')
+//     if (mapShowConsumers.classList.contains('is-info')) {
+//         polyolFilterButton.disabled = false
+//         chemParkFilterButton.disabled = false
+//         steelMillButton.disabled = false
+//         for (l in chemicalParkMarkers)
+//             map.addLayer(chemicalParkMarkers[l])
+//     } else {
+//         polyolFilterButton.disabled = true
+//         chemParkFilterButton.disabled = true
+//         steelMillButton.disabled = true
+//         steelMillFilterButton.disabled = true
+//         for (l in chemicalParkMarkers)
+//             map.removeLayer(chemicalParkMarkers[l])
+//     }
+// }
+// mapShowConsumers.addEventListener('click', toggleShowConsumers)
 
-function putCsvInTextArea(file, textarea) {
-    fetch(file)
-        .then(response => response.text())
-        .then(myBlob => textarea.value = myBlob)
-}
+// function putCsvInTextArea(file, textarea) {
+//     fetch(file)
+//         .then(response => response.text())
+//         .then(myBlob => textarea.value = myBlob)
+// }
 
-function toggleModifyConsumers() {
-    modalModifyConsumers.classList.toggle('is-active')
-    if (!modalModifyConsumers.dataset.isInitialized) {
-        putCsvInTextArea('chemicalparks v2.csv', csvChemicalParks)
-        putCsvInTextArea('polyol plants europe v2.csv', csvPolyolPlants)
-        modalModifyConsumers.dataset.isInitialized = true
-    }
-}
-modifyConsumers.addEventListener('click', toggleModifyConsumers)
-for (let i = 0; i < closeModalList.length; i++) {
-    closeModalList[i].addEventListener('click', toggleModifyConsumers)
-}
+// function toggleModifyConsumers() {
+//     modalModifyConsumers.classList.toggle('is-active')
+//     if (!modalModifyConsumers.dataset.isInitialized) {
+//         putCsvInTextArea('chemicalparks v2.csv', csvChemicalParks)
+//         putCsvInTextArea('polyol plants europe v2.csv', csvPolyolPlants)
+//         modalModifyConsumers.dataset.isInitialized = true
+//     }
+// }
+// modifyConsumers.addEventListener('click', toggleModifyConsumers)
+// for (let i = 0; i < closeModalList.length; i++) {
+//     closeModalList[i].addEventListener('click', toggleModifyConsumers)
+// }
 
-function modifyConsumersLink() {
-    var script = document.createElement('script')
-    script.onload = function () {
-        convertCsvsToJSON().then(json => {
-            var compressed = LZString.compressToEncodedURIComponent(JSON.stringify(json))
-            window.prompt("Copy to clipboard: Ctrl+C, Enter", 'https://carbon4pur.github.io/mapping/index.html?c=' + compressed)
+// function modifyConsumersLink() {
+//     var script = document.createElement('script')
+//     script.onload = function () {
+//         convertCsvsToJSON().then(json => {
+//             var compressed = LZString.compressToEncodedURIComponent(JSON.stringify(json))
+//             window.prompt("Copy to clipboard: Ctrl+C, Enter", 'https://carbon4pur.github.io/mapping/index.html?c=' + compressed)
 
-        })
-    }
-    script.src = 'vendor/lz-string.min.js'
-    document.head.appendChild(script)
-}
-modifyConsumersCreateLink.addEventListener('click', modifyConsumersLink)
+//         })
+//     }
+//     script.src = 'vendor/lz-string.min.js'
+//     document.head.appendChild(script)
+// }
+// modifyConsumersCreateLink.addEventListener('click', modifyConsumersLink)
 
-function downloadObjectAsJson(exportObj, exportName) {
-    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
-    var downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", exportName + ".json");
-    document.body.appendChild(downloadAnchorNode); // required for firefox
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
-}
+// function downloadObjectAsJson(exportObj, exportName) {
+//     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+//     var downloadAnchorNode = document.createElement('a');
+//     downloadAnchorNode.setAttribute("href", dataStr);
+//     downloadAnchorNode.setAttribute("download", exportName + ".json");
+//     document.body.appendChild(downloadAnchorNode); // required for firefox
+//     downloadAnchorNode.click();
+//     downloadAnchorNode.remove();
+// }
 
-function modifyConsumersJSON() {
-    convertCsvsToJSON().then(json => addDistances(globalEmissionData, json))
-        .then(obj => {
-            downloadObjectAsJson(obj.chemParks, "chemicalParks")
-        })
-}
-modifyConsumersCreateJSON.addEventListener('click', modifyConsumersJSON)
+// function modifyConsumersJSON() {
+//     convertCsvsToJSON().then(json => addDistances(globalEmissionData, json))
+//         .then(obj => {
+//             downloadObjectAsJson(obj.chemParks, "chemicalParks")
+//         })
+// }
+// modifyConsumersCreateJSON.addEventListener('click', modifyConsumersJSON)
 
-function convertCsvsToJSON() {
-    return new Promise((resolve) => {
-        // only load csv2geojson if needed
-        var script = document.createElement('script')
-        script.onload = function () {
-            let csvs = {
-                "chemical parks": csvChemicalParks.value,
-                "polyol plants": csvPolyolPlants.value
-            }
-            let json = {}
-            for (type in csvs) {
-                csv2geojson.csv2geojson(csvs[type], {
-                    latfield: 'latitude',
-                    lonfield: 'longitude',
-                    delimiter: ';',
-                }, (err, geojson) => {
-                    if (err) {
-                        console.error(err)
-                    } else {
-                        //console.log(csvs, geojson)
-                        json[type] = geojson
-                    }
-                })
-            }
-            //console.log(globalChemicalData)
-            resolve(json)
-        }
-        script.src = 'vendor/csv2geojson.js'
-        document.head.appendChild(script)
-    })
-}
+// function convertCsvsToJSON() {
+//     return new Promise((resolve) => {
+//         // only load csv2geojson if needed
+//         var script = document.createElement('script')
+//         script.onload = function () {
+//             let csvs = {
+//                 "chemical parks": csvChemicalParks.value,
+//                 "polyol plants": csvPolyolPlants.value
+//             }
+//             let json = {}
+//             for (type in csvs) {
+//                 csv2geojson.csv2geojson(csvs[type], {
+//                     latfield: 'latitude',
+//                     lonfield: 'longitude',
+//                     delimiter: ';',
+//                 }, (err, geojson) => {
+//                     if (err) {
+//                         console.error(err)
+//                     } else {
+//                         //console.log(csvs, geojson)
+//                         json[type] = geojson
+//                     }
+//                 })
+//             }
+//             //console.log(globalChemicalData)
+//             resolve(json)
+//         }
+//         script.src = 'vendor/csv2geojson.js'
+//         document.head.appendChild(script)
+//     })
+// }
 
-function addDistances(emissions, chemParks) {
-    return new Promise((resolve, reject) => {
-        for (c in chemParks) {
-            deleteOldDistances(chemParks[c].features)
-        }
-        for (e in emissions) {
-            deleteOldDistances(emissions[e].features)
-            if (e != "stats") {
-                for (c in chemParks) {
-                    if (c != "stats") {
-                        distancesBetweenFeatureLists(emissions[e].features, e, chemParks[c].features, c, groupByType1 = true)
-                    }
-                }
-            }
-        }
-        resolve({
-            emissions: emissions,
-            chemParks: chemParks
-        })
-    })
-}
+// function addDistances(emissions, chemParks) {
+//     return new Promise((resolve, reject) => {
+//         for (c in chemParks) {
+//             deleteOldDistances(chemParks[c].features)
+//         }
+//         for (e in emissions) {
+//             deleteOldDistances(emissions[e].features)
+//             if (e != "stats") {
+//                 for (c in chemParks) {
+//                     if (c != "stats") {
+//                         distancesBetweenFeatureLists(emissions[e].features, e, chemParks[c].features, c, groupByType1 = true)
+//                     }
+//                 }
+//             }
+//         }
+//         resolve({
+//             emissions: emissions,
+//             chemParks: chemParks
+//         })
+//     })
+// }
 
-function deleteOldDistances(list) {
-    for (let f1 in list) delete list[f1].properties.distances
-}
+// function deleteOldDistances(list) {
+//     for (let f1 in list) delete list[f1].properties.distances
+// }
 
-function distancesBetweenFeatureLists(list1, e, list2, c) {
-    for (let f1 in list1) {
-        for (let f2 in list2) {
-            let feat1 = list1[f1],
-                feat2 = list2[f2]
-            let d = distance(feat1.geometry.coordinates[1], feat1.geometry.coordinates[0], feat2.geometry.coordinates[1], feat2.geometry.coordinates[0])
-            if (d < 100001) {
-                if (!feat1.properties.distances) feat1.properties.distances = {}
-                feat1.properties.distances[feat2.properties.FacilityName] = {
-                    distance: d,
-                    type: c
-                }
-                if (!feat2.properties.distances) feat2.properties.distances = {}
-                feat2.properties.distances[feat1.properties.FacilityName] = {
-                    distance: d,
-                    type: feat1.properties.type,
-                    amount: feat1.properties.MTonnes
-                }
-            }
-        }
-    }
+// function distancesBetweenFeatureLists(list1, e, list2, c) {
+//     for (let f1 in list1) {
+//         for (let f2 in list2) {
+//             let feat1 = list1[f1],
+//                 feat2 = list2[f2]
+//             let d = distance(feat1.geometry.coordinates[1], feat1.geometry.coordinates[0], feat2.geometry.coordinates[1], feat2.geometry.coordinates[0])
+//             if (d < 100001) {
+//                 if (!feat1.properties.distances) feat1.properties.distances = {}
+//                 feat1.properties.distances[feat2.properties.FacilityName] = {
+//                     distance: d,
+//                     type: c
+//                 }
+//                 if (!feat2.properties.distances) feat2.properties.distances = {}
+//                 feat2.properties.distances[feat1.properties.FacilityName] = {
+//                     distance: d,
+//                     type: feat1.properties.type,
+//                     amount: feat1.properties.MTonnes
+//                 }
+//             }
+//         }
+//     }
 
-}
+// }
 
-function distance(lat1, lng1, lat2, lng2) {
-    var rad = Math.PI / 180,
-        lt1 = lat1 * rad,
-        lt2 = lat2 * rad,
-        sinDLat = Math.sin((lat2 - lat1) * rad / 2),
-        sinDLon = Math.sin((lng2 - lng1) * rad / 2),
-        a = sinDLat * sinDLat + Math.cos(lt1) * Math.cos(lt2) * sinDLon * sinDLon,
-        c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-    return 6371000 * c
-}
+// function distance(lat1, lng1, lat2, lng2) {
+//     var rad = Math.PI / 180,
+//         lt1 = lat1 * rad,
+//         lt2 = lat2 * rad,
+//         sinDLat = Math.sin((lat2 - lat1) * rad / 2),
+//         sinDLon = Math.sin((lng2 - lng1) * rad / 2),
+//         a = sinDLat * sinDLat + Math.cos(lt1) * Math.cos(lt2) * sinDLon * sinDLon,
+//         c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+//     return 6371000 * c
+// }
 
-function loadConsumersData() {
-    modifyConsumersLoadData.classList.add('is-loading')
-    convertCsvsToJSON().then(chemParks => addDistances(globalEmissionData, chemParks))
-        .then(obj => {
-            globalEmissionData = obj.emissions
-            globalChemicalData = obj.chemParks
-        })
-        .then(loadChemicalParks(globalChemicalData))
-        .then(() => {
-            modifyConsumersLoadData.classList.remove('is-loading')
-            modalModifyConsumers.classList.remove('is-active')
-        })
-}
+// function loadConsumersData() {
+//     modifyConsumersLoadData.classList.add('is-loading')
+//     convertCsvsToJSON().then(chemParks => addDistances(globalEmissionData, chemParks))
+//         .then(obj => {
+//             globalEmissionData = obj.emissions
+//             globalChemicalData = obj.chemParks
+//         })
+//         .then(loadChemicalParks(globalChemicalData))
+//         .then(() => {
+//             modifyConsumersLoadData.classList.remove('is-loading')
+//             modalModifyConsumers.classList.remove('is-active')
+//         })
+// }
 
-modifyConsumersLoadData.addEventListener('click', loadConsumersData)
+// modifyConsumersLoadData.addEventListener('click', loadConsumersData)
 
-resetConsumers.addEventListener('click', () => {
-    delete modalModifyConsumers.dataset.isInitialized
-    loadChemicalParksFromJSON()
-})
+// resetConsumers.addEventListener('click', () => {
+//     delete modalModifyConsumers.dataset.isInitialized
+//     loadChemicalParksFromJSON()
+// })
 
 
-function createNewEmissionsJSON() {
-    renewEmissions.classList.add('is-loading')
-    window.sortedFeatures = {
-        'stats': {
-            'totalMax': 0,
-            max: {},
-            totals: {
-                "CO2, AIR": {},
-                "CO, AIR": {}
-            },
-            "Description": "BEFORE CHANGING: PLEASE NOTE: the location for 'FJERNVARME FYN FYNSVÆRKET A/S' has to be changed from (9.80973039123284°, 5.33467590910096°) to 10.404647, 55.428245"
-        }
-    };
-    var actions = ["CO2, AIR", "CO, AIR"].map(asyncGetData);
-    var results = Promise.all(actions);
-    results.then(data => { // or just .then(console.log)
-        // iterate over all CO2 plants
-        for (let i = 0; i < sortedFeatures['CO2, AIR'].features.length; i++) {
-            let f = sortedFeatures['CO2, AIR'].features[i];
-            // iterate over all CO plants
-            for (let j = 0; j < sortedFeatures['CO, AIR'].features.length; j++) {
-                let e = sortedFeatures['CO, AIR'].features[j];
-                // check if plants are equal except amount
-                if (checkEquality(e, f, false)) {
-                    e.properties.co2Amount = f.properties.MTonnes;
-                    f.properties.coAmount = e.properties.MTonnes;
-                }
-            }
-        }
-        addDistances(sortedFeatures, globalChemicalData)
-        console.log(sortedFeatures)
-        downloadObjectAsJson(sortedFeatures, "emissions")
-        renewEmissions.classList.remove('is-loading')
-    });
-}
-renewEmissions.addEventListener('click', createNewEmissionsJSON)
+// function createNewEmissionsJSON() {
+//     renewEmissions.classList.add('is-loading')
+//     window.sortedFeatures = {
+//         'stats': {
+//             'totalMax': 0,
+//             max: {},
+//             totals: {
+//                 "CO2, AIR": {},
+//                 "CO, AIR": {}
+//             },
+//             "Description": "BEFORE CHANGING: PLEASE NOTE: the location for 'FJERNVARME FYN FYNSVÆRKET A/S' has to be changed from (9.80973039123284°, 5.33467590910096°) to 10.404647, 55.428245"
+//         }
+//     };
+//     var actions = ["CO2, AIR", "CO, AIR"].map(asyncGetData);
+//     var results = Promise.all(actions);
+//     results.then(data => { // or just .then(console.log)
+//         // iterate over all CO2 plants
+//         for (let i = 0; i < sortedFeatures['CO2, AIR'].features.length; i++) {
+//             let f = sortedFeatures['CO2, AIR'].features[i];
+//             // iterate over all CO plants
+//             for (let j = 0; j < sortedFeatures['CO, AIR'].features.length; j++) {
+//                 let e = sortedFeatures['CO, AIR'].features[j];
+//                 // check if plants are equal except amount
+//                 if (checkEquality(e, f, false)) {
+//                     e.properties.co2Amount = f.properties.MTonnes;
+//                     f.properties.coAmount = e.properties.MTonnes;
+//                 }
+//             }
+//         }
+//         addDistances(sortedFeatures, globalChemicalData)
+//         console.log(sortedFeatures)
+//         downloadObjectAsJson(sortedFeatures, "emissions")
+//         renewEmissions.classList.remove('is-loading')
+//     });
+// }
+// renewEmissions.addEventListener('click', createNewEmissionsJSON)
 
-var asyncGetData = function asyncGetDataFromSparql(emissionName) {
-    return new Promise(resolve => {
-        sortedFeatures[emissionName] = {
-            type: "FeatureCollection",
-            features: []
-        };
-        /* query e-prtr with variables */
-        var query = makeQueryEPRTR(emissionName);
-        fetch(query)
-            .then(function (response) {
-                //console.log(response);
-                return response.json();
-            }, function (reject) {
-                console.log(reject);
-            })
-            .then(myBlob => showEm(myBlob))
-            .then(col => {
-                sortedFeatures[emissionName].features = col;
-                let m = col.reduce((a, b) => a.properties.MTonnes > b.properties.MTonnes ? a : b).properties.MTonnes;
-                sortedFeatures.stats.max[emissionName] = m;
-                if (sortedFeatures.stats.totalMax < m) sortedFeatures.stats.totalMax = m;
-                for (let i = 0; i < col.length; i++) {
-                    let cur = col[i];
-                    if (isNaN(sortedFeatures.stats.totals[emissionName][cur.properties.NACEMainEconomicActivityName])) sortedFeatures.stats.totals[emissionName][cur.properties.NACEMainEconomicActivityName] = 0;
-                    sortedFeatures.stats.totals[emissionName][cur.properties.NACEMainEconomicActivityName] += cur.properties.MTonnes;
-                }
-                resolve(sortedFeatures)
-            });
-    })
-};
+// var asyncGetData = function asyncGetDataFromSparql(emissionName) {
+//     return new Promise(resolve => {
+//         sortedFeatures[emissionName] = {
+//             type: "FeatureCollection",
+//             features: []
+//         };
+//         /* query e-prtr with variables */
+//         var query = makeQueryEPRTR(emissionName);
+//         fetch(query)
+//             .then(function (response) {
+//                 //console.log(response);
+//                 return response.json();
+//             }, function (reject) {
+//                 console.log(reject);
+//             })
+//             .then(myBlob => showEm(myBlob))
+//             .then(col => {
+//                 sortedFeatures[emissionName].features = col;
+//                 let m = col.reduce((a, b) => a.properties.MTonnes > b.properties.MTonnes ? a : b).properties.MTonnes;
+//                 sortedFeatures.stats.max[emissionName] = m;
+//                 if (sortedFeatures.stats.totalMax < m) sortedFeatures.stats.totalMax = m;
+//                 for (let i = 0; i < col.length; i++) {
+//                     let cur = col[i];
+//                     if (isNaN(sortedFeatures.stats.totals[emissionName][cur.properties.NACEMainEconomicActivityName])) sortedFeatures.stats.totals[emissionName][cur.properties.NACEMainEconomicActivityName] = 0;
+//                     sortedFeatures.stats.totals[emissionName][cur.properties.NACEMainEconomicActivityName] += cur.properties.MTonnes;
+//                 }
+//                 resolve(sortedFeatures)
+//             });
+//     })
+// };
 
 /* use http://semantic.eea.europa.eu/sparql online query tool to generate query */
-function makeQueryEPRTR(emissionName = "CO2, AIR") {
-    /* CORS headers not set by europa.eu, so we use a sparql proxy */
-    var proxy = "https://cors-anywhere.herokuapp.com/";
-    /* easiest sparql endpoint we could find */
-    var url = "http://semantic.eea.europa.eu/sparql";
-    var query = `PREFIX eprtr: <http://prtr.ec.europa.eu/rdf/schema.rdf#>
-PREFIX facility: <http://prtr.ec.europa.eu/rdf/facility/>
-PREFIX wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-SELECT ?FacilityName ?FacilityDetails ?CountryName ?Lat ?Long ?ReportingYear ?NACEMainEconomicActivityName ?PollutantName ?Quantity {
-  ?facility eprtr:facilityName ?FacilityName .
-  ?facility eprtr:inCountry ?country . ?country eprtr:name ?CountryName .
-  ?facility eprtr:latestReport ?latestReport . 
-  ?facility wgs84:lat ?Lat . 
-  ?facility wgs84:long ?Long .
-  ?facility foaf:isPrimaryTopicOf ?FacilityDetails .
-  ?latestReport eprtr:reportingYear ?ReportingYear .
-  ?latestReport eprtr:nACEActivity ?nACEActivity . ?nACEActivity eprtr:name ?NACEMainEconomicActivityName
-  values ?nACEActivity {
-    <http://prtr.ec.europa.eu/rdf/nACEActivity/20.13>
-    <http://prtr.ec.europa.eu/rdf/nACEActivity/23.52>
-    <http://prtr.ec.europa.eu/rdf/nACEActivity/35.11>
-    <http://prtr.ec.europa.eu/rdf/nACEActivity/06.20>
-    <http://prtr.ec.europa.eu/rdf/nACEActivity/23.51>
-    <http://prtr.ec.europa.eu/rdf/nACEActivity/20.15>
-    <http://prtr.ec.europa.eu/rdf/nACEActivity/19.20>
-    <http://prtr.ec.europa.eu/rdf/nACEActivity/24.10>
+// function makeQueryEPRTR(emissionName = "CO2, AIR") {
+//     /* CORS headers not set by europa.eu, so we use a sparql proxy */
+//     var proxy = "https://cors-anywhere.herokuapp.com/";
+//     /* easiest sparql endpoint we could find */
+//     var url = "http://semantic.eea.europa.eu/sparql";
+//     var query = `PREFIX eprtr: <http://prtr.ec.europa.eu/rdf/schema.rdf#>
+// PREFIX facility: <http://prtr.ec.europa.eu/rdf/facility/>
+// PREFIX wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+// PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+// PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+// SELECT ?FacilityName ?FacilityDetails ?CountryName ?Lat ?Long ?ReportingYear ?NACEMainEconomicActivityName ?PollutantName ?Quantity {
+//   ?facility eprtr:facilityName ?FacilityName .
+//   ?facility eprtr:inCountry ?country . ?country eprtr:name ?CountryName .
+//   ?facility eprtr:latestReport ?latestReport . 
+//   ?facility wgs84:lat ?Lat . 
+//   ?facility wgs84:long ?Long .
+//   ?facility foaf:isPrimaryTopicOf ?FacilityDetails .
+//   ?latestReport eprtr:reportingYear ?ReportingYear .
+//   ?latestReport eprtr:nACEActivity ?nACEActivity . ?nACEActivity eprtr:name ?NACEMainEconomicActivityName
+//   values ?nACEActivity {
+//     <http://prtr.ec.europa.eu/rdf/nACEActivity/20.13>
+//     <http://prtr.ec.europa.eu/rdf/nACEActivity/23.52>
+//     <http://prtr.ec.europa.eu/rdf/nACEActivity/35.11>
+//     <http://prtr.ec.europa.eu/rdf/nACEActivity/06.20>
+//     <http://prtr.ec.europa.eu/rdf/nACEActivity/23.51>
+//     <http://prtr.ec.europa.eu/rdf/nACEActivity/20.15>
+//     <http://prtr.ec.europa.eu/rdf/nACEActivity/19.20>
+//     <http://prtr.ec.europa.eu/rdf/nACEActivity/24.10>
     
-  }
-  ?pollutantRelease eprtr:facilityReport ?latestReport .   
-  ?pollutantRelease rdfs:label ?PollutantName . 
-  values ?PollutantName {"` + emissionName + `"}  
-  ?pollutantRelease eprtr:totalQuantity ?Quantity . 
-} 
-ORDER BY ?nACEActivity ?FacilityName ?ReportingYear
-LIMIT 10000
-	`;
-    /* Warning: europa.eu is normally limiting results to 512, add nrOfHits to increase */
-    return proxy + url + "?query=" + encodeURIComponent(query) + '&format=application%2Fsparql-results%2Bjson&nrOfHits=10000';
-}
+//   }
+//   ?pollutantRelease eprtr:facilityReport ?latestReport .   
+//   ?pollutantRelease rdfs:label ?PollutantName . 
+//   values ?PollutantName {"` + emissionName + `"}  
+//   ?pollutantRelease eprtr:totalQuantity ?Quantity . 
+// } 
+// ORDER BY ?nACEActivity ?FacilityName ?ReportingYear
+// LIMIT 10000
+// 	`;
+//     /* Warning: europa.eu is normally limiting results to 512, add nrOfHits to increase */
+//     return proxy + url + "?query=" + encodeURIComponent(query) + '&format=application%2Fsparql-results%2Bjson&nrOfHits=10000';
+// }
 
 
-function showEm(data) {
-    var r = createFeatureCollection(data.results.bindings);
-    return r;
-}
+// function showEm(data) {
+//     var r = createFeatureCollection(data.results.bindings);
+//     return r;
+// }
 
-function createGeometry(long, lat) {
-    return {
-        type: "Point",
-        coordinates: [parseFloat(long), parseFloat(lat)]
-    };
-}
+// function createGeometry(long, lat) {
+//     return {
+//         type: "Point",
+//         coordinates: [parseFloat(long), parseFloat(lat)]
+//     };
+// }
 
-function createProperties(obj) {
-    return {
-        CountryName: obj.CountryName.value,
-        FacilityName: obj.FacilityName.value,
-        FacilityDetails: obj.FacilityDetails.value,
-        ReportingYear: obj.ReportingYear.value,
-        MTonnes: obj.Quantity.value / 1E9,
-        NACEMainEconomicActivityName: obj.NACEMainEconomicActivityName.value,
-        PollutantName: obj.PollutantName.value
-    };
-}
+// function createProperties(obj) {
+//     return {
+//         CountryName: obj.CountryName.value,
+//         FacilityName: obj.FacilityName.value,
+//         FacilityDetails: obj.FacilityDetails.value,
+//         ReportingYear: obj.ReportingYear.value,
+//         MTonnes: obj.Quantity.value / 1E9,
+//         NACEMainEconomicActivityName: obj.NACEMainEconomicActivityName.value,
+//         PollutantName: obj.PollutantName.value
+//     };
+// }
 
-function createFeatureFromObj(obj) {
-    return {
-        geometry: createGeometry(obj.Long.value, obj.Lat.value),
-        properties: createProperties(obj),
-        type: "Feature"
-    };
-}
+// function createFeatureFromObj(obj) {
+//     return {
+//         geometry: createGeometry(obj.Long.value, obj.Lat.value),
+//         properties: createProperties(obj),
+//         type: "Feature"
+//     };
+// }
 
-function checkEquality(el, ft, checkAmount = true) {
-    var checks = (el.properties.FacilityDetails == ft.properties.FacilityDetails ? 1 : 0) +
-        (el.properties.FacilityName == ft.properties.FacilityName ? 1 : 0) +
-        (el.properties.ReportingYear == ft.properties.ReportingYear ? 1 : 0) +
-        (el.properties.MTonnes == ft.properties.MTonnes ? 1 : 0)
-    return checks > (checkAmount ? 3 : 2);
-}
+// function checkEquality(el, ft, checkAmount = true) {
+//     var checks = (el.properties.FacilityDetails == ft.properties.FacilityDetails ? 1 : 0) +
+//         (el.properties.FacilityName == ft.properties.FacilityName ? 1 : 0) +
+//         (el.properties.ReportingYear == ft.properties.ReportingYear ? 1 : 0) +
+//         (el.properties.MTonnes == ft.properties.MTonnes ? 1 : 0)
+//     return checks > (checkAmount ? 3 : 2);
+// }
 
-function createFeatureCollection(array) {
-    var col = [];
-    for (var i = 0; i < array.length; i++) {
-        var ft = createFeatureFromObj(array[i]);
-        const found = col.some(el => checkEquality(el, ft));
-        if (!found) col.push(ft);
-    }
-    return col;
-}
+// function createFeatureCollection(array) {
+//     var col = [];
+//     for (var i = 0; i < array.length; i++) {
+//         var ft = createFeatureFromObj(array[i]);
+//         const found = col.some(el => checkEquality(el, ft));
+//         if (!found) col.push(ft);
+//     }
+//     return col;
+// }
 
 
 /***********************/
@@ -1157,79 +1157,79 @@ function loadChemicalParksFromData(data) {
     })
 }
 
-function loadChemicalParksFromURI(c) {
-    loadScript('vendor/lz-string.min.js', () => {
-        let string = LZString.decompressFromEncodedURIComponent(c)
-        console.log(string, JSON.parse(string))
-        loadChemicalParksFromData(JSON.parse(string))
-    })
-}
+// function loadChemicalParksFromURI(c) {
+//     loadScript('vendor/lz-string.min.js', () => {
+//         let string = LZString.decompressFromEncodedURIComponent(c)
+//         console.log(string, JSON.parse(string))
+//         loadChemicalParksFromData(JSON.parse(string))
+//     })
+// }
 
-function loadChemicalParks(data) {
-    return new Promise((resolve, reject) => {
-        for (marker in chemicalParkMarkers) {
-            map.removeLayer(chemicalParkMarkers[marker])
-        }
-        chemicalParkMarkers = {}
-        if (url.searchParams.get("c")) {
-            loadChemicalParksFromURI(url.searchParams.get("c"))
-                .then(resolve())
-        } else {
-            loadChemicalParksFromData(data)
-                .then(resolve())
-        }
-    })
-}
+// function loadChemicalParks(data) {
+//     return new Promise((resolve, reject) => {
+//         for (marker in chemicalParkMarkers) {
+//             map.removeLayer(chemicalParkMarkers[marker])
+//         }
+//         chemicalParkMarkers = {}
+//         if (url.searchParams.get("c")) {
+//             loadChemicalParksFromURI(url.searchParams.get("c"))
+//                 .then(resolve())
+//         } else {
+//             loadChemicalParksFromData(data)
+//                 .then(resolve())
+//         }
+//     })
+// }
 
 
-function loadChemicalParksFromJSON() {
-    return new Promise((resolve) => {
-        fetch('chemicalParks.json')
-            .then((response) => {
-                    return response.json()
-                },
-                (reject) => {
-                    console.error(reject)
-                })
-            .then(loadChemicalParks)
-            .then(() => resolve())
-    })
-}
+// function loadChemicalParksFromJSON() {
+//     return new Promise((resolve) => {
+//         fetch('chemicalParks.json')
+//             .then((response) => {
+//                     return response.json()
+//                 },
+//                 (reject) => {
+//                     console.error(reject)
+//                 })
+//             .then(loadChemicalParks)
+//             .then(() => resolve())
+//     })
+// }
 
-function loadSteelMillsAsChemicalParks() {
-    return new Promise((resolve) => {
-        if (!globalChemicalData['steel mills']) {
-            fetch('steelMills.json')
-                .then((response) => {
-                        return response.json()
-                    },
-                    (reject) => {
-                        console.error(reject)
-                    })
-                .then((json) => {
-                    globalChemicalData["steel mills"] = {
-                        type: "FeatureCollection",
-                        features: []
-                    }
-                    new_feats = globalChemicalData["steel mills"].features
-                    for (e in globalEmissionData["CO, AIR"].features) {
-                        let emitter = globalEmissionData["CO, AIR"].features[e]
-                        for (s in json.bof) {
-                            let steelMill = json.bof[s]
-                            if (emitter.properties.FacilityName == steelMill) {
-                                new_feats.push(clone(emitter))
-                            }
-                        }
-                    }
-                    for (e in globalEmissionData) {
-                        distancesBetweenFeatureLists(globalEmissionData[e].features, new_feats)
-                    }
-                    chemicalParkMarkers["steel mills"] = convertGeoJSONToChemLayer(globalChemicalData, "steel mills")
-                    resolve()
-                })
-        } else resolve()
-    })
-}
+// function loadSteelMillsAsChemicalParks() {
+//     return new Promise((resolve) => {
+//         if (!globalChemicalData['steel mills']) {
+//             fetch('steelMills.json')
+//                 .then((response) => {
+//                         return response.json()
+//                     },
+//                     (reject) => {
+//                         console.error(reject)
+//                     })
+//                 .then((json) => {
+//                     globalChemicalData["steel mills"] = {
+//                         type: "FeatureCollection",
+//                         features: []
+//                     }
+//                     new_feats = globalChemicalData["steel mills"].features
+//                     for (e in globalEmissionData["CO, AIR"].features) {
+//                         let emitter = globalEmissionData["CO, AIR"].features[e]
+//                         for (s in json.bof) {
+//                             let steelMill = json.bof[s]
+//                             if (emitter.properties.FacilityName == steelMill) {
+//                                 new_feats.push(clone(emitter))
+//                             }
+//                         }
+//                     }
+//                     for (e in globalEmissionData) {
+//                         distancesBetweenFeatureLists(globalEmissionData[e].features, new_feats)
+//                     }
+//                     chemicalParkMarkers["steel mills"] = convertGeoJSONToChemLayer(globalChemicalData, "steel mills")
+//                     resolve()
+//                 })
+//         } else resolve()
+//     })
+// }
 
 
 function loadScript(url, callback) {
@@ -1248,23 +1248,23 @@ function loadScript(url, callback) {
 
 /**
  * Convert a geojson to a layer with circles and popups
- *
- * @param {*} data an object from json containing an array of geoJSON
- * @param {string} type the name of the geoJSON inside the data
- * @returns {layer} a geoJSON layer
- */
-function convertGeoJSONToChemLayer(data, type) {
-    return L.geoJson(data[type], {
-        pointToLayer: function (feature, latlng) {
-            feature.properties['type'] = type
-            return L.circle(latlng, distanceChemicalPlantOutput.value * 1000, { // radius expected in m, slider in km
-                fillColor: chemicalColors[feature.properties.type],
-                weight: 0,
-                fillOpacity: 0.4
-            }).bindPopup(addConsumerPopupHandler(feature, type))
-        }
-    })
-}
+//  *
+//  * @param {*} data an object from json containing an array of geoJSON
+//  * @param {string} type the name of the geoJSON inside the data
+//  * @returns {layer} a geoJSON layer
+//  */
+// function convertGeoJSONToChemLayer(data, type) {
+//     return L.geoJson(data[type], {
+//         pointToLayer: function (feature, latlng) {
+//             feature.properties['type'] = type
+//             return L.circle(latlng, distanceChemicalPlantOutput.value * 1000, { // radius expected in m, slider in km
+//                 fillColor: chemicalColors[feature.properties.type],
+//                 weight: 0,
+//                 fillOpacity: 0.4
+//             }).bindPopup(addConsumerPopupHandler(feature, type))
+//         }
+//     })
+// }
 
 /**
  *Add a popup to a GeoJSON feature of a certain type
@@ -1273,16 +1273,16 @@ function convertGeoJSONToChemLayer(data, type) {
  * @param {string} type The name of the category, in this case "chemical parks" or "polyol plant" 
  * @returns
  */
-function addConsumerPopupHandler(feature) {
-    if (feature.properties) {
-        return `<h2>${feature.properties.FacilityName}</h2>
-                ${feature.properties.CountryName}
-                <br><b><i class="${feature.properties.type.replace(" ", "-") + "-popup"}">${feature.properties.type}</i></b>
-                <br>` + consumerPopupAvailability(feature)
-    } else {
-        console.log(feature)
-    }
-}
+// function addConsumerPopupHandler(feature) {
+//     if (feature.properties) {
+//         return `<h2>${feature.properties.FacilityName}</h2>
+//                 ${feature.properties.CountryName}
+//                 <br><b><i class="${feature.properties.type.replace(" ", "-") + "-popup"}">${feature.properties.type}</i></b>
+//                 <br>` + consumerPopupAvailability(feature)
+//     } else {
+//         console.log(feature)
+//     }
+// }
 
 /**
  * Create a box with available emissions around a consumer
@@ -1404,8 +1404,8 @@ let createScale = () => {
 /*************************************/
 /* Change layout with get parameters */
 /*************************************/
-var url = new URL(window.location.href)
-if (!mapLayoutLight.classList.contains('is-info') && url.searchParams.get("style") == "light") toggleMapLayout()
+// var url = new URL(window.location.href)
+// if (!mapLayoutLight.classList.contains('is-info') && url.searchParams.get("style") == "light") toggleMapLayout()
 
 
 /*************************************************/
@@ -1422,13 +1422,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 console.error(reject)
             })
         .then(loadPRTRlayers)
-        .then(createScale)
-        .then(globalModel.emissions.categories.naceCategories.buttons.createButtons)
-        .then(getFilteredTotals)
-        .then(loadChemicalParksFromJSON)
-        .then(loadSteelMillsAsChemicalParks)
-        .then(checkIfIntro)
-        .then(getActiveChemPlants)
+        //.then(createScale)
+        //.then(globalModel.emissions.categories.naceCategories.buttons.createButtons)
+        //.then(getFilteredTotals)
+        //.then(loadChemicalParksFromJSON)
+        //.then(loadSteelMillsAsChemicalParks)
+        //.then(checkIfIntro)
+        //.then(getActiveChemPlants)
 })
 
 // /***********************************/
