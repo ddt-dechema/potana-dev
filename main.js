@@ -339,6 +339,62 @@ function addEmitterPopupHandler(feature) {
         console.log(feature)
     }
 }
+function getFilteredTotals() {
+    let co2sum = 0,
+        cosum = 0,
+        co2sumCombined = 0,
+        cosumCombined = 0,
+        nace = globalModel.emissions.categories.naceCategories.items
+    for (name in nace) {
+        if (nace[name].active) {
+            if (pollutantFilterCOButton.classList.contains('is-activated')) cosum += globalEmissionData.stats.totals['CO, AIR'][name]
+            if (pollutantFilterCO2Button.classList.contains('is-activated')) co2sum += globalEmissionData.stats.totals['CO2, AIR'][name]
+        }
+    }
+    for (f in globalEmissionData['CO, AIR'].features) {
+        let props = globalEmissionData['CO, AIR'].features[f].properties
+        if (pollutantFilterCOButton.classList.contains('is-activated') &&
+            pollutantFilterCO2Button.classList.contains('is-activated') &&
+            nace[props.NACEMainEconomicActivityName].active &&
+            props.co2Amount &&
+            props.co2Amount > 0) {
+            co2sumCombined += props.co2Amount
+            cosumCombined += props.MTonnes
+        }
+    }
+    co2CombinedFilteredSumOutput.style.background = '#ddc'
+    coCombinedFilteredSumOutput.style.background = '#ddc'
+    co2FilteredSumOutput.style.background = '#ddc'
+    coFilteredSumOutput.style.background = '#ddc'
+    setTimeout(function () {
+        co2FilteredSumOutput.style.background = '#fff'
+        coFilteredSumOutput.style.background = '#fff'
+        co2CombinedFilteredSumOutput.style.background = '#fff'
+        coCombinedFilteredSumOutput.style.background = '#fff'
+    }, 500)
+    co2FilteredSumOutput.textContent = format1Dec(co2sum) + ' Megatonnes/year'
+    coFilteredSumOutput.textContent = format1Dec(cosum) + ' Megatonnes/year'
+    co2CombinedFilteredSumOutput.textContent = format1Dec(co2sumCombined) + ' Megatonnes/year'
+    coCombinedFilteredSumOutput.textContent = format1Dec(cosumCombined) + ' Megatonnes/year'
+}
+
+/**
+ * create a translucid color from a color string for the popups
+ *
+ * @param {*} colorString
+ * @param {number} [opacity=0.6]
+ * @returns color
+ */
+function translucidColor(colorString, opacity = 0.6) {
+    let c = d3.color(colorString)
+    c.opacity = opacity
+    return c
+}
+
+
+
+
+
 
 
 /*zum einladen von geoJson-Punktquellen Daten */
@@ -409,6 +465,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             console.error(reject)
         })
     .then(loadPRTRlayers)
+    .then(getFilteredTotals)
+
 /* zum einladen von GeoJson-Linien daten*/
     /*fetch('lines.json')
     .then(
