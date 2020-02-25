@@ -181,6 +181,18 @@ function addEmitterPopupHandler(feature) {
        console.log(feature)
    }
 }
+/**
+ * create a translucid color from a color string for the popups
+ *
+ * @param {*} colorString
+ * @param {number} [opacity=0.6]
+ * @returns color
+ */
+function translucidColor(colorString, opacity = 0.6) {
+    let c = d3.color(colorString)
+    c.opacity = opacity
+    return c
+}
 
 /*************************************************/
 /* And finally load all json data and display it */
