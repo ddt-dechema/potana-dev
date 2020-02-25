@@ -125,6 +125,9 @@ propyleneButton.addEventListener('click', event => {
     togglePipeline(event, 'propylene')
 })
 // new
+pipelineButton.addEventListener('click', event => {
+    togglePipeline(event, 'total')
+})
 kenyaButton.addEventListener('click', event => {
     togglePipeline(event, 'kenya')
 })
