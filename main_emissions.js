@@ -1,5 +1,5 @@
 // define global variables
-let map, format1Dec, formatSI
+let format1Dec, formatSI
 
 // function showMap() {
 //     /* allows us to create filters within a Leaflet GeoJSON layer */
