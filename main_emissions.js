@@ -1404,8 +1404,8 @@ let createScale = () => {
 /*************************************/
 /* Change layout with get parameters */
 /*************************************/
-// var url = new URL(window.location.href)
-// if (!mapLayoutLight.classList.contains('is-info') && url.searchParams.get("style") == "light") toggleMapLayout()
+ var url = new URL(window.location.href)
+ if (!mapLayoutLight.classList.contains('is-info') && url.searchParams.get("style") == "light") toggleMapLayout()
 
 
 /*************************************************/
