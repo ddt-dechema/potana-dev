@@ -122,10 +122,45 @@ function loadGlobalDefs() {
 }
 
 let emissionColors = {
-    "CO2, AIR": 'rgb(241, 177, 48)',
-    "CO, AIR": 'rgb(234,110,57)'
+    "CO2, AIR": 'rgb(0, 141, 180)', //Kopernikus 100%
+    "CO, AIR": 'rgb(77,175,202)' // Kopernikus 70%
+
 }
 
+
+/******************************** */
+/*  Einbau der Buttons zum Togglen der Emissionen */
+/******************************** */
+let pollutantFilterCO2Button = document.getElementById('pollutant-filter-CO2-button'),
+    pollutantFilterCOButton = document.getElementById('pollutant-filter-CO-button')
+/* styling */
+pollutantFilterCO2Button.style.background = emissionColors["CO2, AIR"]
+pollutantFilterCOButton.style.background = emissionColors["CO, AIR"]
+
+
+function returnTogglePollutantFilter(button) {
+    return function () {
+        button.classList.toggle('is-activated')
+        if (button.classList.contains('is-activated')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
+        else button.style.background = '#fff'
+        //getFilteredTotals()
+        toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
+    }
+}
+
+function toggleFilterEmittersByPollutant(pollutant) {
+    if (map.hasLayer(markers[pollutant])) {
+        map.removeLayer(markers[pollutant])
+    } else {
+        map.addLayer(markers[pollutant])
+    }
+}
+pollutantFilterCO2Button.addEventListener('click', returnTogglePollutantFilter(pollutantFilterCO2Button))
+pollutantFilterCOButton.addEventListener('click', returnTogglePollutantFilter(pollutantFilterCOButton))
+
+/******************************** */
+/*  Notwendige Funktionen zur Darstellung der Emissionen */
+/******************************** */
 function loadPRTRlayers(data) {
     return new Promise((resolve, reject) => {
         let nace = globalModel.emissions.categories.naceCategories.items
@@ -193,6 +228,8 @@ function translucidColor(colorString, opacity = 0.6) {
     c.opacity = opacity
     return c
 }
+
+
 
 /*************************************************/
 /* And finally load all json data and display it */
