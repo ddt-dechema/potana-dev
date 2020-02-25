@@ -423,7 +423,7 @@
 	<script src="main.js"></script>
 	<script> 
 	var windSpeed = L.leafletGeotiff(
-            url='tif/wind_speed.tif',
+            url='vendor/wind_speed.tif',
             options={band: 0,
                 displayMin: 0,
                 displayMax: 30,
@@ -437,7 +437,7 @@
         ).addTo(mymap);
         
     var windDirection = L.leafletGeotiff(
-            url='tif/wind_direction.tif',
+            url='vendor/wind_direction.tif',
             options={band: 0,
                 displayMin: 0,
                 displayMax: 360,
