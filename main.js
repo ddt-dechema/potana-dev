@@ -125,10 +125,45 @@ propyleneButton.addEventListener('click', event => {
 
 
 /* toggle-bility von Punktquellen Daten */
-function toggleEmitter(event, type) {
+// function toggleEmitter(event, type) {
+//     event.target.classList.toggle('is-info')
+//     if (event.target.classList.contains('is-info')) {
+//         fetch('data.json')
+//             .then((response) => {
+//                     return response.json()
+//                 },
+//                 (reject) => {
+//                     console.error(reject)
+//                 })
+//             .then((geojson) => {
+//                 markers[type] = L.geoJson(geojson, {
+//                     pointToLayer: function (feature, latlng) {
+//                         return L.circleMarker(latlng, {
+//                             radius: 30,
+//                             color:  "#99d1e1",
+//                             /*fillColor: feature.properties.color,*/
+//                             fillColor: "#99d1e1",
+//                             weight: 1,
+//                             opacity: 0.7,
+//                             fillOpacity: 0.4
+//                         }).bindPopup(addPopupHandler(feature))
+//                     }   
+//                 })
+//                 markers[type].addTo(map)
+//             })
+//     } else {
+//         map.removeLayer(markers[type])
+//     }
+// }
+
+// emitterButton.addEventListener('click', (event) => {
+//     toggleEmitter(event, 'emitter')
+// })
+/*ausprobieren ob es mti der großen emissions.json klappt */
+function toggleEmitter(event, type, data) {
     event.target.classList.toggle('is-info')
     if (event.target.classList.contains('is-info')) {
-        fetch('data.json')
+        fetch(data)
             .then((response) => {
                     return response.json()
                 },
@@ -136,20 +171,25 @@ function toggleEmitter(event, type) {
                     console.error(reject)
                 })
             .then((geojson) => {
-                markers[type] = L.geoJson(geojson, {
-                    pointToLayer: function (feature, latlng) {
-                        return L.circleMarker(latlng, {
-                            radius: 30,
-                            color:  "#99d1e1",
-                            /*fillColor: feature.properties.color,*/
-                            fillColor: "#99d1e1",
-                            weight: 1,
-                            opacity: 0.7,
-                            fillOpacity: 0.4
-                        }).bindPopup(addPopupHandler(feature))
+                for (emission in data) {
+                    if (emission != "stats") {
+                        for (f in data[emission].features) {
+                            data[emission].features[f].properties.type = emission
+                        }
+                        markers[emission] = L.geoJson(data[emission], {
+                            pointToLayer: function (feature, latlng) {
+                                return L.circleMarker(latlng, {
+                                    radius: Math.sqrt(feature.properties.MTonnes / data.stats.totalMax) * 50,
+                                    //color: emissionColors[feature.properties.PollutantName],
+                                    //fillColor: nace[feature.properties.NACEMainEconomicActivityName].color,
+                                    weight: 1,
+                                    opacity: 0.7,
+                                    fillOpacity: 0.4
+                                })//.bindPopup(addEmitterPopupHandler(feature))
+                            }
+                        }).addTo(map)
                     }
-                })
-                markers[type].addTo(map)
+                }
             })
     } else {
         map.removeLayer(markers[type])
@@ -157,9 +197,32 @@ function toggleEmitter(event, type) {
 }
 
 emitterButton.addEventListener('click', (event) => {
-    toggleEmitter(event, 'emitter')
+    toggleEmitter(event, 'emitter', 'emissions.json')
 })
 
+// function addEmitterPopupHandler(feature) {
+//     let nace = globalModel.emissions.categories.naceCategories.items
+//     if (feature.properties) {
+//         let otherEmission = ''
+//         if (feature.properties.co2Amount) otherEmission += formatSI(feature.properties.co2Amount) + ' Megatonnes CO<sub>2</sub>/year'
+//         if (feature.properties.coAmount) otherEmission += formatSI(feature.properties.coAmount) + ' Megatonnes CO/year'
+//         let thisEmission = formatSI(feature.properties.MTonnes) + ' Megatonnes '
+//         if (feature.properties.type == 'CO, AIR') thisEmission += 'CO/year'
+//         else thisEmission += 'CO<sub>2</sub>/year'
+//         let color = translucidColor(nace[feature.properties.NACEMainEconomicActivityName].color)
+//         return `<h2>${feature.properties.FacilityName}</h2>
+//                         ${feature.properties.CountryName}                    
+//                         <br><b><i>${feature.properties.NACEMainEconomicActivityName}</i></b>
+//                         <br>
+//                         <div class='popup-em' style='background: ${color}'>
+//                         Emissions:
+//                         <br>${thisEmission}` + (otherEmission != '' ? `<br />${otherEmission}` : '') + `</div>
+//                         <br><br><a href="${feature.properties.FacilityDetails}" target="_blank">More Facility details on E-PRTR page</a>`
+
+//     } else {
+//         console.log(feature)
+//     }
+// }
 
 /*zum einladen von geoJson-Linien Daten */
 /*function showLineLayer(data) {
