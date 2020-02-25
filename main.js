@@ -85,6 +85,7 @@ windButton = document.getElementById('wind-button'),
 waterButton = document.getElementById('water-button'),
 emitterButton = document.getElementById('emitter-button'),
 pipelineButton = document.getElementById('pipeline-button')
+kenyaButton = document.getElementById('kenya-button')
 /*pollutantFilterCO2Button = document.getElementById('pollutant-filter-CO2-button'),
 pollutantFilterCOButton = document.getElementById('pollutant-filter-CO-button')
 /* Farbe der Pipelines*/
@@ -124,8 +125,8 @@ propyleneButton.addEventListener('click', event => {
     togglePipeline(event, 'propylene')
 })
 // new
-pipelineButton.addEventListener('click', event => {
-    togglePipeline(event, 'total')
+kenyaButton.addEventListener('click', event => {
+    togglePipeline(event, 'kenya')
 })
 
 /* toggle-bility von Punktquellen Daten */
