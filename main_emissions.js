@@ -113,6 +113,10 @@ let globalModel = {
     }
 }
 
+let emissionColors = {
+    "CO2, AIR": 'rgb(241, 177, 48)',
+    "CO, AIR": 'rgb(234,110,57)'
+}
 
 function loadPRTRlayers(data) {
     return new Promise((resolve, reject) => {
