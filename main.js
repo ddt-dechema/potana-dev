@@ -75,144 +75,7 @@ function showMap() {
     })
 
 }
-    /*********************************************************/
-/* COPY-PASTED VON Carbon4PUR seite*/
-function loadGlobalDefs() {
-    // show all numbers with 1,000.00 format
-    format1Dec = d3.format(',.1f')
-    formatSI = d3.format(',.3f')
-}
 
-let emissionColors = {
-        "CO2, AIR": 'rgb(241, 177, 48)',
-        "CO, AIR": 'rgb(234,110,57)'
-    },
-    chemicalColors = {
-        "chemical parks": "rgb(0,168,189)",
-        "polyol plants": "rgb(12,168,118)",
-        "steel mills": "yellow"
-    }
-
-    let globalModel = {
-        emissions: {
-            categories: {
-                gasType: {
-                    buttons: {
-                        containerId: 'gas-type-buttons',
-                        onClick: function(){},
-                        createFunction: function(){}
-                    },
-                    items: {
-                        "CO2, AIR": {
-                            color: 'rgb(241, 177, 48)',
-                            filterButton: document.getElementById('pollutant-filter-CO2-button')
-                        },
-                        "CO, AIR": {
-                            color: 'rgb(234,110,57)',
-                            filterButton: document.getElementById('pollutant-filter-CO-button')
-                        }
-                    }
-                },
-                naceCategories: {
-                    buttons: {
-                        containerId: 'nace-categories',
-                        onClick: (button) => {
-                            return function(){
-                                activateCompatButton(compatFilterManualButton)
-                                // update nace object
-                                toggleNaceButton(button)
-                                // only display active emissions
-                                updateEmissionsFilter()
-                            }
-                        },
-                        createButtons: () => {
-                            return new Promise(resolve => {                            
-                                let nace = globalModel.emissions.categories.naceCategories
-                                let catDiv = document.getElementById('nace-categories')
-                                for (var name in nace.items) {
-                                    let emissionSums = formatSI(globalEmissionData.stats.totals['CO2, AIR'][name]) + ' Megatonnes CO2/year, ' + formatSI(globalEmissionData.stats.totals['CO, AIR'][name]) + ' Megatonnes CO/year';
-                                    nace.items[name].button = document.createElement('a')
-                                    nace.items[name].button.className = 'button is-small is-activated is-fullwidth nace-button ' + nace.items[name].style
-                                    nace.items[name].button.title = emissionSums
-                                    nace.items[name].button.text = name
-                                    nace.items[name].button.onclick = nace.buttons.onClick(nace.items[name].button)
-                                    catDiv.append(nace.items[name].button)
-                                }
-                                nace.buttons.allButtons = document.getElementsByClassName('nace-button')
-                                resolve()
-                            })
-                        },
-                        allButtons: []
-                    },
-                    items: {
-                        "Manufacture of basic iron and steel and of ferro-alloys": {
-                            style: 'nace-iron',
-                            color: '#ff0000',
-                            looping: true,
-                            catalytic: true,
-                            active: true,
-    
-                        },
-                        "Manufacture of other inorganic basic chemicals": {
-                            style: 'nace-inorganic',
-                            color: 'rgb(214,70,111)',
-                            looping: true,
-                            catalytic: true,
-                            active: true
-                        },
-                        "Production of electricity": {
-                            style: 'nace-electricity',
-                            color: 'rgb(190,85,153)',
-                            looping: true,
-                            catalytic: false,
-                            active: true
-                        },
-                        "Extraction of natural gas": {
-                            style: 'nace-ng',
-                            color: 'rgb(151,133,176)', // find color
-                            looping: true,
-                            catalytic: false,
-                            active: true
-                        },
-                        "Manufacture of refined petroleum products": {
-                            style: 'nace-petroleum',
-                            color: 'rgb(103,155,186)',
-                            looping: true,
-                            catalytic: false,
-                            active: true
-                        },
-                        "Manufacture of cement": {
-                            style: 'nace-cement',
-                            color: '#5a6067',
-                            looping: true,
-                            catalytic: false,
-                            active: true
-                        },
-                        "Manufacture of lime and plaster": {
-                            style: 'nace-lime',
-                            color: '#000000',
-                            looping: true,
-                            catalytic: false,
-                            active: true
-                        },
-                        "Manufacture of fertilisers and nitrogen compounds": {
-                            style: 'nace-fertilisers',
-                            color: '#938e99',
-                            looping: true,
-                            catalytic: false,
-                            active: true
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    /*********************************************************/
-    /* Keep a copy of the loaded jsons, in case we need them */
-    let globalEmissionData, globalChemicalData
-
-    
 /***********************/
 /* Einladen der Button-Informationen */
 let ethyleneButton = document.getElementById('ethylene-button'),
@@ -223,7 +86,6 @@ waterButton = document.getElementById('water-button'),
 emitterButton = document.getElementById('emitter-button')
 /*pollutantFilterCO2Button = document.getElementById('pollutant-filter-CO2-button'),
 pollutantFilterCOButton = document.getElementById('pollutant-filter-CO-button')
-
 /* Farbe der Pipelines*/
 function pipelineStyle(feature) {
     return {
@@ -262,140 +124,67 @@ propyleneButton.addEventListener('click', event => {
 
 
 /* toggle-bility von Punktquellen Daten */
-// function toggleEmitter(event, type) {
-//     event.target.classList.toggle('is-info')
-//     if (event.target.classList.contains('is-info')) {
-//         fetch('data.json')
-//             .then((response) => {
-//                     return response.json()
-//                 },
-//                 (reject) => {
-//                     console.error(reject)
-//                 })
-//             .then((geojson) => {
-//                 markers[type] = L.geoJson(geojson, {
-//                     pointToLayer: function (feature, latlng) {
-//                         return L.circleMarker(latlng, {
-//                             radius: 30,
-//                             color:  "#99d1e1",
-//                             /*fillColor: feature.properties.color,*/
-//                             fillColor: "#99d1e1",
-//                             weight: 1,
-//                             opacity: 0.7,
-//                             fillOpacity: 0.4
-//                         }).bindPopup(addPopupHandler(feature))
-//                     }   
-//                 })
-//                 markers[type].addTo(map)
-//             })
-//     } else {
-//         map.removeLayer(markers[type])
-//     }
-// }
-
-// emitterButton.addEventListener('click', (event) => {
-//     toggleEmitter(event, 'emitter')
-// })
-/*ausprobieren ob es mit der großen emissions.json klappt */
-function returnTogglePollutantFilter(button) {
-    return function () {
-        button.classList.toggle('is-activated')
-        if (button.classList.contains('is-activated')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
-        else button.style.background = '#fff'
-        getFilteredTotals()
-        toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
-    }
-}
-
-function toggleFilterEmittersByPollutant(pollutant) {
-    if (map.hasLayer(markers[pollutant])) {
-        map.removeLayer(markers[pollutant])
+function toggleEmitter(event, type) {
+    event.target.classList.toggle('is-info')
+    if (event.target.classList.contains('is-info')) {
+        fetch('data.json')
+            .then((response) => {
+                    return response.json()
+                },
+                (reject) => {
+                    console.error(reject)
+                })
+            .then((geojson) => {
+                markers[type] = L.geoJson(geojson, {
+                    pointToLayer: function (feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 30,
+                            color:  "#99d1e1",
+                            /*fillColor: feature.properties.color,*/
+                            fillColor: "#99d1e1",
+                            weight: 1,
+                            opacity: 0.7,
+                            fillOpacity: 0.4
+                        }).bindPopup(addPopupHandler(feature))
+                    }
+                })
+                markers[type].addTo(map)
+            })
     } else {
-        map.addLayer(markers[pollutant])
+        map.removeLayer(markers[type])
     }
 }
-emitterButton.addEventListener('click', returnTogglePollutantFilter(emitterButton))
 
-function addEmitterPopupHandler(feature) {
-    let nace = globalModel.emissions.categories.naceCategories.items
-    if (feature.properties) {
-        let otherEmission = ''
-        if (feature.properties.co2Amount) otherEmission += formatSI(feature.properties.co2Amount) + ' Megatonnes CO<sub>2</sub>/year'
-        if (feature.properties.coAmount) otherEmission += formatSI(feature.properties.coAmount) + ' Megatonnes CO/year'
-        let thisEmission = formatSI(feature.properties.MTonnes) + ' Megatonnes '
-        if (feature.properties.type == 'CO, AIR') thisEmission += 'CO/year'
-        else thisEmission += 'CO<sub>2</sub>/year'
-        let color = translucidColor(nace[feature.properties.NACEMainEconomicActivityName].color)
-        return `<h2>${feature.properties.FacilityName}</h2>
-                        ${feature.properties.CountryName}                    
-                        <br><b><i>${feature.properties.NACEMainEconomicActivityName}</i></b>
-                        <br>
-                        <div class='popup-em' style='background: ${color}'>
-                        Emissions:
-                        <br>${thisEmission}` + (otherEmission != '' ? `<br />${otherEmission}` : '') + `</div>
-                        <br><br><a href="${feature.properties.FacilityDetails}" target="_blank">More Facility details on E-PRTR page</a>`
+emitterButton.addEventListener('click', (event) => {
+    toggleEmitter(event, 'emitter')
+})
 
-    } else {
-        console.log(feature)
-    }
-}
-function getFilteredTotals() {
-    let co2sum = 0,
-        cosum = 0,
-        co2sumCombined = 0,
-        cosumCombined = 0,
-        nace = globalModel.emissions.categories.naceCategories.items
-    for (name in nace) {
-        if (nace[name].active) {
-            if (emitterButton.classList.contains('is-activated')) cosum += globalEmissionData.stats.totals['CO, AIR'][name]
-            
+
+/*zum einladen von geoJson-Linien Daten */
+/*function showLineLayer(data) {
+    map.lineLayer = L.geoJson(data, {
+        style: function (feature) {
+            return {
+                weight: feature.properties.diameter / 10,
+                color: feature.properties.color
+            }
+        },
+        onEachFeature: function (feature, layer) {
+            var popup = L.popup();
+            popup.setContent('text');
+            layer.on('click', function (e) {
+                L.popup()
+                    .setLatLng(e.latlng)
+                    .setContent(`<h2>${layer.feature.properties.name}</h2>
+            <i>${layer.feature.properties.ort}</i>
+            <br><b>Diameter:</b> ${layer.feature.properties.diameter}
+            <br><b>Flow:</b> ${layer.feature.properties.flow}`)
+                    .openOn(map);
+            });
         }
-    }
-    for (f in globalEmissionData['CO, AIR'].features) {
-        let props = globalEmissionData['CO, AIR'].features[f].properties
-        if (emitterButton.classList.contains('is-activated') &&
-            nace[props.NACEMainEconomicActivityName].active &&
-            props.co2Amount &&
-            props.co2Amount > 0) {
-            co2sumCombined += props.co2Amount
-            cosumCombined += props.MTonnes
-        }
-    }
-    co2CombinedFilteredSumOutput.style.background = '#ddc'
-    coCombinedFilteredSumOutput.style.background = '#ddc'
-    co2FilteredSumOutput.style.background = '#ddc'
-    coFilteredSumOutput.style.background = '#ddc'
-    setTimeout(function () {
-        co2FilteredSumOutput.style.background = '#fff'
-        coFilteredSumOutput.style.background = '#fff'
-        co2CombinedFilteredSumOutput.style.background = '#fff'
-        coCombinedFilteredSumOutput.style.background = '#fff'
-    }, 500)
-    co2FilteredSumOutput.textContent = format1Dec(co2sum) + ' Megatonnes/year'
-    coFilteredSumOutput.textContent = format1Dec(cosum) + ' Megatonnes/year'
-    co2CombinedFilteredSumOutput.textContent = format1Dec(co2sumCombined) + ' Megatonnes/year'
-    coCombinedFilteredSumOutput.textContent = format1Dec(cosumCombined) + ' Megatonnes/year'
+    }).addTo(map)
 }
-
-/**
- * create a translucid color from a color string for the popups
- *
- * @param {*} colorString
- * @param {number} [opacity=0.6]
- * @returns color
- */
-function translucidColor(colorString, opacity = 0.6) {
-    let c = d3.color(colorString)
-    c.opacity = opacity
-    return c
-}
-
-
-
-
-
-
-
+*/
 /*zum einladen von geoJson-Punktquellen Daten */
 function showDataLayer(data) {
     L.geoJson(data, {
@@ -426,46 +215,9 @@ var markers = {}
 var chemicalParkMarkers = {}
 var globalPipelines = {}
 
-function loadPRTRlayers(data) {
-    return new Promise((resolve, reject) => {
-        let nace = globalModel.emissions.categories.naceCategories.items
-        for (emission in data) {
-            if (emission != "stats") {
-                for (f in data[emission].features) {
-                    data[emission].features[f].properties.type = emission
-                }
-                markers[emission] = L.geoJson(data[emission], {
-                    pointToLayer: function (feature, latlng) {
-                        return L.circleMarker(latlng, {
-                            radius: Math.sqrt(feature.properties.MTonnes / data.stats.totalMax) * 50,
-                            color: emissionColors[feature.properties.PollutantName],
-                            fillColor: nace[feature.properties.NACEMainEconomicActivityName].color,
-                            weight: 1,
-                            opacity: 0.7,
-                            fillOpacity: 0.4
-                        }).bindPopup(addEmitterPopupHandler(feature))
-                    }
-                }).addTo(map)
-            }
-        }
-        globalEmissionData = data
-        resolve(data)
-    })
-}
 /*  */
 document.addEventListener('DOMContentLoaded', (event) => {
     showMap()
-    loadGlobalDefs()
-    fetch('emissions.json')
-    .then((response) => {
-            return response.json()
-        },
-        (reject) => {
-            console.error(reject)
-        })
-    .then(loadPRTRlayers)
-    .then(getFilteredTotals)
-
 /* zum einladen von GeoJson-Linien daten*/
     /*fetch('lines.json')
     .then(
