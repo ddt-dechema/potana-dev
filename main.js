@@ -19,7 +19,33 @@ function showMap() {
         scrollWheelZoom: false,
         zoomControl: false // to put the zoom butons on the right
     })
-
+    var windSpeed = L.leafletGeotiff(
+        url='vendor/wind_speed.tif',
+        options={band: 0,
+            displayMin: 0,
+            displayMax: 30,
+            name: 'Wind speed',
+            colorScale: 'rainbow',
+            clampLow: false,
+            clampHigh: true,
+            //vector:true,
+            arrowSize: 20,
+        }
+    ).addTo(mymap);
+    
+    var windDirection = L.leafletGeotiff(
+        url='vendor/wind_direction.tif',
+        options={band: 0,
+            displayMin: 0,
+            displayMax: 360,
+            name: 'Wind direction',
+            //colorScale: 'rainbow',
+            //clampLow: false,
+            //clampHigh: true,
+            vector:true,
+            arrowSize: 20,
+        }
+    ).addTo(mymap);
     /* Add the zoom buttons */
     L.control.zoom({
         position: 'topright'
@@ -242,30 +268,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
 // try to load in wind
-var windSpeed = L.leafletGeotiff(
-    url='vendor/wind_speed.tif',
-    options={band: 0,
-        displayMin: 0,
-        displayMax: 30,
-        name: 'Wind speed',
-        colorScale: 'rainbow',
-        clampLow: false,
-        clampHigh: true,
-        //vector:true,
-        arrowSize: 20,
-    }
-).addTo(mymap);
 
-var windDirection = L.leafletGeotiff(
-    url='vendor/wind_direction.tif',
-    options={band: 0,
-        displayMin: 0,
-        displayMax: 360,
-        name: 'Wind direction',
-        //colorScale: 'rainbow',
-        //clampLow: false,
-        //clampHigh: true,
-        vector:true,
-        arrowSize: 20,
-    }
-).addTo(mymap);
