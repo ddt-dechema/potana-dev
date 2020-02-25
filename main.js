@@ -347,14 +347,13 @@ function getFilteredTotals() {
         nace = globalModel.emissions.categories.naceCategories.items
     for (name in nace) {
         if (nace[name].active) {
-            if (pollutantFilterCOButton.classList.contains('is-activated')) cosum += globalEmissionData.stats.totals['CO, AIR'][name]
-            if (pollutantFilterCO2Button.classList.contains('is-activated')) co2sum += globalEmissionData.stats.totals['CO2, AIR'][name]
+            if (emitterButton.classList.contains('is-activated')) cosum += globalEmissionData.stats.totals['CO, AIR'][name]
+            
         }
     }
     for (f in globalEmissionData['CO, AIR'].features) {
         let props = globalEmissionData['CO, AIR'].features[f].properties
-        if (pollutantFilterCOButton.classList.contains('is-activated') &&
-            pollutantFilterCO2Button.classList.contains('is-activated') &&
+        if (emitterButton.classList.contains('is-activated') &&
             nace[props.NACEMainEconomicActivityName].active &&
             props.co2Amount &&
             props.co2Amount > 0) {
