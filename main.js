@@ -213,9 +213,10 @@ function toggleWater(event) {
         //toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
         if (event.target.classList.contains('is-info')) {
             map.addLayer(globalWater)
-        } else {
-            map.removeLayer(globalWater)
         }
+        else {
+            map.removeLayer(globalWater)
+        }    
     }
 }
 
