@@ -60,6 +60,10 @@
 			<symbol id="icon-infra" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="pipeline">
 				<path d="M512 0H292v40h30v136h-46v-30h-40v30h-66c-77.195 0-140 62.805-140 140v156H0v40h220v-40h-30V336h46v30h40v-30h66c77.195 0 140-62.805 140-140V40h30zM180 296c-16.543 0-30 13.457-30 30v146H70V316c0-55.14 44.86-100 100-100h66v80zm262-100c0 55.14-44.86 100-100 100h-66v-80h56c16.543 0 30-13.457 30-30V40h80zm0 0"></path>
 			</symbol>
+			<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 -256 1792 1792" id="icon-lock">
+				<path d="M1022.915 834.17q0-53-37.5-90.5t-90.5-37.5q-53 0-90.5 37.5t-37.5 90.5q0 37 19 67t51 47l-69 229q-5 15 5 28t26 13h192q16 0 26-13t5-28l-69-229q32-17 51-47t19-67zm-384-256h512v-192q0-106-75-181t-181-75q-106 0-181 75t-75 181v192zm832 96v576q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-576q0-40 28-68t68-28h32v-192q0-184 132-316t316-132q184 0 316 132t132 316v192h32q40 0 68 28t28 68z"
+				  fill="currentColor"></path>
+			  </symbol>
 		</defs>
 	</svg>
 >
@@ -86,7 +90,7 @@
 				</li>
 		<!-- hinzufügen weitere "Tabs", die aber effektiv als Button funktionieren sollen-->
 
-				<li id="consumer-tab-li"> <!-- langfristig für PV-Potenzial-->
+				<li id="pv-tab-li"> <!-- langfristig für PV-Potenzial-->
 					<a href="#pv-content" role="tab" aria-label="Filter by PV-Potential">
 						<svg class="svgicon" viewbox="0 0 32 32">
 							<use xlink:href="#icon-pv"></use>
@@ -94,7 +98,7 @@
 					PV
 					</a>
 				</li>
-				<li id="consumer-tab-li"> <!-- langfristig für Wind-Potenzial-->
+				<li id="wind-tab-li"> <!-- langfristig für Wind-Potenzial-->
 					<a href="#wind-content" role="tab" aria-label="Filter by Wind-Potential">
 						<svg class="svgicon" viewbox="0 0 32 32">
 							<use xlink:href="#icon-wind"></use>
@@ -102,7 +106,7 @@
 					Wind
 					</a>
 				</li>
-				<li id="consumer-tab-li"> <!-- langfristig für Wasser-Potenzial-->
+				<li id="water-tab-li"> <!-- langfristig für Wasser-Potenzial-->
 					<a href="#water-content" role="tab" aria-label="Filter by Water Potential">
 						<svg class="svgicon" viewbox="0 0 32 32">
 							<use xlink:href="#icon-water"></use>
@@ -116,17 +120,17 @@
 						</svg>
 					</a>
 				</li>
-				<li id="consumer-tab-li"> <!-- langfristig für Infrastruktur-->
+				<li id="infra-tab-li"> <!-- langfristig für Infrastruktur-->
 					<a href="#infra-content" role="tab" aria-label="Filter by Infrastructure">
 						<svg class="svgicon" viewbox="0 0 32 32">
 							<use xlink:href="#icon-infra"></use>
 						</svg>
 					</a>
 				</li>
-				<li id="consumer-tab-li"> <!-- langfristig für Infrastruktur-->
+				<li id="area-tab-li"> <!-- langfristig für protected araes-->
 					<a href="#protectedarea-content" role="tab" aria-label="Filter by protected areas">
 						<svg class="svgicon" viewbox="0 0 32 32">
-							<use xlink:href="#icon-infra"></use>
+							<use xlink:href="#icon-lock"></use>
 						</svg>
 					</a>
 				</li>
