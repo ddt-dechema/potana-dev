@@ -143,12 +143,12 @@ kenyaButton.addEventListener('click', event => {
     togglePipeline(event, 'kenya')
 })
 protectedareaButton.addEventListener('click', event => {
-    togglearea(event, 'protected')
+    toggleArea(event, 'protected')
 })
 waterButton.addEventListener('click', event => {
-    togglearea(event, 'africa')
+    toggleWater(event, 'africa')
 })
-function togglearea(event, type) {
+function toggleArea(event, type) {
     event.target.classList.toggle('is-info')
     if (event.target.classList.contains('is-info')) {
         fetch(type + '-areas' + '.json')
@@ -169,7 +169,7 @@ function togglearea(event, type) {
     }
 
 }
-function togglewater(event, type) {
+function toggleWater(event, type) {
     event.target.classList.toggle('is-info')
     if (event.target.classList.contains('is-info')) {
         fetch('water-' + type + '.json')
