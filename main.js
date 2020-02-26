@@ -102,11 +102,19 @@ var areaStyle = {
     "weight": 5,
     "opacity": 0.65
 };
-var waterStyle = {
-    "color": "#19cdfa",
-    "weight": 5,
-    "opacity": 0.65
-};
+function waterStyle(feature) {
+    return {
+        color: "#19cdfa",
+        "weight": 5,
+        "opacity": 0.65
+        // 54 = propylene, 52 = ethylene
+    };
+}
+// var waterStyle = {
+//     "color": "#19cdfa",
+//     "weight": 5,
+//     "opacity": 0.65
+// };
 
 /* toggle-bility von Linien Daten */
 function togglePipeline(event, type) {
