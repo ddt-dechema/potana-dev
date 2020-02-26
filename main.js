@@ -102,19 +102,19 @@ var areaStyle = {
     "weight": 5,
     "opacity": 0.65
 };
-function waterStyle(feature) {
-    return {
-        color: "#19cdfa",
-        "weight": 5,
-        "opacity": 0.65,
-        // 54 = propylene, 52 = ethylene
-    };
-}
-// var waterStyle = {
-//     "color": "#19cdfa",
-//     "weight": 5,
-//     "opacity": 0.65
-// };
+// function waterStyle(feature) {
+//     return {
+//         color: "#19cdfa",
+//         "weight": 5,
+//         "opacity": 0.65,
+//         // 54 = propylene, 52 = ethylene
+//     };
+// }
+ var waterStyle = {
+    "color": "#19cdfa",
+    "weight": 5,
+    "opacity": 0.65
+};
 
 /* toggle-bility von Linien Daten */
 function togglePipeline(event, type) {
@@ -203,7 +203,7 @@ function loadWaterlayers(data) {
     })
 }
 
-function toggleWater(event, country) {
+function toggleWater(event) {
     return function () {
         //button.classList.toggle('is-activated')
         event.target.classList.toggle('is-info')
@@ -212,9 +212,9 @@ function toggleWater(event, country) {
         //getFilteredTotals()
         //toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
         if (event.target.classList.contains('is-info')) {
-            map.addLayer(globalWater[country])
+            map.addLayer(globalWater)
         } else {
-            map.removeLayer(globalWater[country])
+            map.removeLayer(globalWater)
         }
     }
 }
@@ -227,7 +227,7 @@ function toggleWater(event, country) {
 //     }
 // }
 waterButton.addEventListener('click', event => {
-    toggleWater(event, 'africa')
+    toggleWater(event)
 })
 /*
 function toggleWater(event, type) {
