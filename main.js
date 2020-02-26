@@ -158,9 +158,7 @@ usaButton.addEventListener('click', event => {
 protectedareaButton.addEventListener('click', event => {
     toggleArea(event, 'protected')
 })
-waterButton.addEventListener('click', event => {
-    toggleWater(waterButton)
-})
+
 // waterButton.addEventListener('click', event => {
 //     toggleWater(event, 'africa')
 // })
@@ -206,7 +204,7 @@ function loadWaterlayers(data) {
     })
 }
 
-function toggleWater(button) {
+function toggleWater(button, country) {
     return function () {
         //button.classList.toggle('is-activated')
         button.classList.toggle('is-info')
@@ -215,14 +213,16 @@ function toggleWater(button) {
         //getFilteredTotals()
         //toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
         if (button.classList.contains('is-info')) {
-            map.addLayer(globalWater['features'])
+            map.addLayer(globalWater[country])
         }
         else {
-            map.removeLayer(globalWater['features'])
+            map.removeLayer(globalWater[country])
         }    
     }
 }
-
+waterButton.addEventListener('click', event => {
+    toggleWater(waterButton, "Africa")
+})
 // function toggleFilterEmittersByPollutant(pollutant) {
 //     if (map.hasLayer(globalWater[pollutant])) {
 //         map.removeLayer(globalWater[pollutant])
