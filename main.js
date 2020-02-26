@@ -85,8 +85,9 @@ windButton = document.getElementById('wind-button'),
 waterButton = document.getElementById('water-button'),
 emitterButton = document.getElementById('emitter-button'),
 pipelineButton = document.getElementById('pipeline-button'),
-kenyaButton = document.getElementById('kenya-button')
-protectedareaButton = document.getElementById('protectedarea-button')
+kenyaButton = document.getElementById('kenya-button'),
+protectedareaButton = document.getElementById('protectedarea-button'),
+usaButton = document.getElementById('usa-button')
 /*pollutantFilterCO2Button = document.getElementById('pollutant-filter-CO2-button'),
 pollutantFilterCOButton = document.getElementById('pollutant-filter-CO-button')
 /* Farbe der Pipelines*/
@@ -142,6 +143,10 @@ pipelineButton.addEventListener('click', event => {
 kenyaButton.addEventListener('click', event => {
     togglePipeline(event, 'kenya')
 })
+usaButton.addEventListener('click', event => {
+    togglePipeline(event, 'usa')
+})
+
 protectedareaButton.addEventListener('click', event => {
     toggleArea(event, 'protected')
 })
