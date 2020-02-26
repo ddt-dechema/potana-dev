@@ -228,7 +228,7 @@ function toggleWater(event) {
 //     }
 // }
 waterButton.addEventListener('click', event => {
-    toggleWater(event)
+    toggleWater(waterButton)
 })
 /*
 function toggleWater(event, type) {
