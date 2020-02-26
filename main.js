@@ -212,12 +212,11 @@ function toggleWater(button) {
         //else button.style.background = '#fff'
         //getFilteredTotals()
         //toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
-        if (button.classList.contains('is-info')) {
+        if(button.classList.contains('is-info')){
             map.addLayer(globalWater)
-        }
-        else {
+        } else {
             map.removeLayer(globalWater)
-        }    
+        }
 }
 waterButton.addEventListener('click', toggleWater(waterButton))
 // function toggleFilterEmittersByPollutant(pollutant) {
