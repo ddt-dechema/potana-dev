@@ -96,6 +96,16 @@ function pipelineStyle(feature) {
         // 54 = propylene, 52 = ethylene
     };
 }
+var areaStyle = {
+    "color": "#19fa28",
+    "weight": 5,
+    "opacity": 0.65
+};
+var waterStyle = {
+    "color": "#19cdfa",
+    "weight": 5,
+    "opacity": 0.65
+};
 
 /* toggle-bility von Linien Daten */
 function togglePipeline(event, type) {
@@ -150,7 +160,7 @@ function togglearea(event, type) {
                 })
             .then((geojson) => {
                 protectedArea[type] = L.geoJson(geojson, {
-                    style: pipelineStyle
+                    style: areaStyle
                 })
                 protectedArea[type].addTo(map)
             })
@@ -171,7 +181,7 @@ function togglewater(event, type) {
                 })
             .then((geojson) => {
                 globalWater[type] = L.geoJson(geojson, {
-                    style: pipelineStyle
+                    style: waterStyle
                 })
                 globalWater[type].addTo(map)
             })
