@@ -205,7 +205,7 @@ function loadWaterlayers(data) {
     })
 }
 
-function toggleWater(button, country) {
+function toggleWater(button) {
         //button.classList.toggle('is-activated')
         button.classList.toggle('is-info')
         //if (button.classList.contains('is-info')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
