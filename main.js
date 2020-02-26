@@ -84,8 +84,9 @@ pvButton = document.getElementById('pv-button'),
 windButton = document.getElementById('wind-button'),
 waterButton = document.getElementById('water-button'),
 emitterButton = document.getElementById('emitter-button'),
-pipelineButton = document.getElementById('pipeline-button')
+pipelineButton = document.getElementById('pipeline-button'),
 kenyaButton = document.getElementById('kenya-button')
+protectedareaButton = document.getElementById('protectedarea-button')
 /*pollutantFilterCO2Button = document.getElementById('pollutant-filter-CO2-button'),
 pollutantFilterCOButton = document.getElementById('pollutant-filter-CO-button')
 /* Farbe der Pipelines*/
@@ -131,6 +132,30 @@ pipelineButton.addEventListener('click', event => {
 kenyaButton.addEventListener('click', event => {
     togglePipeline(event, 'kenya')
 })
+protectedareaButton.addEventListener('click', event => {
+    togglearea(event, 'protected')
+})
+function togglearea(event, type) {
+    event.target.classList.toggle('is-info')
+    if (event.target.classList.contains('is-info')) {
+        fetch(type + '-areas' + '.json')
+            .then((response) => {
+                    return response.json()
+                },
+                (reject) => {
+                    console.error(reject)
+                })
+            .then((geojson) => {
+                protectedArea[type] = L.geoJson(geojson, {
+                    style: pipelineStyle
+                })
+                protectedArea[type].addTo(map)
+            })
+    } else {
+        map.removeLayer(protectedArea[type])
+    }
+
+}
 
 /* toggle-bility von Punktquellen Daten */
 function toggleEmitter(event, type) {
@@ -223,7 +248,7 @@ function addPopupHandler(feature) {
 var markers = {}
 var chemicalParkMarkers = {}
 var globalPipelines = {}
-
+var protectedArea = {}
 /*  */
 document.addEventListener('DOMContentLoaded', (event) => {
     showMap()

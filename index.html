@@ -123,6 +123,13 @@
 						</svg>
 					</a>
 				</li>
+				<li id="consumer-tab-li"> <!-- langfristig für Infrastruktur-->
+					<a href="#protectedarea-content" role="tab" aria-label="Filter by protected areas">
+						<svg class="svgicon" viewbox="0 0 32 32">
+							<use xlink:href="#icon-infra"></use>
+						</svg>
+					</a>
+				</li>
 			</ul>
 
 			<ul role="tablist">
@@ -247,6 +254,19 @@
 						<button class="button is-small" style="width: 38%;" id="kenya-button">(Show Kenya pipelines)</button>
 				</div>
 				<button class="button is-small" style="width: 38%;" id="pipeline-button">(Show all pipelines)</button>
+			</div>
+			<div class="sidebar-pane" id="protectedarea-content">
+				<h1 class="sidebar-header">
+					Protected Areas
+					<span class="sidebar-close" id="sidebar-close-info-span"><svg class="svgicon" viewbox="0 0 32 32">
+							<use xlink:href="#icon-play3"></use>
+						</svg></span>
+				</h1>
+				<h2>Information on this map</h2>
+				<p>Hier kann man erklären, was die Karte macht. Als kleines Gimmick hier ein Button, um das Kartenlayout
+					zu ändern:
+				</p>
+				<button class="button is-small" style="width: 38%;" id="protectedareas-button">(Show all pipelines)</button>
 			</div>
 			<div class="sidebar-pane" id="legal-content">
 				<h1 class="sidebar-header">
@@ -421,7 +441,7 @@
 	</div>
 
 	<script src="vendor/leaflet.js" defer></script>
-	<script src="vendor/d3.min.js" defer></script>
+	<script src="vendor/.min.js" defer></script>
 	<script src="vendor/leaflet-sidebar2.min.js" defer></script>
 	<script src="main.js"></script>
 	<script src="main_emissions.js"></script>
