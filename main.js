@@ -135,6 +135,9 @@ kenyaButton.addEventListener('click', event => {
 protectedareaButton.addEventListener('click', event => {
     togglearea(event, 'protected')
 })
+waterButton.addEventListener('click', event => {
+    togglearea(event, 'africa')
+})
 function togglearea(event, type) {
     event.target.classList.toggle('is-info')
     if (event.target.classList.contains('is-info')) {
@@ -153,6 +156,27 @@ function togglearea(event, type) {
             })
     } else {
         map.removeLayer(protectedArea[type])
+    }
+
+}
+function togglewater(event, type) {
+    event.target.classList.toggle('is-info')
+    if (event.target.classList.contains('is-info')) {
+        fetch('water-' + type + '.json')
+            .then((response) => {
+                    return response.json()
+                },
+                (reject) => {
+                    console.error(reject)
+                })
+            .then((geojson) => {
+                globalWater[type] = L.geoJson(geojson, {
+                    style: pipelineStyle
+                })
+                globalWater[type].addTo(map)
+            })
+    } else {
+        map.removeLayer(globalWater[type])
     }
 
 }
@@ -249,6 +273,7 @@ var markers = {}
 var chemicalParkMarkers = {}
 var globalPipelines = {}
 var protectedArea = {}
+var globalWater = {}
 /*  */
 document.addEventListener('DOMContentLoaded', (event) => {
     showMap()
