@@ -306,7 +306,7 @@ function translucidColor(colorString, opacity = 0.6) {
     return c
 }
 
-
+var markers = {}
 
 /*************************************************/
 /* And finally load all json data and display it */

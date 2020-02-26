@@ -180,16 +180,16 @@ function toggleArea(event, type) {
 function loadWaterlayers(data) {
     return new Promise((resolve, reject) => {
         //let nace = globalModel.emissions.categories.naceCategories.items
-        for (country in data) {
+        //for (country in data) {
             //if (country != "stats") {
-                for (f in data[country].features) {
-                    data[country].features[f].properties.type = country
-                }
-                globalWater[country] = L.geoJson(data[country], {
+                // for (f in data[country].features) {
+                //     data[country].features[f].properties.type = country
+                // }
+                globalWater = L.geoJson(data, {
                     style = waterStyle
                 }).addTo(map)
             //}
-        }
+        //}
         //globalWater = data
         resolve(data)
     })
@@ -332,8 +332,7 @@ function addPopupHandler(feature) {
 /***********************/
 
 // keep reference to the markers for filtering
-var markers = {}
-var chemicalParkMarkers = {}
+
 var globalPipelines = {}
 var protectedArea = {}
 var globalWater = {}
