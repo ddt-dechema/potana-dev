@@ -206,12 +206,12 @@ function loadWaterlayers(data) {
 function toggleWater(button) {
     return function () {
         //button.classList.toggle('is-activated')
-        button.lassList.toggle('is-info')
+        button.classList.toggle('is-info')
         //if (button.classList.contains('is-info')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
         //else button.style.background = '#fff'
         //getFilteredTotals()
         //toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
-        if (button.target.classList.contains('is-info')) {
+        if (button.classList.contains('is-info')) {
             map.addLayer(globalWater[features])
         }
         else {
