@@ -106,7 +106,7 @@ function waterStyle(feature) {
     return {
         color: "#19cdfa",
         "weight": 5,
-        "opacity": 0.65
+        "opacity": 0.65,
         // 54 = propylene, 52 = ethylene
     };
 }
@@ -188,17 +188,17 @@ function toggleArea(event, type) {
 function loadWaterlayers(data) {
     return new Promise((resolve, reject) => {
         //let nace = globalModel.emissions.categories.naceCategories.items
-        //for (country in data) {
-            //if (country != "stats") {
-                // for (f in data[country].features) {
-                //     data[country].features[f].properties.type = country
-                // }
-                globalWater = L.geoJson(data, {
-                    style = waterStyle
+        for (country in data) {
+            if (country != "stats") {
+                for (f in data[country].features) {
+                    data[country].features[f].properties.type = country
+                }
+                globalWater[country] = L.geoJson(data[country], {
+                    style: waterStyle
                 }).addTo(map)
-            //}
-        //}
-        //globalWater = data
+            }
+        }
+        globalWater = data
         resolve(data)
     })
 }
