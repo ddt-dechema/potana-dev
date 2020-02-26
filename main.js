@@ -205,18 +205,25 @@ function loadWaterlayers(data) {
     })
 }
 
-function toggleWater(button) {
-        //button.classList.toggle('is-activated')
-        button.classList.toggle('is-info')
-        //if (button.classList.contains('is-info')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
-        //else button.style.background = '#fff'
-        //getFilteredTotals()
-        //toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
-        if(button.classList.contains('is-info')){
-            map.addLayer(globalWater)
-        } else {
-            map.removeLayer(globalWater)
-        }
+// function toggleWater(button) {
+//         //button.classList.toggle('is-activated')
+//         button.classList.toggle('is-info')
+//         //if (button.classList.contains('is-info')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
+//         //else button.style.background = '#fff'
+//         //getFilteredTotals()
+//         //toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
+//         if(button.classList.contains('is-info')){
+//             map.addLayer(globalWater)
+//         } else {
+//             map.removeLayer(globalWater)
+//         }
+// }
+function toggleFilterEmittersByPollutant(pollutant) {
+    if (map.hasLayer(globalWater)) {
+        map.removeLayer(globalWater)
+    } else {
+        map.addLayer(globalWater)
+    }
 }
 waterButton.addEventListener('click', toggleWater(waterButton))
 // function toggleFilterEmittersByPollutant(pollutant) {
