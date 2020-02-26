@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 console.error(reject)
             })
         .then(loadPRTRlayers)
-        // .then(createScale)
+        .then(createScale)
         // .then(globalModel.emissions.categories.naceCategories.buttons.createButtons)
         // .then(getFilteredTotals)
         // .then(loadChemicalParksFromJSON)
