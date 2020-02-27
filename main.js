@@ -194,38 +194,33 @@ function loadWaterlayers(data) {
                 for (f in data[country].features) {
                     data[country].features[f].properties.type = country
                 }
-                globalWater[country] = L.geoJson(data[country], {
+                waterLayer = L.geoJson(data[country], {
                     style: waterStyle
                 }).addTo(map)
             }
         }
         globalWater = data
         resolve(data)
-        map.addLayer(globalWater)
+        map.addLayer(waterLayer)
     })
 }
 
-// function toggleWater(button) {
-//         //button.classList.toggle('is-activated')
-//         button.classList.toggle('is-info')
-//         //if (button.classList.contains('is-info')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
-//         //else button.style.background = '#fff'
-//         //getFilteredTotals()
-//         //toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
-//         if(button.classList.contains('is-info')){
-//             map.addLayer(globalWater)
-//         } else {
-//             map.removeLayer(globalWater)
-//         }
-// }
-function toggleFilterEmittersByPollutant(pollutant) {
-    if (map.hasLayer(globalWater)) {
-        map.removeLayer(globalWater)
-    } else {
-        map.addLayer(globalWater)
+waterButton.addEventListener('click', toggleWater(waterButton))
+function toggleWater(button) {
+    return function () {    
+        button.classList.toggle('is-info')
+        //if (button.classList.contains('is-info')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
+        //else button.style.background = '#fff'
+        //getFilteredTotals()
+        //toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
+        if(map.hasLayer(waterLayer)) {
+                map.removeLayer(waterLayer)
+            } else {
+                map.addLayer(waterLayer)
+            }
     }
 }
-waterButton.addEventListener('click', toggleWater(waterButton))
+
 // function toggleFilterEmittersByPollutant(pollutant) {
 //     if (map.hasLayer(globalWater[pollutant])) {
 //         map.removeLayer(globalWater[pollutant])
