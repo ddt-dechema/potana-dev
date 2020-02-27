@@ -201,11 +201,12 @@ function loadWaterlayers(data) {
         }
         globalWater = data
         resolve(data)
-        map.addLayer(waterLayer)
+       // map.addLayer(waterLayer)
     })
 }
 
 waterButton.addEventListener('click', toggleWater(waterButton))
+
 function toggleWater(button) {
     return function () {    
         button.classList.toggle('is-info')
@@ -217,7 +218,7 @@ function toggleWater(button) {
                 map.removeLayer(waterLayer)
             } else {
                 map.addLayer(waterLayer)
-            }
+        }
     }
 }
 
