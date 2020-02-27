@@ -195,6 +195,9 @@ function loadWaterlayers(data) {
                 //    data[country].features[f].properties.type = country
                 // }
                 waterLayer = L.geoJson(data[country], {
+                    // für mehr Länder 
+                    // waterLayer[country]=L.geoJson(data[country])
+                    // toggle event müsste auch angepasst werden, dass die Variable mit gegeben wird, welches Land getogglet werden soll,
                     style: waterStyle
                 }).addTo(map)
                 }
