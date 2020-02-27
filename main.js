@@ -202,7 +202,7 @@ function loadAreaLayers(data) {
                 // for (f in data[country].features) {
                 //    data[country].features[f].properties.type = country
                 // }
-                areaLayer = L.geoJson(data[country], {
+                areaLayer = L.geoJson(data, {
                     // für mehr Länder 
                     // waterLayer[country]=L.geoJson(data[country])
                     // toggle event müsste auch angepasst werden, dass die Variable mit gegeben wird, welches Land getogglet werden soll,
