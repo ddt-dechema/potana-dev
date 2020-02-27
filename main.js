@@ -194,9 +194,10 @@ function loadWaterlayers(data) {
                 for (f in data[country].features) {
                     data[country].features[f].properties.type = country
                 }
-                waterLayer = L.geoJson(data[country], {
+                // waterLayer = L.geoJson(data[country], {
+                var waterLayer = new L.geoJson(data[country], {
                     style: waterStyle
-                }).addTo(map)
+                })//.addTo(map)
             }
         }
         globalWater = data
