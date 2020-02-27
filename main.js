@@ -225,10 +225,10 @@ function toggleArea(button) {
         //else button.style.background = '#fff'
         //getFilteredTotals()
         //toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
-        if(map.hasLayer(protectedArea["protected"])) {
-                map.removeLayer(protectedArea["protected"])
+        if(map.hasLayer(areaLayer)) {
+                map.removeLayer(areaLayer)
             } else {
-                map.addLayer(protectedArea["protected"])
+                map.addLayer(areaLayer)
         }
     }
 }
