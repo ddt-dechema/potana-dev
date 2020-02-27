@@ -220,7 +220,7 @@ protectedareaButton.addEventListener('click', toggleArea(protectedareaButton))
 
 function toggleArea(button) {
     return function () {    
-        button.classList.toggle('is-info')
+        button.classList.toggle('is-success')
         //if (button.classList.contains('is-info')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
         //else button.style.background = '#fff'
         //getFilteredTotals()
