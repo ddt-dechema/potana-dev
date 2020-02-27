@@ -191,25 +191,13 @@ function loadWaterlayers(data) {
         //let nace = globalModel.emissions.categories.naceCategories.items
         for (country in data) {
             if (country != "stats") {
-                for (f in data[country].features) {
-                   data[country].features[f].properties.type = country
-                }
-                // waterLayer = L.geoJson(data[country], {
-                //     style: waterStyle
-                // })//.addTo(map)
-                globalWater[country] = L.geoJson(data[country], {
-                    pointToLayer: function (feature, latlng) {
-                        return L.circleMarker(latlng, {
-                            //radius: Math.sqrt(feature.properties.MTonnes / data.stats.totalMax) * 50,
-                            //color: emissionColors[feature.properties.PollutantName],
-                            //fillColor: nace[feature.properties.NACEMainEconomicActivityName].color,
-                            weight: 1,
-                            opacity: 0.7,
-                            fillOpacity: 0.4
-                        })//.bindPopup(addEmitterPopupHandler(feature))
-                    }
+                // for (f in data[country].features) {
+                //    data[country].features[f].properties.type = country
+                // }
+                waterLayer = L.geoJson(data[country], {
+                    style: waterStyle
                 }).addTo(map)
-            }
+                }
         }
         globalWater = data
         resolve(data)
