@@ -102,15 +102,8 @@ var areaStyle = {
     "weight": 5,
     "opacity": 0.65
 };
-// function waterStyle(feature) {
-//     return {
-//         color: "#19cdfa",
-//         "weight": 5,
-//         "opacity": 0.65,
-//         // 54 = propylene, 52 = ethylene
-//     };
-// }
- var waterStyle = {
+
+var waterStyle = {
     "color": "#19cdfa",
     "weight": 5,
     "opacity": 0.65
@@ -155,34 +148,7 @@ usaButton.addEventListener('click', event => {
     togglePipeline(event, 'usa')
 })
 
-protectedareaButton.addEventListener('click', event => {
-    toggleArea(event, 'protected')
-})
 
-// waterButton.addEventListener('click', event => {
-//     toggleWater(event, 'africa')
-// })
-function toggleArea(event, type) {
-    event.target.classList.toggle('is-info')
-    if (event.target.classList.contains('is-info')) {
-        fetch(type + '-areas' + '.json')
-            .then((response) => {
-                    return response.json()
-                },
-                (reject) => {
-                    console.error(reject)
-                })
-            .then((geojson) => {
-                protectedArea[type] = L.geoJson(geojson, {
-                    style: areaStyle
-                })
-                protectedArea[type].addTo(map)
-            })
-    } else {
-        map.removeLayer(protectedArea[type])
-    }
-
-}
 /************************* */
 /* ISSUE 1 */
 
@@ -225,36 +191,80 @@ function toggleWater(button) {
     }
 }
 
-// function toggleFilterEmittersByPollutant(pollutant) {
-//     if (map.hasLayer(globalWater[pollutant])) {
-//         map.removeLayer(globalWater[pollutant])
+/************************* */
+/* ISSUE 1.1 - das selbe nun für protected areas */
+
+function loadAreaLayers(data) {
+    return new Promise((resolve, reject) => {
+        //let nace = globalModel.emissions.categories.naceCategories.items
+        //for (country in data) {
+          //  if (country != "stats") {
+                // for (f in data[country].features) {
+                //    data[country].features[f].properties.type = country
+                // }
+                areaLayer = L.geoJson(data[country], {
+                    // für mehr Länder 
+                    // waterLayer[country]=L.geoJson(data[country])
+                    // toggle event müsste auch angepasst werden, dass die Variable mit gegeben wird, welches Land getogglet werden soll,
+                    style: areaStyle
+                }).addTo(map)
+            //    }
+        //}
+        globalArea = data
+        resolve(data)
+        //map.addLayer(waterLayer)
+    })
+}
+
+protectedareaButton.addEventListener('click', toggleArea(protectedareaButton))
+
+function toggleArea(button) {
+    return function () {    
+        button.classList.toggle('is-info')
+        //if (button.classList.contains('is-info')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
+        //else button.style.background = '#fff'
+        //getFilteredTotals()
+        //toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
+        if(map.hasLayer(protectedArea["protected"])) {
+                map.removeLayer(protectedArea["protected"])
+            } else {
+                map.addLayer(protectedArea["protected"])
+        }
+    }
+}
+/************************* */
+/* old 1.1 */
+
+
+/*protectedareaButton.addEventListener('click', event => {
+    toggleArea(event, 'protected')
+})*/
+
+
+// function toggleArea(event, type) {
+//     event.target.classList.toggle('is-info')
+//     if (event.target.classList.contains('is-info')) {
+//         fetch(type + '-areas' + '.json')
+//             .then((response) => {
+//                     return response.json()
+//                 },
+//                 (reject) => {
+//                     console.error(reject)
+//                 })
+//             .then((geojson) => {
+//                 protectedArea[type] = L.geoJson(geojson, {
+//                     style: areaStyle
+//                 })
+//                 protectedArea[type].addTo(map)
+//             })
 //     } else {
-//         map.addLayer(globalWater[pollutant])
+//         map.removeLayer(protectedArea[type])
 //     }
+
 // }
 
-/*
-function toggleWater(event, type) {
-    event.target.classList.toggle('is-info')
-    if (event.target.classList.contains('is-info')) {
-        fetch('water-' + type + '.json')
-            .then((response) => {
-                    return response.json()
-                },
-                (reject) => {
-                    console.error(reject)
-                })
-            .then((geojson) => {
-                globalWater[type] = L.geoJson(geojson, {
-                    style: waterStyle
-                })
-                globalWater[type].addTo(map)
-            })
-    } else {
-        map.removeLayer(globalWater[type])
-    }
 
-}
+/************************* */
 
 /* toggle-bility von Punktquellen Daten */
 function toggleEmitter(event, type) {
@@ -349,6 +359,8 @@ var globalPipelines = {}
 var protectedArea = {}
 var globalWater = {}
 var waterLayer = {}
+var globalArea = {}
+var areaLayer = {}
 /*  */
 document.addEventListener('DOMContentLoaded', (event) => {
     showMap()
@@ -360,5 +372,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
             console.error(reject)
         })
     .then(loadWaterlayers)
-
+    fetch('protected-areas.json')
+    .then((response) => {
+            return response.json()
+        },
+        (reject) => {
+            console.error(reject)
+        })
+    .then(loadAreaLayers) 
 })
