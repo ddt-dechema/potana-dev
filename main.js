@@ -189,20 +189,19 @@ function toggleArea(event, type) {
 function loadWaterlayers(data) {
     return new Promise((resolve, reject) => {
         //let nace = globalModel.emissions.categories.naceCategories.items
-        for (country in data) {
-            if (country != "stats") {
-                for (f in data[country].features) {
-                    data[country].features[f].properties.type = country
-                }
-                // waterLayer = L.geoJson(data[country], {
-                var waterLayer = new L.geoJson(data[country], {
+        //for (country in data) {
+            //if (country != "stats") {
+                //for (f in data[country].features) {
+                //   data[country].features[f].properties.type = country
+                //}
+                waterLayer = L.geoJson(data[country], {
                     style: waterStyle
                 })//.addTo(map)
-            }
-        }
+            //}
+        //}
         globalWater = data
         resolve(data)
-       // map.addLayer(waterLayer)
+        map.addLayer(waterLayer)
     })
 }
 
