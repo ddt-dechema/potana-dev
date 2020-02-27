@@ -346,6 +346,7 @@ function addPopupHandler(feature) {
 var globalPipelines = {}
 var protectedArea = {}
 var globalWater = {}
+var waterLayer = {}
 /*  */
 document.addEventListener('DOMContentLoaded', (event) => {
     showMap()
