@@ -211,8 +211,9 @@ let createScale = () => {
 let pollutantFilterCO2Button = document.getElementById('pollutant-filter-CO2-button'),
     pollutantFilterCOButton = document.getElementById('pollutant-filter-CO-button')
 /* styling */
-pollutantFilterCO2Button.style.background = emissionColors["CO2, AIR"]
-pollutantFilterCOButton.style.background = emissionColors["CO, AIR"]
+
+// pollutantFilterCO2Button.style.background = emissionColors["CO2, AIR"]
+// pollutantFilterCOButton.style.background = emissionColors["CO, AIR"]
 
 
 function returnTogglePollutantFilter(button) {
@@ -262,6 +263,8 @@ function loadPRTRlayers(data) {
         }
         globalEmissionData = data
         resolve(data)
+        map.removeLayer(markers["CO2, AIR"])
+        map.removeLayer(markers["CO, AIR"])
     })
 }
 /*Add a popup to a GeoJSON feature of a certain type

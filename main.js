@@ -20,12 +20,7 @@ function showMap() {
         zoomControl: false // to put the zoom butons on the right
     })
 
-    /* Add the zoom buttons */
-    L.control.zoom({
-        position: 'topright'
-    }).addTo(map)
-
-    /* Set up a layout object with different map styles and a toggle function */
+   
     map.layout = {
         items:{
             light: {
@@ -40,7 +35,25 @@ function showMap() {
                     attribution: 'Maps &copy; <a href="https://www.thunderforest.com">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, <a href="http://prtr.ec.europa.eu">E-PRTR</a>'
                 }),
                 button: document.getElementById('map-layout-green')
-            }
+            }/*,
+            pvTileLayer : {
+                layer: L.tileLayer(mbUrl, {
+                    id: 'dinhdutran/ck7x7q0gm142w1ipaudrqah67', tileSize: 512, zoomOffset: -1, attribution: mbAttr
+                }),
+                button: document.getElementById('pv-button')
+            },
+            windTileLayer : {
+                layer: L.tileLayer(mbUrl, {
+                    id: 'dinhdutran/ck7x7ug5w055h1ir1fcycofg5', tileSize: 512, zoomOffset: -1, attribution: mbAttr
+                }),
+                button: document.getElementById('wind-button')
+            },
+            waterTileLayer : {
+                layer: L.tileLayer(mbUrl, {
+                    id: 'dinhdutran/ck7xgtwbu1efl1imd3tmuoklt', tileSize: 512, zoomOffset: -1, attribution: mbAttr
+                }),
+                button: document.getElementById('water-button')
+            }*/
         },
         toggle: function() {
             for(layout in map.layout.items){
@@ -59,6 +72,158 @@ function showMap() {
         let l = map.layout.items[layout]
         l.button.addEventListener('click', map.layout.toggle)
     }
+
+
+/***********************/
+/* Implement Mapbox-Styles */
+/***********************/
+var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGluaGR1dHJhbiIsImEiOiJjazdxMWhzN2YwMWZ5M2h0bDZvdmgxdDN5In0.T3gSsacrZXZOTqmx-zknUw';
+
+ var pvTileLayer  = L.tileLayer(mbUrl, {id: 'dinhdutran/ck7x7q0gm142w1ipaudrqah67', tileSize: 512, zoomOffset: -1, attribution: mbAttr}),
+ windTileLayer  = L.tileLayer(mbUrl, {id: 'dinhdutran/ck7x7ug5w055h1ir1fcycofg5', tileSize: 512, zoomOffset: -1, attribution: mbAttr}),
+ waterTileLayer = L.tileLayer(mbUrl, {id: 'dinhdutran/ck7xgtwbu1efl1imd3tmuoklt', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
+
+ /* Add the zoom buttons */
+ L.control.zoom({
+    position: 'topright'
+}).addTo(map)
+
+pvButton.addEventListener('click', togglePV(pvButton))
+
+function togglePV(button) {
+    return function () {    
+        button.classList.toggle('is-info')
+            if(map.hasLayer(pvTileLayer)) {
+                map.removeLayer(pvTileLayer)
+            } else {
+                map.addLayer(pvTileLayer)
+        }
+    }
+}
+
+windButton.addEventListener('click', toggleWind(windButton))
+
+function toggleWind(button) {
+    return function () {    
+        button.classList.toggle('is-info')
+            if(map.hasLayer(windTileLayer)) {
+                map.removeLayer(windTileLayer)
+            } else {
+                map.addLayer(windTileLayer)
+        }
+    }
+}
+
+waterStress.addEventListener('click', toggleWaterStress(waterStress))
+
+function toggleWaterStress(button) {
+    return function () {    
+        button.classList.toggle('is-info')
+            if(map.hasLayer(waterTileLayer)) {
+                map.removeLayer(waterTileLayer)
+            } else {
+                map.addLayer(waterTileLayer)
+        }
+    }
+}
+
+
+var eez_boundaries = new L.GeoJSON.AJAX(["eez_boundaries_v11.geojson"]);
+
+eezButton.addEventListener('click', toggleEEZ(eezButton))
+
+function toggleEEZ(button) {
+    return function () {    
+        button.classList.toggle('is-info')
+            if(map.hasLayer(eez_boundaries)) {
+                map.removeLayer(eez_boundaries)
+            } else {
+                map.addLayer(eez_boundaries)
+        }
+    }
+}
+
+
+let powerplantsColors = {
+    //"Biomass": 'rgb(0, 141, 180)', //Kopernikus 100%
+    "Biomass": '#09B57C', // greeny
+    "Hydro": '#0A5469', // dark blue
+    "Solar": '#B51247', // red
+    "Waste": '#696105', // brwonish
+    "Wave and Tidal": '#008DB4', // Kopernikus 100%
+    "Wind": '#99D1E1', //Kopernikus 40%
+}
+
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend ddtvis ddthide');
+    var grades = ["#09B57C", // greeny
+        "#0A5469" , // dark blue
+        '#B51247' , // red
+        '#696105' , // brwonish
+        '#008DB4' , // Kopernikus 100%
+        '#99D1E1'],
+        labels = ["Biomass", // greeny
+        "Hydro", // dark blue
+        "Solar", // red
+        "Waste", // brwonish
+        "Wave and Tidal", // Kopernikus 100%
+        "Wind" //Kopernikus 40%
+    ];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + grades[i] + '"></i> ' +
+            labels[i] + '<br>';
+    }
+
+    return div;
+};
+
+// legend.addTo(map);
+
+var renewables_plants = new L.GeoJSON.AJAX(["EEpowerplants_global.geojson"], {
+pointToLayer: function (feature, latlng) {
+    return L.circleMarker(latlng, {
+        radius: 2,
+        color: powerplantsColors[feature.properties.primary_fuel],
+        /*fillColor: feature.properties.color,*/
+        fillColor: powerplantsColors[feature.properties.primary_fuel],
+        weight: 1,
+        opacity: 0.7,
+        fillOpacity: 0.4
+    }).bindPopup(addPopupHandler(feature))
+}});
+
+renewablesButton.addEventListener('click', togglerenewables(renewablesButton))
+
+
+function togglerenewables(button) {
+    return function () {    
+        button.classList.toggle('is-info')
+            if(map.hasLayer(renewables_plants)) {
+                map.removeLayer(renewables_plants)
+                map.removeControl(legend)
+            } else {
+                map.addLayer(renewables_plants)
+                map.addControl(legend)
+        }
+    }
+}
+
+
+
+
+
+
+
+///////////////////////
 
     /* Add the sidebar */
     map.sidebar = L.control.sidebar('sidebar', {
@@ -83,11 +248,15 @@ propyleneButton = document.getElementById('propylene-button'),
 pvButton = document.getElementById('pv-button'),
 windButton = document.getElementById('wind-button'),
 waterButton = document.getElementById('water-button'),
+waterStress = document.getElementById('water-stress'),
 emitterButton = document.getElementById('emitter-button'),
 pipelineButton = document.getElementById('pipeline-button'),
 kenyaButton = document.getElementById('kenya-button'),
 protectedareaButton = document.getElementById('protectedarea-button'),
+eezButton = document.getElementById('eez-button')
+renewablesButton = document.getElementById('renewables-button')
 usaButton = document.getElementById('usa-button')
+
 /*pollutantFilterCO2Button = document.getElementById('pollutant-filter-CO2-button'),
 pollutantFilterCOButton = document.getElementById('pollutant-filter-CO-button')
 /* Farbe der Pipelines*/
@@ -166,11 +335,11 @@ function loadWaterlayers(data) {
                     // toggle event müsste auch angepasst werden, dass die Variable mit gegeben wird, welches Land getogglet werden soll,
                     style: waterStyle
                 }).addTo(map)
-                }
+                   }
         }
         globalWater = data
         resolve(data)
-        //map.addLayer(waterLayer)
+        map.removeLayer(waterLayer)
     })
 }
 
@@ -212,7 +381,7 @@ function loadAreaLayers(data) {
         //}
         globalArea = data
         resolve(data)
-        //map.addLayer(waterLayer)
+        map.removeLayer(areaLayer)
     })
 }
 
