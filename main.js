@@ -131,7 +131,7 @@ function toggleWaterStress(button) {
 }
 
 
-var eez_boundaries = new L.GeoJSON.AJAX(["eez_boundaries_v11.geojson"]);
+var eez_boundaries = new L.GeoJSON.AJAX(["geofiles/eez_boundaries_v11.geojson"]);
 
 eezButton.addEventListener('click', toggleEEZ(eezButton))
 
@@ -188,7 +188,7 @@ legend.onAdd = function (map) {
 
 // legend.addTo(map);
 
-var renewables_plants = new L.GeoJSON.AJAX(["EEpowerplants_global.geojson"], {
+var renewables_plants = new L.GeoJSON.AJAX(["geofiles/EEpowerplants_global.geojson"], {
 pointToLayer: function (feature, latlng) {
     return L.circleMarker(latlng, {
         radius: 2,
@@ -282,7 +282,7 @@ var waterStyle = {
 function togglePipeline(event, type) {
     event.target.classList.toggle('is-info')
     if (event.target.classList.contains('is-info')) {
-        fetch('pipeline-' + type + '.json')
+        fetch('geofiles/pipeline-' + type + '.json')
             .then((response) => {
                     return response.json()
                 },
@@ -533,7 +533,7 @@ var areaLayer = {}
 /*  */
 document.addEventListener('DOMContentLoaded', (event) => {
     showMap()
-    fetch('water-africa.json')
+    fetch('geofiles/water-africa.json')
     .then((response) => {
             return response.json()
         },
@@ -541,7 +541,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             console.error(reject)
         })
     .then(loadWaterlayers)
-    fetch('protected-areas.json')
+    fetch('geofiles/protected-areas-africa.json')
     .then((response) => {
             return response.json()
         },
