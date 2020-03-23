@@ -69,7 +69,7 @@ let globalModel = {
                     },
                     "Production of electricity": {
                         style: 'nace-electricity',
-                        color: 'rgb(190,85,153)',
+                        color: '#be5599',
                         looping: true,
                         catalytic: false,
                         active: true
@@ -223,16 +223,32 @@ function returnTogglePollutantFilter(button) {
         else button.style.background = '#fff'
         //getFilteredTotals()
         toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
+        toggleScale("CO2, AIR", "CO, AIR")
     }
 }
+
+var scale_legend = document.getElementById("scale")
 
 function toggleFilterEmittersByPollutant(pollutant) {
     if (map.hasLayer(markers[pollutant])) {
         map.removeLayer(markers[pollutant])
+        //scale_legend.style.display="none"
     } else {
         map.addLayer(markers[pollutant])
+        scale_legend.style.display="block"
     }
 }
+
+function toggleScale(pollutant, pollutant_CO2) {
+    if (map.hasLayer(markers[pollutant_CO2]) && map.hasLayer(markers[pollutant])) {
+        scale_legend.style.display="block"
+    } else if (map.hasLayer(markers[pollutant_CO2]) ||   map.hasLayer(markers[pollutant])) { 
+        scale_legend.style.display="block"
+    } else {
+        scale_legend.style.display="none"
+    }
+}
+
 pollutantFilterCO2Button.addEventListener('click', returnTogglePollutantFilter(pollutantFilterCO2Button))
 pollutantFilterCOButton.addEventListener('click', returnTogglePollutantFilter(pollutantFilterCOButton))
 

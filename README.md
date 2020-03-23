@@ -4,6 +4,7 @@ See live example: https://ddt-dechema.github.io/potana-dev/
 * geotiffs were converted and compressed in QGis (Bucuresti) <span style="color:red">not cited yet</span>. 
 8 bit and pseudo-one channel color
 * available (Geo)JSONs were partly converted via free online tools <span style="color:red">not cited yet</span>
+* CSVs (containing lat,lon) were converted via https://www.convertcsv.com/csv-to-geojson.htm (at least the first line of lat, lon must be wrapped in `" "`)
 * Some data (mostly geotiffs and shapefiles) were uploaded to http://studio.mapbox.com and formated therein. The resulting styles are then used in this map for a faster loading time
 
 # Sources

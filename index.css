@@ -149,6 +149,7 @@ body .sidebar-tabs>li.active, .sidebar-tabs>ul>li.active {
   bottom: 20px;
   padding: 3px;
   font: 10px sans-serif;
+ display: none;
 }
 .legend path,
 .legend line {

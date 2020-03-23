@@ -155,32 +155,44 @@ let powerplantsColors = {
     "Waste": '#696105', // brwonish
     "Wave and Tidal": '#008DB4', // Kopernikus 100%
     "Wind": '#99D1E1', //Kopernikus 40%
+    "Coal": '#be5599', // Coal
+    "Cogeneration": '#AB4C89' , // Cogeneration
+    "Gas:": '#98447A' , // Gas
+    "Geothermal": '#853B6B' , // Geothermal
+    "Nuclear": '#72335B' , // Nuclear
+    "Oil": '#5F2A4C', // Oil
+    "Other": '#4C223D', // Other
+    "Petcoke": '#39192D', // Petcoke
+    "Storage": '#26111E' // Storage
 }
 
 var legend = L.control({position: 'bottomright'});
 
 legend.onAdd = function (map) {
 
-    var div = L.DomUtil.create('div', 'info legend ddtvis ddthide');
-    var grades = ["#09B57C", // greeny
+    var div = L.DomUtil.create('div', 'info legend');
+    var grades_powerEE = [
+        "#09B57C", // greeny
         "#0A5469" , // dark blue
         '#B51247' , // red
         '#696105' , // brwonish
         '#008DB4' , // Kopernikus 100%
-        '#99D1E1'],
-        labels = ["Biomass", // greeny
-        "Hydro", // dark blue
-        "Solar", // red
-        "Waste", // brwonish
-        "Wave and Tidal", // Kopernikus 100%
-        "Wind" //Kopernikus 40%
-    ];
+        '#99D1E1'
+    ],
+        labels_powerEE = [
+            "Biomass", // greeny
+            "Hydro", // dark blue
+            "Solar", // red
+            "Waste", // brwonish
+            "Wave and Tidal", // Kopernikus 100%
+            "Wind" //Kopernikus 40%
+        ];
 
     // loop through our density intervals and generate a label with a colored square for each interval
-    for (var i = 0; i < grades.length; i++) {
+    for (var i = 0; i < grades_powerEE.length; i++) {
         div.innerHTML +=
-            '<i style="background:' + grades[i] + '"></i> ' +
-            labels[i] + '<br>';
+            '<i style="background:' + grades_powerEE[i] + '"></i> ' +
+            labels_powerEE[i] + '<br>';
     }
 
     return div;
@@ -188,7 +200,7 @@ legend.onAdd = function (map) {
 
 // legend.addTo(map);
 
-var renewables_plants = new L.GeoJSON.AJAX(["geofiles/EEpowerplants_global.geojson"], {
+var renewables_plants = new L.GeoJSON.AJAX(["geofiles/powerplants_global-EE.geojson"], {
 pointToLayer: function (feature, latlng) {
     return L.circleMarker(latlng, {
         radius: 2,
@@ -198,7 +210,7 @@ pointToLayer: function (feature, latlng) {
         weight: 1,
         opacity: 0.7,
         fillOpacity: 0.4
-    }).bindPopup(addPopupHandler(feature))
+    }).bindPopup(addPowerPlantPopupHandler(feature))
 }});
 
 renewablesButton.addEventListener('click', togglerenewables(renewablesButton))
@@ -217,11 +229,101 @@ function togglerenewables(button) {
     }
 }
 
+// energy plants - non EE
+
+var legend_power = L.control({position: 'bottomright'});
+
+legend_power.onAdd = function (map) {
+
+    var div_power = L.DomUtil.create('div', 'info legend');
+    var grades_power = [ //shades of the Carbon4PUR electricity color scheme
+            '#be5599', // Coal
+            '#AB4C89' , // Cogeneration
+            '#98447A' , // Gas
+            '#853B6B' , // Geothermal
+            '#72335B' , // Nuclear
+            '#5F2A4C', // Oil
+            '#4C223D', // Other
+            '#39192D', // Petcoke
+            '#26111E' // Storage
+        ],
+        labels_power = [ // 9 stück
+            "Coal",
+            "Cogeneration",
+            "Gas",
+            "Geothermal",
+            "Nuclear",
+            "Oil",
+            "Other",
+            "Petcoke",
+            "Storage"
+    ];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades_power.length; i++) {
+        div_power.innerHTML +=
+            '<i style="background:' + grades_power[i] + '"></i> ' +
+            labels_power[i] + '<br>';
+    }
+
+    return div_power;
+};
 
 
+var power_plants = new L.GeoJSON.AJAX(["geofiles/powerplants_global-nonEE.geojson"], {
+    pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+            radius: 2,
+            color: powerplantsColors[feature.properties.primary_fuel],
+            /*fillColor: feature.properties.color,*/
+            fillColor: powerplantsColors[feature.properties.primary_fuel],
+            weight: 1,
+            opacity: 0.7,
+            fillOpacity: 0.4
+        }).bindPopup(addPowerPlantPopupHandler(feature))
+    }});
+    
+    powerplantsButton.addEventListener('click', toggleplants(powerplantsButton))
+    
+    
+    function toggleplants(button) {
+        return function () {    
+            button.classList.toggle('is-info')
+                if(map.hasLayer(power_plants)) {
+                    map.removeLayer(power_plants)
+                    map.removeControl(legend_power)
+                } else {
+                    map.addLayer(power_plants)
+                    map.addControl(legend_power)
+            }
+        }
+    }
 
 
-
+function addPowerPlantPopupHandler(feature) {
+    // let nace = globalModel.emissions.categories.naceCategories.items
+    if (feature.properties) {
+        let otherEmission = ''
+        //if (feature.properties.co2Amount) otherEmission += formatSI(feature.properties.co2Amount) + ' Megatonnes CO<sub>2</sub>/year'
+        //if (feature.properties.coAmount) otherEmission += formatSI(feature.properties.coAmount) + ' Megatonnes CO/year'
+        //let thisEmission = formatSI(feature.properties.MTonnes) + ' Megatonnes '
+        //if (feature.properties.type == 'CO, AIR') thisEmission += 'CO/year'
+        //else thisEmission += 'CO<sub>2</sub>/year'
+        //let color = translucidColor(nace[feature.properties.NACEMainEconomicActivityName].color)
+        return `<h2>${feature.properties.name}</h2>
+                        ${feature.properties.country_long} (${feature.properties.country})                    
+                        <br>primary fuel: <i>${feature.properties.primary_fuel}</i><br>
+                        <a href="${feature.properties.url}" target="_blank">Source</a>`
+                        // <br>
+                        // <div class='popup-em' style='background: ${color}'>
+                        // Emissions:
+                        // <br>${thisEmission}` + (otherEmission != '' ? `<br />${otherEmission}` : '') + `</div>
+                        // <br><br><a href="${feature.properties.FacilityDetails}" target="_blank">More Facility details on E-PRTR page</a>`
+    
+    } else {
+        console.log(feature)
+    }
+    }
 
 ///////////////////////
 
@@ -256,6 +358,7 @@ protectedareaButton = document.getElementById('protectedarea-button'),
 eezButton = document.getElementById('eez-button')
 renewablesButton = document.getElementById('renewables-button')
 usaButton = document.getElementById('usa-button')
+powerplantsButton = document.getElementById('powerplants-button')
 
 /*pollutantFilterCO2Button = document.getElementById('pollutant-filter-CO2-button'),
 pollutantFilterCOButton = document.getElementById('pollutant-filter-CO-button')
