@@ -158,9 +158,10 @@ let createScale = () => {
         .attr("r", function (d) {
             return size(d)
         })
-        .style("fill", "none")
+        .style("fill", "rgba(190, 85, 153, 0.6)")   // changed by DDT from none to 
         .style("stroke", "black")
         .style("stroke-width", "0.8")
+        .style("fill-opacity", "0.4")               //added by DDT
         .attr("stroke", "black")
 
     // Add legend: segments
@@ -242,7 +243,7 @@ function toggleFilterEmittersByPollutant(pollutant) {
 function toggleScale(pollutant, pollutant_CO2) {
     if (map.hasLayer(markers[pollutant_CO2]) && map.hasLayer(markers[pollutant])) {
         scale_legend.style.display="block"
-    } else if (map.hasLayer(markers[pollutant_CO2]) ||   map.hasLayer(markers[pollutant])) { 
+    } else if (map.hasLayer(markers[pollutant_CO2]) || map.hasLayer(markers[pollutant])) { 
         scale_legend.style.display="block"
     } else {
         scale_legend.style.display="none"

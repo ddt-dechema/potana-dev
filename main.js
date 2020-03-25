@@ -1,655 +1,611 @@
 // define global variables
-let map
+let map;
+/***********************/
+/* Einladen der Button-Informationen */
+let ethyleneButton = document.getElementById("ethylene-button"),
+    propyleneButton = document.getElementById("propylene-button"),
+    pvButton = document.getElementById("pv-button"),
+    windButton = document.getElementById("wind-button"),
+    waterButton = document.getElementById("water-button"),
+    waterStressButton = document.getElementById("water-stress"),
+    emitterButton = document.getElementById("emitter-button"),
+    pipelineButton = document.getElementById("pipeline-button"),
+    kenyaButton = document.getElementById("kenya-button"),
+    protectedareaButton = document.getElementById("protectedarea-button"),
+    countryButton = document.getElementById("country-button"),
+    renewablesButton = document.getElementById("renewables-button"),
+    usaButton = document.getElementById("usa-button"),
+    powerplantsButton = document.getElementById("powerplants-button"),
+    GHGUSAButton = document.getElementById("GHG-USA-button")
+    CO2globalButton = document.getElementById("CO2-global-button"),
+    scale_global = document.getElementById("scale_global"),
+    scale_legend = document.getElementById("scale");
 
 function showMap() {
     /* allows us to create filters within a Leaflet GeoJSON layer */
     L.GeoJSON.include({
-        setFilter: function (originalData, _) {
-            this.options.filter = _
-            this.clearLayers()
-            this.addData(originalData)
-            return this
+        setFilter: function(originalData, _) {
+            this.options.filter = _;
+            this.clearLayers();
+            this.addData(originalData);
+            return this;
         }
-    })
+    });
 
     /* Set up the map with initial center and zoom level */
-    map = L.map('map', {
+    map = L.map("map", {
         center: [51.65892, 6.41601], // roughly show Europe
-        zoom: 5, // roughly show Europe (from 1 to 18 -- decrease to zoom out, increase to zoom in)
+        zoom: 3, // roughly show Europe (from 1 to 18 -- decrease to zoom out, increase to zoom in)
         scrollWheelZoom: false,
         zoomControl: false // to put the zoom butons on the right
-    })
+    });
 
-   
     map.layout = {
-        items:{
+        items: {
             light: {
-                layer: L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap<\/a>, &copy; <a href="https://carto.com/attribution">CARTO<\/a>, <a href="http://prtr.ec.europa.eu">E-PRTR</a>'
-                }).addTo(map),
+                layer: L.tileLayer(
+                    "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png", {
+                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>, <a href="http://prtr.ec.europa.eu">E-PRTR</a>'
+                    }
+                ).addTo(map),
                 /* ".addto(map)" hinzufügen, wenn man das defaultmäßig haben will */
-                button: document.getElementById('map-layout-light')
+                button: document.getElementById("map-layout-light")
             },
             green: {
-                layer: L.tileLayer('https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png?apikey=9a85f60a13be4bf7bed59b5ffc0f4d86', {
-                    attribution: 'Maps &copy; <a href="https://www.thunderforest.com">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, <a href="http://prtr.ec.europa.eu">E-PRTR</a>'
-                }),
-                button: document.getElementById('map-layout-green')
-            }/*,
-            pvTileLayer : {
-                layer: L.tileLayer(mbUrl, {
-                    id: 'dinhdutran/ck7x7q0gm142w1ipaudrqah67', tileSize: 512, zoomOffset: -1, attribution: mbAttr
-                }),
-                button: document.getElementById('pv-button')
-            },
-            windTileLayer : {
-                layer: L.tileLayer(mbUrl, {
-                    id: 'dinhdutran/ck7x7ug5w055h1ir1fcycofg5', tileSize: 512, zoomOffset: -1, attribution: mbAttr
-                }),
-                button: document.getElementById('wind-button')
-            },
-            waterTileLayer : {
-                layer: L.tileLayer(mbUrl, {
-                    id: 'dinhdutran/ck7xgtwbu1efl1imd3tmuoklt', tileSize: 512, zoomOffset: -1, attribution: mbAttr
-                }),
-                button: document.getElementById('water-button')
-            }*/
+                layer: L.tileLayer(
+                    "https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png?apikey=9a85f60a13be4bf7bed59b5ffc0f4d86", {
+                        attribution: 'Maps &copy; <a href="https://www.thunderforest.com">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, <a href="http://prtr.ec.europa.eu">E-PRTR</a>'
+                    }
+                ),
+                button: document.getElementById("map-layout-green")
+            }
         },
         toggle: function() {
-            for(layout in map.layout.items){
-                let l = map.layout.items[layout]
-                l.button.classList.toggle('is-info')
-                if(l.button.classList.contains('is-info')){
-                    map.addLayer(l.layer)
-                }
-                else {
-                    map.removeLayer(l.layer)
+            for (var layout in map.layout.items) {
+                let l = map.layout.items[layout];
+                l.button.classList.toggle("is-info");
+                if (l.button.classList.contains("is-info")) {
+                    map.addLayer(l.layer);
+                } else {
+                    map.removeLayer(l.layer);
                 }
             }
         }
+    };
+    for (var layout in map.layout.items) {
+        let l = map.layout.items[layout];
+        l.button.addEventListener("click", map.layout.toggle);
     }
-    for(layout in map.layout.items){
-        let l = map.layout.items[layout]
-        l.button.addEventListener('click', map.layout.toggle)
-    }
+
+    /***********************/
+    /* Implement Mapbox-Styles */
+    /***********************/
 
 
-/***********************/
-/* Implement Mapbox-Styles */
-/***********************/
-var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGluaGR1dHJhbiIsImEiOiJjazdxMWhzN2YwMWZ5M2h0bDZvdmgxdDN5In0.T3gSsacrZXZOTqmx-zknUw';
+    /* Add the zoom buttons */
+    L.control
+        .zoom({
+            position: "topright"
+        })
+        .addTo(map);
 
- var pvTileLayer  = L.tileLayer(mbUrl, {id: 'dinhdutran/ck7x7q0gm142w1ipaudrqah67', tileSize: 512, zoomOffset: -1, attribution: mbAttr}),
- windTileLayer  = L.tileLayer(mbUrl, {id: 'dinhdutran/ck7x7ug5w055h1ir1fcycofg5', tileSize: 512, zoomOffset: -1, attribution: mbAttr}),
- waterTileLayer = L.tileLayer(mbUrl, {id: 'dinhdutran/ck7xgtwbu1efl1imd3tmuoklt', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
 
- /* Add the zoom buttons */
- L.control.zoom({
-    position: 'topright'
-}).addTo(map)
 
-pvButton.addEventListener('click', togglePV(pvButton))
 
-function togglePV(button) {
-    return function () {    
-        button.classList.toggle('is-info')
-            if(map.hasLayer(pvTileLayer)) {
-                map.removeLayer(pvTileLayer)
-            } else {
-                map.addLayer(pvTileLayer)
+    /* Add the sidebar */
+    map.sidebar = L.control
+        .sidebar("sidebar", {
+            position: "left"
+        })
+        .addTo(map);
+
+    /* On the map, scrolling should zoom */
+    map.on("focus", () => {
+        map.scrollWheelZoom.enable();
+    });
+    /* Outside of the map, scrolling should not zoom */
+    map.on("blur", () => {
+        map.scrollWheelZoom.disable();
+    });
+}
+var mbAttr =
+    'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+    '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    mbUrl =
+    "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGluaGR1dHJhbiIsImEiOiJjazdxMWhzN2YwMWZ5M2h0bDZvdmgxdDN5In0.T3gSsacrZXZOTqmx-zknUw";
+
+var pvTileLayer = L.tileLayer(mbUrl, {
+        id: "dinhdutran/ck7x7q0gm142w1ipaudrqah67",
+        tileSize: 512,
+        zoomOffset: -1,
+        attribution: mbAttr
+    }),
+    windTileLayer = L.tileLayer(mbUrl, {
+        id: "dinhdutran/ck7x7ug5w055h1ir1fcycofg5",
+        tileSize: 512,
+        zoomOffset: -1,
+        attribution: mbAttr
+    }),
+    waterTileLayer = L.tileLayer(mbUrl, {
+        id: "dinhdutran/ck7xgtwbu1efl1imd3tmuoklt",
+        tileSize: 512,
+        zoomOffset: -1,
+        attribution: mbAttr
+    });
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////
+// BASIC FUNCTIONS
+
+function toggleLayer(button, layer) {
+    return function() {
+        button.classList.toggle("is-info");
+        if (map.hasLayer(layer)) {
+            map.removeLayer(layer);
+        } else {
+            map.addLayer(layer);
         }
-    }
+    };
 }
 
-windButton.addEventListener('click', toggleWind(windButton))
-
-function toggleWind(button) {
-    return function () {    
-        button.classList.toggle('is-info')
-            if(map.hasLayer(windTileLayer)) {
-                map.removeLayer(windTileLayer)
-            } else {
-                map.addLayer(windTileLayer)
+function toggleLayerScale(button, layer, scale) {
+    return function() {
+        button.classList.toggle("is-info");
+        if (map.hasLayer(layer)) {
+            map.removeLayer(layer);
+            scale.style.display="none";
+        } else {
+            map.addLayer(layer);
+            scale.style.display="block"
         }
-    }
+    };
 }
 
-waterStress.addEventListener('click', toggleWaterStress(waterStress))
-
-function toggleWaterStress(button) {
-    return function () {    
-        button.classList.toggle('is-info')
-            if(map.hasLayer(waterTileLayer)) {
-                map.removeLayer(waterTileLayer)
-            } else {
-                map.addLayer(waterTileLayer)
+function toggleLayerLegend(button, layer, legend) {
+    return function() {
+        button.classList.toggle('is-info');
+        if (map.hasLayer(layer)) {
+            map.removeLayer(layer);
+            map.removeControl(legend);
+        } else {
+            map.addLayer(layer);
+            map.addControl(legend);
         }
-    }
+    };
 }
 
-
-var eez_boundaries = new L.GeoJSON.AJAX(["geofiles/eez_boundaries_v11.geojson"]);
-
-eezButton.addEventListener('click', toggleEEZ(eezButton))
-
-function toggleEEZ(button) {
-    return function () {    
-        button.classList.toggle('is-info')
-            if(map.hasLayer(eez_boundaries)) {
-                map.removeLayer(eez_boundaries)
-            } else {
-                map.addLayer(eez_boundaries)
-        }
-    }
-}
+////////////////////////////////////////////////////////////////////////////////////
+// LEGENDS
 
 
-let powerplantsColors = {
-    //"Biomass": 'rgb(0, 141, 180)', //Kopernikus 100%
-    "Biomass": '#09B57C', // greeny
-    "Hydro": '#0A5469', // dark blue
-    "Solar": '#B51247', // red
-    "Waste": '#696105', // brwonish
-    "Wave and Tidal": '#008DB4', // Kopernikus 100%
-    "Wind": '#99D1E1', //Kopernikus 40%
-    "Coal": '#be5599', // Coal
-    "Cogeneration": '#AB4C89' , // Cogeneration
-    "Gas:": '#98447A' , // Gas
-    "Geothermal": '#853B6B' , // Geothermal
-    "Nuclear": '#72335B' , // Nuclear
-    "Oil": '#5F2A4C', // Oil
-    "Other": '#4C223D', // Other
-    "Petcoke": '#39192D', // Petcoke
-    "Storage": '#26111E' // Storage
-}
+var legend_EE = L.control({
+    position: "bottomright"
+});
 
-var legend = L.control({position: 'bottomright'});
+legend_EE.onAdd = function(map) {
+    var div_EE = L.DomUtil.create("div", "info legend_EE");
 
-legend.onAdd = function (map) {
-
-    var div = L.DomUtil.create('div', 'info legend');
-    var grades_powerEE = [
-        "#09B57C", // greeny
-        "#0A5469" , // dark blue
-        '#B51247' , // red
-        '#696105' , // brwonish
-        '#008DB4' , // Kopernikus 100%
-        '#99D1E1'
-    ],
-        labels_powerEE = [
-            "Biomass", // greeny
-            "Hydro", // dark blue
-            "Solar", // red
-            "Waste", // brwonish
-            "Wave and Tidal", // Kopernikus 100%
-            "Wind" //Kopernikus 40%
-        ];
-
-    // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades_powerEE.length; i++) {
-        div.innerHTML +=
-            '<i style="background:' + grades_powerEE[i] + '"></i> ' +
-            labels_powerEE[i] + '<br>';
+        div_EE.innerHTML += '<i style="background:' + grades_powerEE[i] + '"></i> ' + labels_powerEE[i] + "<br>";
     }
-
-    return div;
+    return div_EE;
 };
 
-// legend.addTo(map);
 
-var renewables_plants = new L.GeoJSON.AJAX(["geofiles/powerplants_global-EE.geojson"], {
-pointToLayer: function (feature, latlng) {
-    return L.circleMarker(latlng, {
-        radius: 2,
-        color: powerplantsColors[feature.properties.primary_fuel],
-        /*fillColor: feature.properties.color,*/
-        fillColor: powerplantsColors[feature.properties.primary_fuel],
-        weight: 1,
-        opacity: 0.7,
-        fillOpacity: 0.4
-    }).bindPopup(addPowerPlantPopupHandler(feature))
-}});
+var legend_power = L.control({
+    position: "bottomright"
+});
 
-renewablesButton.addEventListener('click', togglerenewables(renewablesButton))
-
-
-function togglerenewables(button) {
-    return function () {    
-        button.classList.toggle('is-info')
-            if(map.hasLayer(renewables_plants)) {
-                map.removeLayer(renewables_plants)
-                map.removeControl(legend)
-            } else {
-                map.addLayer(renewables_plants)
-                map.addControl(legend)
-        }
-    }
-}
-
-// energy plants - non EE
-
-var legend_power = L.control({position: 'bottomright'});
-
-legend_power.onAdd = function (map) {
-
-    var div_power = L.DomUtil.create('div', 'info legend');
-    var grades_power = [ //shades of the Carbon4PUR electricity color scheme
-            '#be5599', // Coal
-            '#AB4C89' , // Cogeneration
-            '#98447A' , // Gas
-            '#853B6B' , // Geothermal
-            '#72335B' , // Nuclear
-            '#5F2A4C', // Oil
-            '#4C223D', // Other
-            '#39192D', // Petcoke
-            '#26111E' // Storage
-        ],
-        labels_power = [ // 9 stück
-            "Coal",
-            "Cogeneration",
-            "Gas",
-            "Geothermal",
-            "Nuclear",
-            "Oil",
-            "Other",
-            "Petcoke",
-            "Storage"
-    ];
-
+legend_power.onAdd = function(map) {
+    var div_power = L.DomUtil.create("div", "info legend_power");
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades_power.length; i++) {
         div_power.innerHTML +=
-            '<i style="background:' + grades_power[i] + '"></i> ' +
-            labels_power[i] + '<br>';
+            '<i style="background:' + grades_power[i] + '"></i> ' + labels_power[i] + "<br>";
     }
-
     return div_power;
 };
 
 
-var power_plants = new L.GeoJSON.AJAX(["geofiles/powerplants_global-nonEE.geojson"], {
-    pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng, {
-            radius: 2,
-            color: powerplantsColors[feature.properties.primary_fuel],
-            /*fillColor: feature.properties.color,*/
-            fillColor: powerplantsColors[feature.properties.primary_fuel],
-            weight: 1,
-            opacity: 0.7,
-            fillOpacity: 0.4
-        }).bindPopup(addPowerPlantPopupHandler(feature))
-    }});
-    
-    powerplantsButton.addEventListener('click', toggleplants(powerplantsButton))
-    
-    
-    function toggleplants(button) {
-        return function () {    
-            button.classList.toggle('is-info')
-                if(map.hasLayer(power_plants)) {
-                    map.removeLayer(power_plants)
-                    map.removeControl(legend_power)
-                } else {
-                    map.addLayer(power_plants)
-                    map.addControl(legend_power)
-            }
+/* create scale for the index.html */
+let createScale_global = () => {
+    var height = 75
+    var width = 130
+    var svg = d3.select("#scale_global")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+
+    // The scale you use for bubble size
+    var size = d3.scaleSqrt()
+        .domain([0, 10000]) // What's in the data, min-max
+        .range([0, 50]) // Size in pixel
+
+    // Add legend: circles
+    var valuesToShow = [20, 1000, 5000] // [globalEmissionData.stats.totalMax / 100, globalEmissionData.stats.totalMax / 10, globalEmissionData.stats.totalMax]
+    var xCircle = 38
+    var xLabel = 100
+    var yCircle = 74
+    svg
+        .selectAll("legend")
+        .data(valuesToShow)
+        .enter()
+        .append("circle")
+        .attr("cx", xCircle)
+        .attr("cy", function (d) {
+            return yCircle - size(d)
+        })
+        .attr("r", function (d) {
+            return size(d)
+        })
+        .style("fill", "black")         // changed by DDT from none to black
+        .style("stroke", "black")
+        .style("stroke-width", "0.8")
+        .style("fill-opacity", "0.4")   // added by DDT
+        .attr("stroke", "black")
+
+    // Add legend: segments
+    svg
+        .selectAll("legend")
+        .data(valuesToShow)
+        .enter()
+        .append("line")
+        .attr('x1', function (d) {
+            return xCircle + size(d)
+        })
+        .attr('x2', xLabel)
+        .attr('y1', function (d) {
+            return yCircle - size(d)
+        })
+        .attr('y2', function (d) {
+            return yCircle - size(d)
+        })
+        .attr('stroke', 'black')
+        .style("stroke", "black")
+        .style("stroke-width", "0.8")
+        .style('stroke-dasharray', ('2,2'))
+
+    // Add legend: labels
+    svg
+        .selectAll("legend")
+        .data(valuesToShow)
+        .enter()
+        .append("text")
+        .attr('x', function (d) {
+            return xLabel + (d >= 10 ? 1 : 7)
+        })
+        .attr('y', function (d) {
+            return yCircle - size(d)
+        })
+        .text(function (d) {
+            return format1Dec(d)
+        }) // to display in Mt
+        .style("font-size", 10)
+        .attr('alignment-baseline', 'middle')
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////
+// LOADING DATA
+
+
+
+// EEZ BOUNDARIES 
+var eez_boundaries = new L.GeoJSON.AJAX([
+    "geofiles/eez_boundaries_v11.geojson"
+]);
+
+// PANES
+
+// map.createPane('labels')
+// map.getPane('labels').style.zIndex = 650; // a value of 650 will make the TileLayer with the labels show on top of markers but below pop-ups.
+// map.getPane('labels').style.pointerEvents = 'none'; // If a user clicks anywhere on the map, the web browser will assume she clicked on the labels tiles, and not on the GeoJSON or on the markers
+
+// var positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+//         attribution: '©OpenStreetMap, ©CartoDB'
+// }).addTo(map);
+
+// var positronLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+//         attribution: '©OpenStreetMap, ©CartoDB',
+//         pane: 'labels'
+// }).addTo(map);
+var areaStyle = {
+    color: "#19fa28",
+    weight: 5,
+    opacity: 0.65
+};
+
+var country_panes = new L.GeoJSON.AJAX(['geofiles/country_panes.json'], {
+    onEachFeature: function ( feature, layer ) {
+        layer.bindPopup(feature.properties.name)
+    }})//.addTo(map)
+    ;
+
+
+// Group both layers - EEZ boundaries and country panes
+
+var country_layers = L.layerGroup([eez_boundaries, country_panes]);
+
+
+
+
+////////////////////////////////////////
+// POWER PLANTS - NON EE
+var power_plants = new L.GeoJSON.AJAX(
+    ["geofiles/powerplants_global-nonEE.geojson"], {
+        pointToLayer: function(feature, latlng) {
+            return L.circleMarker(latlng, {
+                radius: 2,
+                color: powerplantsColors[feature.properties.primary_fuel],
+                /*fillColor: feature.properties.color,*/
+                fillColor: powerplantsColors[feature.properties.primary_fuel],
+                weight: 1,
+                opacity: 0.7,
+                fillOpacity: 0.4
+            }).bindPopup(addPowerPlantPopupHandler(feature));
         }
     }
+);
 
+
+// RENEWABLE PLANTS
+var renewables_plants = new L.GeoJSON.AJAX(
+    ["geofiles/powerplants_global-EE.geojson"], {
+        pointToLayer: function(feature, latlng) {
+            return L.circleMarker(latlng, {
+                radius: 2,
+                color: powerplantsColors[feature.properties.primary_fuel],
+                /*fillColor: feature.properties.color,*/
+                fillColor: powerplantsColors[feature.properties.primary_fuel],
+                weight: 1,
+                opacity: 0.7,
+                fillOpacity: 0.4
+            }).bindPopup(addPowerPlantPopupHandler(feature));
+        }
+    }
+);
 
 function addPowerPlantPopupHandler(feature) {
     // let nace = globalModel.emissions.categories.naceCategories.items
     if (feature.properties) {
-        let otherEmission = ''
-        //if (feature.properties.co2Amount) otherEmission += formatSI(feature.properties.co2Amount) + ' Megatonnes CO<sub>2</sub>/year'
-        //if (feature.properties.coAmount) otherEmission += formatSI(feature.properties.coAmount) + ' Megatonnes CO/year'
-        //let thisEmission = formatSI(feature.properties.MTonnes) + ' Megatonnes '
-        //if (feature.properties.type == 'CO, AIR') thisEmission += 'CO/year'
-        //else thisEmission += 'CO<sub>2</sub>/year'
-        //let color = translucidColor(nace[feature.properties.NACEMainEconomicActivityName].color)
         return `<h2>${feature.properties.name}</h2>
                         ${feature.properties.country_long} (${feature.properties.country})                    
                         <br>primary fuel: <i>${feature.properties.primary_fuel}</i><br>
-                        <a href="${feature.properties.url}" target="_blank">Source</a>`
-                        // <br>
-                        // <div class='popup-em' style='background: ${color}'>
-                        // Emissions:
-                        // <br>${thisEmission}` + (otherEmission != '' ? `<br />${otherEmission}` : '') + `</div>
-                        // <br><br><a href="${feature.properties.FacilityDetails}" target="_blank">More Facility details on E-PRTR page</a>`
-    
+                        <a href="${feature.properties.url}" target="_blank">Source</a>`;
     } else {
-        console.log(feature)
+        console.log(feature);
     }
-    }
-
-///////////////////////
-
-    /* Add the sidebar */
-    map.sidebar = L.control.sidebar('sidebar', {
-        position: 'left'
-    }).addTo(map)
-
-    /* On the map, scrolling should zoom */
-    map.on('focus', () => {
-        map.scrollWheelZoom.enable()
-    })
-    /* Outside of the map, scrolling should not zoom */
-    map.on('blur', () => {
-        map.scrollWheelZoom.disable()
-    })
-
 }
 
-/***********************/
-/* Einladen der Button-Informationen */
-let ethyleneButton = document.getElementById('ethylene-button'),
-propyleneButton = document.getElementById('propylene-button'),
-pvButton = document.getElementById('pv-button'),
-windButton = document.getElementById('wind-button'),
-waterButton = document.getElementById('water-button'),
-waterStress = document.getElementById('water-stress'),
-emitterButton = document.getElementById('emitter-button'),
-pipelineButton = document.getElementById('pipeline-button'),
-kenyaButton = document.getElementById('kenya-button'),
-protectedareaButton = document.getElementById('protectedarea-button'),
-eezButton = document.getElementById('eez-button')
-renewablesButton = document.getElementById('renewables-button')
-usaButton = document.getElementById('usa-button')
-powerplantsButton = document.getElementById('powerplants-button')
+// GHG USA - data from EPA
+// legend-toggability should be changed when  main_emissions.js and main.js are merged
+
+var GHG_USA = new L.GeoJSON.AJAX(["geofiles/GHG_USA.geojson"], {
+    pointToLayer: function(feature, latlng) {
+        return L.circleMarker(latlng, {
+            radius: Math.sqrt(feature.properties.MTonnes / 37.6) * 50, // statt 37.6 sollte dort die totalMax der Emissionen stehen - hier wurde nun der Wert der E-PRTR Json genommen.
+            color: "rgba(190, 85, 153, 0.6)",
+            /*fillColor: feature.properties.color,*/
+            fillColor: "rgba(190, 85, 153, 0.6)",
+            weight: 1,
+            opacity: 0.7,
+            fillOpacity: 0.4
+        }).bindPopup(addGHGUSAPopupHandler(feature));
+    }
+});
+
+function addGHGUSAPopupHandler(feature) {
+    // let nace = globalModel.emissions.categories.naceCategories.items
+    if (feature.properties) {
+        let thisEmission =
+            formatSI(feature.properties.MTonnes) + " Megatonnes CO/year";
+        //if (feature.properties.co2Amount) otherEmission += formatSI(feature.properties.co2Amount) + ' Megatonnes CO<sub>2</sub>/year'
+        //if (feature.properties.coAmount) otherEmission += formatSI(feature.properties.coAmount) + ' Megatonnes CO/year'
+        //let thisEmission = formatSI(feature.properties.MTonnes) + ' Megatonnes '
+        //let color = translucidColor(nace[feature.properties.NACEMainEconomicActivityName].color)
+        return `<h2>${feature.properties.FacilityName} (${feature.properties.CompanyName})</h2>
+                        ${feature.properties.CityName} (${feature.properties.StateName}, USA)                    
+                        <br>
+                        Emissions:
+                        <br>${thisEmission}</div>`;
+        // <br><br><a href="${feature.properties.FacilityDetails}" target="_blank">More Facility details on E-PRTR page</a>`
+    } else {
+        console.log(feature);
+    }
+}
+
+////////////////////////////////////////////////////////////////////////
+// Global CO2 emissions, grouped by country 
+
+// as polygon??
+
+
+// as points
+var CO2_global = new L.GeoJSON.AJAX(['geofiles/countries_CO2.geojson'], { 
+    pointToLayer: function(feature, latlng) {
+        return L.circleMarker(latlng, {
+            radius: Math.sqrt(feature.properties.MTonnes / 10065) * 50, // statt 37.6 sollte dort die totalMax der Emissionen stehen - hier wurde nun der Wert der E-PRTR Json genommen.
+            color: "black",
+            /*fillColor: feature.properties.color,*/
+            fillColor: "black",
+            weight: 1,
+            opacity: 0.7,
+            fillOpacity: 0.4
+        }).bindPopup(addCO2globalPopupHandler(feature));
+    }})//.addTo(map);s
+
+    // totalMax:
+
+    function addCO2globalPopupHandler(feature) {
+    // let nace = globalModel.emissions.categories.naceCategories.items
+    if (feature.properties) {
+        let thisEmission =
+            formatSI(feature.properties.MTonnes) + " Megatonnes CO<sub>2</sub>/year";
+        //if (feature.properties.co2Amount) otherEmission += formatSI(feature.properties.co2Amount) + ' Megatonnes CO<sub>2</sub>/year'
+        //if (feature.properties.coAmount) otherEmission += formatSI(feature.properties.coAmount) + ' Megatonnes CO/year'
+        //let thisEmission = formatSI(feature.properties.MTonnes) + ' Megatonnes '
+        //let color = translucidColor(nace[feature.properties.NACEMainEconomicActivityName].color)
+        return `<h2>${feature.properties.name} (${feature.properties.country})</h2>
+                        Emissions:
+                        <br>${thisEmission}</div>`;
+        // <br><br><a href="${feature.properties.FacilityDetails}" target="_blank">More Facility details on E-PRTR page</a>`
+    } else {
+        console.log(feature);
+    }
+}
+// ////////////////////////////
+// protected area layer
+
+var areaLayer = new L.GeoJSON.AJAX(['geofiles/protected-areas-africa.json'], { 
+     style: areaStyle,
+     onEachFeature: function (feature, layer ) {
+      layer.bindPopup(feature.properties.iso)
+    }
+})//.addTo(map)
+        
+  
+// water resources layer in africa
+
+var waterLayer = new L.GeoJSON.AJAX(['geofiles/water-africa.json'], { 
+    style: waterStyle,
+//     onEachFeature: function (feature, layer ) {
+//      layer.bindPopup(feature.properties.NAME_OF_WA)
+//    }
+})//.addTo(map)
+       
+
+
+ // ////////////////////////////
+// PIPELINES
+
 
 /*pollutantFilterCO2Button = document.getElementById('pollutant-filter-CO2-button'),
 pollutantFilterCOButton = document.getElementById('pollutant-filter-CO-button')
 /* Farbe der Pipelines*/
 function pipelineStyle(feature) {
     return {
-        color: feature.properties.type[1] == 54 ? "green" : "red", //Outline color
+        color: feature.properties.type[1] == 54 ? "green" : "red" //Outline color
         // 54 = propylene, 52 = ethylene
     };
 }
-var areaStyle = {
-    "color": "#19fa28",
-    "weight": 5,
-    "opacity": 0.65
-};
-
-var waterStyle = {
-    "color": "#19cdfa",
-    "weight": 5,
-    "opacity": 0.65
-};
 
 /* toggle-bility von Linien Daten */
 function togglePipeline(event, type) {
-    event.target.classList.toggle('is-info')
-    if (event.target.classList.contains('is-info')) {
-        fetch('geofiles/pipeline-' + type + '.json')
-            .then((response) => {
-                    return response.json()
+    event.target.classList.toggle("is-info");
+    if (event.target.classList.contains("is-info")) {
+        fetch("geofiles/pipeline-" + type + ".json")
+            .then(
+                response => {
+                    return response.json();
                 },
-                (reject) => {
-                    console.error(reject)
-                })
-            .then((geojson) => {
+                reject => {
+                    console.error(reject);
+                }
+            )
+            .then(geojson => {
                 globalPipelines[type] = L.geoJson(geojson, {
                     style: pipelineStyle
-                })
-                globalPipelines[type].addTo(map)
-            })
+                });
+                globalPipelines[type].addTo(map);
+            });
     } else {
-        map.removeLayer(globalPipelines[type])
-    }
-
-}
-ethyleneButton.addEventListener('click', (event) => {
-    togglePipeline(event, 'ethylene')
-})
-propyleneButton.addEventListener('click', event => {
-    togglePipeline(event, 'propylene')
-})
-// new
-pipelineButton.addEventListener('click', event => {
-    togglePipeline(event, 'total')
-})
-kenyaButton.addEventListener('click', event => {
-    togglePipeline(event, 'kenya')
-})
-usaButton.addEventListener('click', event => {
-    togglePipeline(event, 'usa')
-})
-
-
-/************************* */
-/* ISSUE 1 */
-
-function loadWaterlayers(data) {
-    return new Promise((resolve, reject) => {
-        //let nace = globalModel.emissions.categories.naceCategories.items
-        for (country in data) {
-            if (country != "stats") {
-                // for (f in data[country].features) {
-                //    data[country].features[f].properties.type = country
-                // }
-                waterLayer = L.geoJson(data[country], {
-                    // für mehr Länder 
-                    // waterLayer[country]=L.geoJson(data[country])
-                    // toggle event müsste auch angepasst werden, dass die Variable mit gegeben wird, welches Land getogglet werden soll,
-                    style: waterStyle
-                }).addTo(map)
-                   }
-        }
-        globalWater = data
-        resolve(data)
-        map.removeLayer(waterLayer)
-    })
-}
-
-waterButton.addEventListener('click', toggleWater(waterButton))
-
-function toggleWater(button) {
-    return function () {    
-        button.classList.toggle('is-info')
-        //if (button.classList.contains('is-info')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
-        //else button.style.background = '#fff'
-        //getFilteredTotals()
-        //toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
-        if(map.hasLayer(waterLayer)) {
-                map.removeLayer(waterLayer)
-            } else {
-                map.addLayer(waterLayer)
-        }
+        map.removeLayer(globalPipelines[type]);
     }
 }
 
-/************************* */
-/* ISSUE 1.1 - das selbe nun für protected areas */
-
-function loadAreaLayers(data) {
-    return new Promise((resolve, reject) => {
-        //let nace = globalModel.emissions.categories.naceCategories.items
-        //for (country in data) {
-          //  if (country != "stats") {
-                // for (f in data[country].features) {
-                //    data[country].features[f].properties.type = country
-                // }
-                areaLayer = L.geoJson(data, {
-                    // für mehr Länder 
-                    // waterLayer[country]=L.geoJson(data[country])
-                    // toggle event müsste auch angepasst werden, dass die Variable mit gegeben wird, welches Land getogglet werden soll,
-                    style: areaStyle
-                }).addTo(map)
-            //    }
-        //}
-        globalArea = data
-        resolve(data)
-        map.removeLayer(areaLayer)
-    })
-}
-
-protectedareaButton.addEventListener('click', toggleArea(protectedareaButton))
-
-function toggleArea(button) {
-    return function () {    
-        button.classList.toggle('is-success')
-        //if (button.classList.contains('is-info')) button.style.background = emissionColors[button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR"]
-        //else button.style.background = '#fff'
-        //getFilteredTotals()
-        //toggleFilterEmittersByPollutant(button.id.includes("CO2") ? "CO2, AIR" : "CO, AIR")
-        if(map.hasLayer(areaLayer)) {
-                map.removeLayer(areaLayer)
-            } else {
-                map.addLayer(areaLayer)
-        }
-    }
-}
-/************************* */
-/* old 1.1 */
-
-
-/*protectedareaButton.addEventListener('click', event => {
-    toggleArea(event, 'protected')
-})*/
-
-
-// function toggleArea(event, type) {
-//     event.target.classList.toggle('is-info')
-//     if (event.target.classList.contains('is-info')) {
-//         fetch(type + '-areas' + '.json')
-//             .then((response) => {
-//                     return response.json()
-//                 },
-//                 (reject) => {
-//                     console.error(reject)
-//                 })
-//             .then((geojson) => {
-//                 protectedArea[type] = L.geoJson(geojson, {
-//                     style: areaStyle
-//                 })
-//                 protectedArea[type].addTo(map)
-//             })
-//     } else {
-//         map.removeLayer(protectedArea[type])
-//     }
-
-// }
-
-
-/************************* */
-
+ // ////////////////////////////
+// 
 /* toggle-bility von Punktquellen Daten */
 function toggleEmitter(event, type) {
-    event.target.classList.toggle('is-info')
-    if (event.target.classList.contains('is-info')) {
-        fetch('data.json')
-            .then((response) => {
-                    return response.json()
+    event.target.classList.toggle("is-info");
+    if (event.target.classList.contains("is-info")) {
+        fetch("data.json")
+            .then(
+                response => {
+                    return response.json();
                 },
-                (reject) => {
-                    console.error(reject)
-                })
-            .then((geojson) => {
+                reject => {
+                    console.error(reject);
+                }
+            )
+            .then(geojson => {
                 markers[type] = L.geoJson(geojson, {
-                    pointToLayer: function (feature, latlng) {
+                    pointToLayer: function(feature, latlng) {
                         return L.circleMarker(latlng, {
                             radius: 30,
-                            color:  "#99d1e1",
+                            color: "#99d1e1",
                             /*fillColor: feature.properties.color,*/
                             fillColor: "#99d1e1",
                             weight: 1,
                             opacity: 0.7,
                             fillOpacity: 0.4
-                        }).bindPopup(addPopupHandler(feature))
+                        }).bindPopup(addPopupHandler(feature));
                     }
-                })
-                markers[type].addTo(map)
-            })
-    } else {
-        map.removeLayer(markers[type])
-    }
-}
-
-emitterButton.addEventListener('click', (event) => {
-    toggleEmitter(event, 'emitter')
-})
-
-
-/*zum einladen von geoJson-Linien Daten */
-/*function showLineLayer(data) {
-    map.lineLayer = L.geoJson(data, {
-        style: function (feature) {
-            return {
-                weight: feature.properties.diameter / 10,
-                color: feature.properties.color
-            }
-        },
-        onEachFeature: function (feature, layer) {
-            var popup = L.popup();
-            popup.setContent('text');
-            layer.on('click', function (e) {
-                L.popup()
-                    .setLatLng(e.latlng)
-                    .setContent(`<h2>${layer.feature.properties.name}</h2>
-            <i>${layer.feature.properties.ort}</i>
-            <br><b>Diameter:</b> ${layer.feature.properties.diameter}
-            <br><b>Flow:</b> ${layer.feature.properties.flow}`)
-                    .openOn(map);
+                });
+                markers[type].addTo(map);
             });
-        }
-    }).addTo(map)
-}
-*/
-/*zum einladen von geoJson-Punktquellen Daten */
-function showDataLayer(data) {
-    L.geoJson(data, {
-        pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, {
-                radius: 30,
-                color: feature.properties.color,
-                fillColor: feature.properties.color,
-                weight: 1,
-                opacity: 0.7,
-                fillOpacity: 0.4
-            }).bindPopup(addPopupHandler(feature))
-        }
-    }).addTo(map)
+    } else {
+        map.removeLayer(markers[type]);
+    }
 }
 
 function addPopupHandler(feature) {
     return `<h2>${feature.properties.FacilityName}</h2>
-        ${feature.properties.CountryName}`
+        ${feature.properties.CountryName}`;
 }
+
+
+////////////////////////////////////////////////////////////////////////////////////
+// BUTTONS
+
+pvButton.addEventListener("click", toggleLayer(pvButton, pvTileLayer));
+windButton.addEventListener("click", toggleLayer(windButton, windTileLayer));
+waterStressButton.addEventListener("click", toggleLayer(waterStressButton, waterTileLayer));
+waterButton.addEventListener("click", toggleLayer(waterButton, waterLayer));
+
+CO2globalButton.addEventListener("click", toggleLayerScale(CO2globalButton, CO2_global, scale_global));
+GHGUSAButton.addEventListener("click", toggleLayerScale(GHGUSAButton, GHG_USA, scale_legend ));
+
+powerplantsButton.addEventListener("click", toggleLayerLegend(powerplantsButton, power_plants, legend_power));
+emitterButton.addEventListener("click", event => {
+    toggleEmitter(event, "emitter");
+});
+
+protectedareaButton.addEventListener("click", toggleLayer(protectedareaButton, areaLayer));
+countryButton.addEventListener("click", toggleLayer(countryButton, country_layers));
+renewablesButton.addEventListener("click", toggleLayerLegend(renewablesButton, renewables_plants, legend_EE));
+
+ethyleneButton.addEventListener("click", event => {
+    togglePipeline(event, "ethylene");
+});
+propyleneButton.addEventListener("click", event => {
+    togglePipeline(event, "propylene");
+});
+pipelineButton.addEventListener("click", event => {
+    togglePipeline(event, "total");
+});
+kenyaButton.addEventListener("click", event => {
+    togglePipeline(event, "kenya");
+});
+usaButton.addEventListener("click", event => {
+    togglePipeline(event, "usa");
+});
+
 
 /***********************/
 /* Load data functions */
 /***********************/
 
 // keep reference to the markers for filtering
+var globalPipelines = {};
+var globalWater = {};
+var globalArea = {};
 
-var globalPipelines = {}
-var protectedArea = {}
-var globalWater = {}
-var waterLayer = {}
-var globalArea = {}
-var areaLayer = {}
-/*  */
-document.addEventListener('DOMContentLoaded', (event) => {
-    showMap()
-    fetch('geofiles/water-africa.json')
-    .then((response) => {
-            return response.json()
-        },
-        (reject) => {
-            console.error(reject)
-        })
-    .then(loadWaterlayers)
-    fetch('geofiles/protected-areas-africa.json')
-    .then((response) => {
-            return response.json()
-        },
-        (reject) => {
-            console.error(reject)
-        })
-    .then(loadAreaLayers) 
-})
+document.addEventListener("DOMContentLoaded", event => {
+    showMap();
+    createScale_global();
+});

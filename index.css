@@ -150,7 +150,23 @@ body .sidebar-tabs>li.active, .sidebar-tabs>ul>li.active {
   padding: 3px;
   font: 10px sans-serif;
  display: none;
-}
+ }
+
+#scale_global {
+  position: absolute;
+  background-color: white;
+  border-radius: 5px;
+  border: 1.5px solid rgba(0,0,0,.2);
+  z-index: 1000;
+  right: 10px;
+  bottom: 20px;
+  padding: 3px;
+  font: 10px sans-serif;
+ display: none;
+ margin-right: 150px;
+ }
+
+
 .legend path,
 .legend line {
   fill: none;
@@ -169,16 +185,29 @@ body .sidebar-tabs>li.active, .sidebar-tabs>ul>li.active {
 }
 
 
-.legend { 
+.legend_EE { 
   line-height: 18px;
   color:  #555;
-  margin-bottom: 150px !important;
+  
   background: white;
   border-radius: 5px;
   border: 1.5px solid rgba(0,0,0,.2);
-  margin-right: 30px !important;
+  margin-right: 10px !important;
+  padding: 3px;
+  bottom: 120px !important;
 }
-.legend i {
+.legend_power { 
+  line-height: 18px;
+  color:  #555;
+  
+  background: white;
+  border-radius: 5px;
+  border: 1.5px solid rgba(0,0,0,.2);
+  margin-right: 10px !important;
+  padding: 3px;
+  bottom: 120px !important;
+}
+.legend_EE i, .legend_power i {
   width: 18px;
   height: 18px;
   float: left;
