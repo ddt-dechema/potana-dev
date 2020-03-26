@@ -1,4 +1,4 @@
-let format1Dec, formatSI
+// let format1Dec, formatSI
 
 let globalModel = {
     emissions: {
