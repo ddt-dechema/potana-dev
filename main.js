@@ -1,6 +1,5 @@
 // define global variables
-let map
-let format1Dec, formatSI
+let map, format1Dec, formatSI;
 /***********************/
 /* Einladen der Button-Informationen */
 let ethyleneButton = document.getElementById("ethylene-button"),
@@ -17,8 +16,9 @@ let ethyleneButton = document.getElementById("ethylene-button"),
 	renewablesButton = document.getElementById("renewables-button"),
 	usaButton = document.getElementById("usa-button"),
 	powerplantsButton = document.getElementById("powerplants-button"),
-	GHGUSAButton = document.getElementById("GHG-USA-button")
-CO2globalButton = document.getElementById("CO2-global-button"),
+	GHGUSAButton = document.getElementById("GHG-USA-button"),
+    CO2globalButton = document.getElementById("CO2-global-button"),
+    CO2globalpanesButton = document.getElementById("CO2-global-panes-button"),
 	scale_global = document.getElementById("scale_global"),
 	scale_legend = document.getElementById("scale");
 
@@ -143,8 +143,8 @@ var pvTileLayer = L.tileLayer(mbUrl, {
 
 function loadGlobalDefs() {
 	// show all numbers with 1,000.00 format
-	format1Dec = d3.format(',.1f')
-	formatSI = d3.format(',.3f')
+	format1Dec = d3.format(',.1f');
+	formatSI = d3.format(',.3f');
 }
 
 function toggleLayer(button, layer) {
@@ -166,7 +166,7 @@ function toggleLayerScale(button, layer, scale) {
 			scale.style.display = "none";
 		} else {
 			map.addLayer(layer);
-			scale.style.display = "block"
+			scale.style.display = "block";
 		}
 	};
 }
@@ -219,23 +219,23 @@ legend_power.onAdd = function(map) {
 
 /* create scale for the index.html */
 let createScale_global = () => {
-	var height = 75
-	var width = 130
+	var height = 75;
+	var width = 130;
 	var svg = d3.select("#scale_global")
 		.append("svg")
 		.attr("width", width)
-		.attr("height", height)
+		.attr("height", height);
 
 	// The scale you use for bubble size
 	var size = d3.scaleSqrt()
 		.domain([0, 10000]) // What's in the data, min-max
 		.range([0, 50]) // Size in pixel
-
+    ;   
 	// Add legend: circles
-	var valuesToShow = [20, 1000, 5000] // [globalEmissionData.stats.totalMax / 100, globalEmissionData.stats.totalMax / 10, globalEmissionData.stats.totalMax]
-	var xCircle = 38
-	var xLabel = 100
-	var yCircle = 74
+	var valuesToShow = [20, 1000, 5000]; // [globalEmissionData.stats.totalMax / 100, globalEmissionData.stats.totalMax / 10, globalEmissionData.stats.totalMax]
+	var xCircle = 38;
+	var xLabel = 100;
+	var yCircle = 74;
 	svg
 		.selectAll("legend")
 		.data(valuesToShow)
@@ -243,16 +243,16 @@ let createScale_global = () => {
 		.append("circle")
 		.attr("cx", xCircle)
 		.attr("cy", function(d) {
-			return yCircle - size(d)
+			return yCircle - size(d);
 		})
 		.attr("r", function(d) {
-			return size(d)
+			return size(d);
 		})
 		.style("fill", "black") // changed by DDT from none to black
 		.style("stroke", "black")
 		.style("stroke-width", "0.8")
 		.style("fill-opacity", "0.4") // added by DDT
-		.attr("stroke", "black")
+		.attr("stroke", "black");
 
 	// Add legend: segments
 	svg
@@ -261,19 +261,19 @@ let createScale_global = () => {
 		.enter()
 		.append("line")
 		.attr('x1', function(d) {
-			return xCircle + size(d)
+			return xCircle + size(d);
 		})
 		.attr('x2', xLabel)
 		.attr('y1', function(d) {
-			return yCircle - size(d)
+			return yCircle - size(d);
 		})
 		.attr('y2', function(d) {
-			return yCircle - size(d)
+			return yCircle - size(d);
 		})
 		.attr('stroke', 'black')
 		.style("stroke", "black")
 		.style("stroke-width", "0.8")
-		.style('stroke-dasharray', ('2,2'))
+		.style('stroke-dasharray', ('2,2'));
 
 	// Add legend: labels
 	svg
@@ -282,17 +282,17 @@ let createScale_global = () => {
 		.enter()
 		.append("text")
 		.attr('x', function(d) {
-			return xLabel + (d >= 10 ? 1 : 7)
+			return xLabel + (d >= 10 ? 1 : 7);
 		})
 		.attr('y', function(d) {
-			return yCircle - size(d)
+			return yCircle - size(d);
 		})
 		.text(function(d) {
-			return format1Dec(d)
+			return format1Dec(d);
 		}) // to display in Mt
 		.style("font-size", 10)
-		.attr('alignment-baseline', 'middle')
-}
+		.attr('alignment-baseline', 'middle');
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -327,7 +327,7 @@ var areaStyle = {
 
 var country_panes = new L.GeoJSON.AJAX(['geofiles/country_panes.json'], {
 	onEachFeature: function(feature, layer) {
-		layer.bindPopup(feature.properties.name)
+		layer.bindPopup(feature.properties.name);
 	}
 }) //.addTo(map)
 ;
@@ -444,7 +444,7 @@ var CO2_global = new L.GeoJSON.AJAX(['geofiles/countries_CO2.geojson'], {
 			fillOpacity: 0.4
 		}).bindPopup(addCO2globalPopupHandler(feature));
 	}
-}) //.addTo(map);s
+}); //.addTo(map);s
 
 // totalMax:
 
@@ -465,15 +465,85 @@ function addCO2globalPopupHandler(feature) {
 		console.log(feature);
 	}
 }
+
+// as panes
+var CO2_global_panes = new L.GeoJSON.AJAX(['geofiles/countries_large_woAntartica_simplified0.025.json'], {
+    style: style,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup('<h2>' + feature.properties.ADMIN + 
+        ' (' + feature.properties.ISO_A3 + ')</h2><p>' + feature.properties.MTonnes + ' MTonnes CO<sub>2</sub>/year'),
+        layer.bindTooltip('<h2>' + feature.properties.ADMIN + 
+        ' (' + feature.properties.ISO_A3 + ')</h2><p>' + feature.properties.MTonnes + ' MTonnes CO<sub>2</sub>/year'),
+        // layer.on({  // originally taken from leaflet-documentation
+        // mouseover: highlightFeature,
+        // // mouseout: resetHighlight,
+        // //click: zoomToFeature
+        // });
+        layer.on('mouseover', highlightFeature);
+        layer.on('mouseout', function () {
+            CO2_global_panes.resetStyle(this);
+        });	}
+}) //.addTo(map)
+;
+
+function getColor(d) {
+    return d > 1000 ? '#800026' :
+           d > 500  ? '#BD0026' :
+           d > 200  ? '#E31A1C' :
+           d > 100  ? '#FC4E2A' :
+           d > 50   ? '#FD8D3C' :
+           d > 20   ? '#FEB24C' :
+           d > 10   ? '#FED976' :
+                      '#FFEDA0';
+}
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.MTonnes),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+}
+function highlightFeature(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+}
+
+//do not use this function, as one must always name the layer which is to be reset
+// function resetHighlight(e) {
+//     CO2_global_pane.resetStyle(this);
+// }
+
+function onEachFeature(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        click: zoomToFeature
+    });
+}
+
+
 // ////////////////////////////
 // protected area layer
 
 var areaLayer = new L.GeoJSON.AJAX(['geofiles/protected-areas-africa.json'], {
 	style: areaStyle,
 	onEachFeature: function(feature, layer) {
-		layer.bindPopup(feature.properties.iso)
+		layer.bindPopup(feature.properties.iso);
 	}
-}) //.addTo(map)
+}); //.addTo(map)
 
 
 // water resources layer in africa
@@ -483,7 +553,7 @@ var waterLayer = new L.GeoJSON.AJAX(['geofiles/water-africa.json'], {
 	//     onEachFeature: function (feature, layer ) {
 	//      layer.bindPopup(feature.properties.NAME_OF_WA)
 	//    }
-}) //.addTo(map)
+}); //.addTo(map)
 
 
 
@@ -576,6 +646,7 @@ waterStressButton.addEventListener("click", toggleLayer(waterStressButton, water
 waterButton.addEventListener("click", toggleLayer(waterButton, waterLayer));
 
 CO2globalButton.addEventListener("click", toggleLayerScale(CO2globalButton, CO2_global, scale_global));
+CO2globalpanesButton.addEventListener("click", toggleLayer(CO2globalpanesButton, CO2_global_panes));
 GHGUSAButton.addEventListener("click", toggleLayerScale(GHGUSAButton, GHG_USA, scale_legend));
 
 powerplantsButton.addEventListener("click", toggleLayerLegend(powerplantsButton, power_plants, legend_power));
@@ -610,8 +681,6 @@ usaButton.addEventListener("click", event => {
 
 // keep reference to the markers for filtering
 var globalPipelines = {};
-var globalWater = {};
-var globalArea = {};
 
 document.addEventListener("DOMContentLoaded", event => {
 	showMap();

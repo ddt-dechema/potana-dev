@@ -13,6 +13,7 @@ See live example: https://ddt-dechema.github.io/potana-dev/
 * Wind - Mean Wind Speed at 100 m https://globalwindatlas.info/
 * Exclusive Economic Zone - Maritime Boundaries v11 https://www.marineregions.org/downloads.php
 * Country borders - https://geojson-maps.ash.ms/
+the lines were simplified for faster loading with https://mapshaper.org/  
 * Country centers - https://developers.google.com/public-data/docs/canonical/countries_csv
 * Global CO<sub>2</sub> emissions - http://www.globalcarbonatlas.org/en/CO2-emissions
 
