@@ -505,6 +505,25 @@ function onEachFeature(feature, layer) {
 	});
 }
 
+var legend_co2panes = L.control({position: 'topright'});
+
+legend_co2panes.onAdd = function (map) {
+
+    var div_co2legend = L.DomUtil.create('div', 'info legend_co2panes'),
+        grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+        labels = [];
+		div_co2legend.innerHTML += 'Total Emissions (2018) in <br> Mt CO<sub>2</sub> per year<br>'
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div_co2legend.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+
+    return div_co2legend;
+};
+
+// legend_co2panes.addTo(map);
 
 // ////////////////////////////
 // protected area layer
@@ -615,7 +634,7 @@ waterStressButton.addEventListener("click", toggleLayer(waterStressButton, water
 waterButton.addEventListener("click", toggleLayer(waterButton, waterLayer));
 
 CO2globalButton.addEventListener("click", toggleLayerScale(CO2globalButton, CO2_global, scale_global));
-CO2globalpanesButton.addEventListener("click", toggleLayer(CO2globalpanesButton, CO2_global_panes));
+CO2globalpanesButton.addEventListener("click", toggleLayerLegend(CO2globalpanesButton, CO2_global_panes, legend_co2panes));
 GHGUSAButton.addEventListener("click", toggleLayerScale(GHGUSAButton, GHG_USA, scale_legend));
 
 powerplantsButton.addEventListener("click", toggleLayerLegend(powerplantsButton, power_plants, legend_power));
