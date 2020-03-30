@@ -104,7 +104,7 @@ function showMap() {
 
 
 	map.createPane('labels')
-	map.getPane('labels').style.zIndex = 650; // a value of 650 will make the TileLayer with the labels show on top of markers but below pop-ups.
+	map.getPane('labels').style.zIndex = 620; // a value of 650 will make the TileLayer with the labels show on top of markers but below pop-ups.
 	map.getPane('labels').style.pointerEvents = 'none'; // If a user clicks anywhere on the map, the web browser will assume she clicked on the labels tiles, and not on the GeoJSON or on the markers
 
 	var positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
