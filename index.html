@@ -8,13 +8,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
     <link href="vendor/leaflet.css" rel="stylesheet" />
+    <!-- <script src="https://unpkg.com/leaflet-sidebar-v2@3.0.0/js/leaflet-sidebar.min.js" defer></script> -->
+    <script src="vendor/leaflet-sidebar2.min.js" defer></script>
     <link rel="stylesheet" href="vendor/leaflet-sidebar2.min.css" />
     <!-- A CSS framework for easy styling -->
     <link href="vendor/bulma.min.css" rel="stylesheet" />
     <link href="index.css" rel="stylesheet">
 </head>
 
-<body>
+<body onLoad="document.getElementById('CO2-global-panes-button').click();">
     <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <!-- Symbol definition -->
@@ -529,7 +531,8 @@
     <script type="text/javascript" src="leaflet.ajax.js"></script>
 
     <script src="vendor/d3.min.js" defer></script>
-    <script src="vendor/leaflet-sidebar2.min.js" defer></script>
+    <!-- <script src="vendor/leaflet-sidebar2.min.js" defer></script> -->
+    
     <script src="vendor/colors.js"></script>
     <script src="main.js"></script>
     <script src="main_emissions.js"></script>

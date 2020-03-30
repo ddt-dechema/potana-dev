@@ -17,8 +17,8 @@ let ethyleneButton = document.getElementById("ethylene-button"),
 	usaButton = document.getElementById("usa-button"),
 	powerplantsButton = document.getElementById("powerplants-button"),
 	GHGUSAButton = document.getElementById("GHG-USA-button"),
-    CO2globalButton = document.getElementById("CO2-global-button"),
-    CO2globalpanesButton = document.getElementById("CO2-global-panes-button"),
+	CO2globalButton = document.getElementById("CO2-global-button"),
+	CO2globalpanesButton = document.getElementById("CO2-global-panes-button"),
 	scale_global = document.getElementById("scale_global"),
 	scale_legend = document.getElementById("scale");
 
@@ -78,20 +78,12 @@ function showMap() {
 		l.button.addEventListener("click", map.layout.toggle);
 	}
 
-	/***********************/
-	/* Implement Mapbox-Styles */
-	/***********************/
-
-
 	/* Add the zoom buttons */
 	L.control
 		.zoom({
 			position: "topright"
 		})
 		.addTo(map);
-
-
-
 
 	/* Add the sidebar */
 	map.sidebar = L.control
@@ -108,7 +100,27 @@ function showMap() {
 	map.on("blur", () => {
 		map.scrollWheelZoom.disable();
 	});
+
+
+
+	map.createPane('labels')
+	map.getPane('labels').style.zIndex = 650; // a value of 650 will make the TileLayer with the labels show on top of markers but below pop-ups.
+	map.getPane('labels').style.pointerEvents = 'none'; // If a user clicks anywhere on the map, the web browser will assume she clicked on the labels tiles, and not on the GeoJSON or on the markers
+
+	var positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+		attribution: '©OpenStreetMap, ©CartoDB'
+	}).addTo(map);
+
+	var positronLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+		attribution: '©OpenStreetMap, ©CartoDB',
+		pane: 'labels'
+	}).addTo(map);
 }
+
+/***********************/
+/* Implement Mapbox-Styles */
+/***********************/
+
 var mbAttr =
 	'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
 	'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -135,10 +147,7 @@ var pvTileLayer = L.tileLayer(mbUrl, {
 		attribution: mbAttr
 	});
 
-
-
-
-////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 // BASIC FUNCTIONS
 
 function loadGlobalDefs() {
@@ -230,7 +239,7 @@ let createScale_global = () => {
 	var size = d3.scaleSqrt()
 		.domain([0, 10000]) // What's in the data, min-max
 		.range([0, 50]) // Size in pixel
-    ;   
+	;
 	// Add legend: circles
 	var valuesToShow = [20, 1000, 5000]; // [globalEmissionData.stats.totalMax / 100, globalEmissionData.stats.totalMax / 10, globalEmissionData.stats.totalMax]
 	var xCircle = 38;
@@ -298,47 +307,20 @@ let createScale_global = () => {
 ////////////////////////////////////////////////////////////////////////////////////
 // LOADING DATA
 
-
-
 // EEZ BOUNDARIES 
 var eez_boundaries = new L.GeoJSON.AJAX([
 	"geofiles/eez_boundaries_v11.geojson"
 ]);
 
 // PANES
-
-// map.createPane('labels')
-// map.getPane('labels').style.zIndex = 650; // a value of 650 will make the TileLayer with the labels show on top of markers but below pop-ups.
-// map.getPane('labels').style.pointerEvents = 'none'; // If a user clicks anywhere on the map, the web browser will assume she clicked on the labels tiles, and not on the GeoJSON or on the markers
-
-// var positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
-//         attribution: '©OpenStreetMap, ©CartoDB'
-// }).addTo(map);
-
-// var positronLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
-//         attribution: '©OpenStreetMap, ©CartoDB',
-//         pane: 'labels'
-// }).addTo(map);
-var areaStyle = {
-	color: "#19fa28",
-	weight: 5,
-	opacity: 0.65
-};
-
 var country_panes = new L.GeoJSON.AJAX(['geofiles/country_panes.json'], {
 	onEachFeature: function(feature, layer) {
 		layer.bindPopup(feature.properties.name);
 	}
 }) //.addTo(map)
 ;
-
-
 // Group both layers - EEZ boundaries and country panes
-
 var country_layers = L.layerGroup([eez_boundaries, country_panes]);
-
-
-
 
 ////////////////////////////////////////
 // POWER PLANTS - NON EE
@@ -358,7 +340,7 @@ var power_plants = new L.GeoJSON.AJAX(
 	}
 );
 
-
+////////////////////////////////////////
 // RENEWABLE PLANTS
 var renewables_plants = new L.GeoJSON.AJAX(
 	["geofiles/powerplants_global-EE.geojson"], {
@@ -428,9 +410,6 @@ function addGHGUSAPopupHandler(feature) {
 ////////////////////////////////////////////////////////////////////////
 // Global CO2 emissions, grouped by country 
 
-// as polygon??
-
-
 // as points
 var CO2_global = new L.GeoJSON.AJAX(['geofiles/countries_CO2.geojson'], {
 	pointToLayer: function(feature, latlng) {
@@ -444,7 +423,7 @@ var CO2_global = new L.GeoJSON.AJAX(['geofiles/countries_CO2.geojson'], {
 			fillOpacity: 0.4
 		}).bindPopup(addCO2globalPopupHandler(feature));
 	}
-}); //.addTo(map);s
+}); //.addTo(map);
 
 // totalMax:
 
@@ -468,57 +447,49 @@ function addCO2globalPopupHandler(feature) {
 
 // as panes
 var CO2_global_panes = new L.GeoJSON.AJAX(['geofiles/countries_large_woAntartica_simplified0.025.json'], {
-    style: style,
+	style: style,
 	onEachFeature: function(feature, layer) {
-		layer.bindPopup('<h2>' + feature.properties.ADMIN + 
-        ' (' + feature.properties.ISO_A3 + ')</h2><p>' + feature.properties.MTonnes + ' MTonnes CO<sub>2</sub>/year'),
-        layer.bindTooltip('<h2>' + feature.properties.ADMIN + 
-        ' (' + feature.properties.ISO_A3 + ')</h2><p>' + feature.properties.MTonnes + ' MTonnes CO<sub>2</sub>/year'),
-        // layer.on({  // originally taken from leaflet-documentation
-        // mouseover: highlightFeature,
-        // // mouseout: resetHighlight,
-        // //click: zoomToFeature
-        // });
-        layer.on('mouseover', highlightFeature);
-        layer.on('mouseout', function () {
-            CO2_global_panes.resetStyle(this);
-        });	}
+		layer.bindPopup('<h2>' + feature.properties.ADMIN +
+				' (' + feature.properties.ISO_A3 + ')</h2><p>' + feature.properties.MTonnes + ' MTonnes CO<sub>2</sub>/year'),
+			layer.bindTooltip('<h2>' + feature.properties.ADMIN +
+				' (' + feature.properties.ISO_A3 + ')</h2><p>' + feature.properties.MTonnes + ' MTonnes CO<sub>2</sub>/year'),
+			// layer.on({  // originally taken from leaflet-documentation
+			// mouseover: highlightFeature,
+			// // mouseout: resetHighlight,
+			// //click: zoomToFeature
+			// });
+			layer.on('mouseover', highlightFeature);
+		layer.on('mouseout', function() {
+			CO2_global_panes.resetStyle(this);
+		});
+	}
 }) //.addTo(map)
 ;
 
-function getColor(d) {
-    return d > 1000 ? '#800026' :
-           d > 500  ? '#BD0026' :
-           d > 200  ? '#E31A1C' :
-           d > 100  ? '#FC4E2A' :
-           d > 50   ? '#FD8D3C' :
-           d > 20   ? '#FEB24C' :
-           d > 10   ? '#FED976' :
-                      '#FFEDA0';
-}
 function style(feature) {
-    return {
-        fillColor: getColor(feature.properties.MTonnes),
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7
-    };
+	return {
+		fillColor: getColor(feature.properties.MTonnes),
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7
+	};
 }
+
 function highlightFeature(e) {
-    var layer = e.target;
+	var layer = e.target;
 
-    layer.setStyle({
-        weight: 5,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
+	layer.setStyle({
+		weight: 5,
+		color: '#666',
+		dashArray: '',
+		fillOpacity: 0.7
+	});
 
-    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-        layer.bringToFront();
-    }
+	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+		layer.bringToFront();
+	}
 }
 
 //do not use this function, as one must always name the layer which is to be reset
@@ -527,11 +498,11 @@ function highlightFeature(e) {
 // }
 
 function onEachFeature(feature, layer) {
-    layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: zoomToFeature
-    });
+	layer.on({
+		mouseover: highlightFeature,
+		mouseout: resetHighlight,
+		click: zoomToFeature
+	});
 }
 
 
@@ -554,8 +525,6 @@ var waterLayer = new L.GeoJSON.AJAX(['geofiles/water-africa.json'], {
 	//      layer.bindPopup(feature.properties.NAME_OF_WA)
 	//    }
 }); //.addTo(map)
-
-
 
 // ////////////////////////////
 // PIPELINES
