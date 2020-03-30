@@ -8151,7 +8151,7 @@
       "properties": {
         "ADMIN": "Botswana",
         "ISO_A3": "BWA",
-        "ISO_A2": "BW"
+        "ISO_A2": "BW","MTonnes":6.6661
       }
     },
     {
@@ -8514,7 +8514,7 @@
       "properties": {
         "ADMIN": "Central African Republic",
         "ISO_A3": "CAF",
-        "ISO_A2": "CF"
+        "ISO_A2": "CF","MTonnes":0.3037
       }
     },
     {
@@ -13655,7 +13655,7 @@
       "properties": {
         "ADMIN": "Canada",
         "ISO_A3": "CAN",
-        "ISO_A2": "CA"
+        "ISO_A2": "CA","MTonnes":568.4122
       }
     },
     {
@@ -13754,7 +13754,7 @@
       "properties": {
         "ADMIN": "Switzerland",
         "ISO_A3": "CHE",
-        "ISO_A2": "CH"
+        "ISO_A2": "CH","MTonnes":36.8734
       }
     },
     {
@@ -15023,7 +15023,7 @@
       "properties": {
         "ADMIN": "Chile",
         "ISO_A3": "CHL",
-        "ISO_A2": "CL"
+        "ISO_A2": "CL","MTonnes":85.8766
       }
     },
     {
@@ -16984,7 +16984,7 @@
       "properties": {
         "ADMIN": "China",
         "ISO_A3": "CHN",
-        "ISO_A2": "CN"
+        "ISO_A2": "CN","MTonnes":10064.6857
       }
     },
     {
@@ -17235,7 +17235,7 @@
       "properties": {
         "ADMIN": "Ivory Coast",
         "ISO_A3": "CIV",
-        "ISO_A2": "CI"
+        "ISO_A2": "CI","MTonnes":8.3906
       }
     },
     {
@@ -17621,7 +17621,7 @@
       "properties": {
         "ADMIN": "Cameroon",
         "ISO_A3": "CMR",
-        "ISO_A2": "CM"
+        "ISO_A2": "CM","MTonnes":8.1372
       }
     },
     {
@@ -18401,7 +18401,7 @@
       "properties": {
         "ADMIN": "Democratic Republic of the Congo",
         "ISO_A3": "COD",
-        "ISO_A2": "CD"
+        "ISO_A2": "CD","MTonnes":3.2311
       }
     },
     {
@@ -18708,7 +18708,7 @@
       "properties": {
         "ADMIN": "Republic of Congo",
         "ISO_A3": "COG",
-        "ISO_A2": "CG"
+        "ISO_A2": "CG","MTonnes":2.0369
       }
     },
     {
@@ -19286,7 +19286,7 @@
       "properties": {
         "ADMIN": "Colombia",
         "ISO_A3": "COL",
-        "ISO_A2": "CO"
+        "ISO_A2": "CO","MTonnes":97.2694
       }
     },
     {
@@ -19325,7 +19325,7 @@
       "properties": {
         "ADMIN": "Comoros",
         "ISO_A3": "COM",
-        "ISO_A2": "KM"
+        "ISO_A2": "KM","MTonnes":0.21841
       }
     },
     {
@@ -19356,7 +19356,7 @@
       "properties": {
         "ADMIN": "Cape Verde",
         "ISO_A3": "CPV",
-        "ISO_A2": "CV"
+        "ISO_A2": "CV","MTonnes":0.62823
       }
     },
     {
@@ -19503,7 +19503,7 @@
       "properties": {
         "ADMIN": "Costa Rica",
         "ISO_A3": "CRI",
-        "ISO_A2": "CR"
+        "ISO_A2": "CR","MTonnes":8.0585
       }
     },
     {
@@ -19807,7 +19807,7 @@
       "properties": {
         "ADMIN": "Cuba",
         "ISO_A3": "CUB",
-        "ISO_A2": "CU"
+        "ISO_A2": "CU","MTonnes":28.6168
       }
     },
     {
@@ -19854,7 +19854,7 @@
       "properties": {
         "ADMIN": "Curaçao",
         "ISO_A3": "CUW",
-        "ISO_A2": "CW"
+        "ISO_A2": "CW","MTonnes":5.4821
       }
     },
     {
@@ -19893,7 +19893,7 @@
       "properties": {
         "ADMIN": "Cayman Islands",
         "ISO_A3": "CYM",
-        "ISO_A2": "KY"
+        "ISO_A2": "KY","MTonnes":0
       }
     },
     {
@@ -20007,7 +20007,7 @@
       "properties": {
         "ADMIN": "Cyprus",
         "ISO_A3": "CYP",
-        "ISO_A2": "CY"
+        "ISO_A2": "CY","MTonnes":7.4906
       }
     },
     {
@@ -20134,7 +20134,7 @@
       "properties": {
         "ADMIN": "Czech Republic",
         "ISO_A3": "CZE",
-        "ISO_A2": "CZ"
+        "ISO_A2": "CZ","MTonnes":105.9451
       }
     },
     {
@@ -20425,7 +20425,7 @@
       "properties": {
         "ADMIN": "Germany",
         "ISO_A3": "DEU",
-        "ISO_A2": "DE"
+        "ISO_A2": "DE","MTonnes":759.0019
       }
     },
     {
@@ -20496,7 +20496,7 @@
       "properties": {
         "ADMIN": "Djibouti",
         "ISO_A3": "DJI",
-        "ISO_A2": "DJ"
+        "ISO_A2": "DJ","MTonnes":0.6442
       }
     },
     {
@@ -20527,7 +20527,7 @@
       "properties": {
         "ADMIN": "Dominica",
         "ISO_A3": "DMA",
-        "ISO_A2": "DM"
+        "ISO_A2": "DM","MTonnes":0.18241
       }
     },
     {
@@ -20716,7 +20716,7 @@
       "properties": {
         "ADMIN": "Denmark",
         "ISO_A3": "DNK",
-        "ISO_A2": "DK"
+        "ISO_A2": "DK","MTonnes":34.8097
       }
     },
     {
@@ -20839,7 +20839,7 @@
       "properties": {
         "ADMIN": "Dominican Republic",
         "ISO_A3": "DOM",
-        "ISO_A2": "DO"
+        "ISO_A2": "DO","MTonnes":24.8573
       }
     },
     {
@@ -21282,7 +21282,7 @@
       "properties": {
         "ADMIN": "Algeria",
         "ISO_A3": "DZA",
-        "ISO_A2": "DZ"
+        "ISO_A2": "DZ","MTonnes":155.7253
       }
     },
     {
@@ -21535,7 +21535,7 @@
       "properties": {
         "ADMIN": "Ecuador",
         "ISO_A3": "ECU",
-        "ISO_A2": "EC"
+        "ISO_A2": "EC","MTonnes":41.9154
       }
     },
     {
@@ -21814,7 +21814,7 @@
       "properties": {
         "ADMIN": "Egypt",
         "ISO_A3": "EGY",
-        "ISO_A2": "EG"
+        "ISO_A2": "EG","MTonnes":238.8157
       }
     },
     {
@@ -22009,7 +22009,7 @@
       "properties": {
         "ADMIN": "Eritrea",
         "ISO_A3": "ERI",
-        "ISO_A2": "ER"
+        "ISO_A2": "ER","MTonnes":0.74011
       }
     },
     {
@@ -22485,7 +22485,7 @@
       "properties": {
         "ADMIN": "Spain",
         "ISO_A3": "ESP",
-        "ISO_A2": "ES"
+        "ISO_A2": "ES","MTonnes":268.2338
       }
     },
     {
@@ -22622,7 +22622,7 @@
       "properties": {
         "ADMIN": "Estonia",
         "ISO_A3": "EST",
-        "ISO_A2": "EE"
+        "ISO_A2": "EE","MTonnes":19.5591
       }
     },
     {
@@ -22953,7 +22953,7 @@
       "properties": {
         "ADMIN": "Ethiopia",
         "ISO_A3": "ETH",
-        "ISO_A2": "ET"
+        "ISO_A2": "ET","MTonnes":14.9355
       }
     },
     {
@@ -23240,7 +23240,7 @@
       "properties": {
         "ADMIN": "Finland",
         "ISO_A3": "FIN",
-        "ISO_A2": "FI"
+        "ISO_A2": "FI","MTonnes":46.9891
       }
     },
     {
@@ -23345,7 +23345,7 @@
       "properties": {
         "ADMIN": "Fiji",
         "ISO_A3": "FJI",
-        "ISO_A2": "FJ"
+        "ISO_A2": "FJ","MTonnes":2.1251
       }
     },
     {
@@ -23426,7 +23426,7 @@
       "properties": {
         "ADMIN": "Falkland Islands",
         "ISO_A3": "FLK",
-        "ISO_A2": "FK"
+        "ISO_A2": "FK","MTonnes":0
       }
     },
     {
@@ -23947,7 +23947,7 @@
       "properties": {
         "ADMIN": "France",
         "ISO_A3": "FRA",
-        "ISO_A2": "FR"
+        "ISO_A2": "FR","MTonnes":337.9134
       }
     },
     {
@@ -23982,7 +23982,7 @@
       "properties": {
         "ADMIN": "Faroe Islands",
         "ISO_A3": "FRO",
-        "ISO_A2": "FO"
+        "ISO_A2": "FO","MTonnes":0.63278
       }
     },
     {
@@ -24013,7 +24013,7 @@
       "properties": {
         "ADMIN": "Federated States of Micronesia",
         "ISO_A3": "FSM",
-        "ISO_A2": "FM"
+        "ISO_A2": "FM","MTonnes":0.15075
       }
     },
     {
@@ -24220,7 +24220,7 @@
       "properties": {
         "ADMIN": "Gabon",
         "ISO_A3": "GAB",
-        "ISO_A2": "GA"
+        "ISO_A2": "GA","MTonnes":5.3583
       }
     },
     {
@@ -24645,7 +24645,7 @@
       "properties": {
         "ADMIN": "United Kingdom",
         "ISO_A3": "GBR",
-        "ISO_A2": "GB"
+        "ISO_A2": "GB","MTonnes":379.0399
       }
     },
     {
@@ -24796,7 +24796,7 @@
       "properties": {
         "ADMIN": "Georgia",
         "ISO_A3": "GEO",
-        "ISO_A2": "GE"
+        "ISO_A2": "GE","MTonnes":10.5598
       }
     },
     {
@@ -24827,7 +24827,7 @@
       "properties": {
         "ADMIN": "Guernsey",
         "ISO_A3": "GGY",
-        "ISO_A2": "GG"
+        "ISO_A2": "GG","MTonnes":0
       }
     },
     {
@@ -24994,7 +24994,7 @@
       "properties": {
         "ADMIN": "Ghana",
         "ISO_A3": "GHA",
-        "ISO_A2": "GH"
+        "ISO_A2": "GH","MTonnes":18.2984
       }
     },
     {
@@ -25029,7 +25029,7 @@
       "properties": {
         "ADMIN": "Gibraltar",
         "ISO_A3": "GIB",
-        "ISO_A2": "GI"
+        "ISO_A2": "GI","MTonnes":0
       }
     },
     {
@@ -25296,7 +25296,7 @@
       "properties": {
         "ADMIN": "Guinea",
         "ISO_A3": "GIN",
-        "ISO_A2": "GN"
+        "ISO_A2": "GN","MTonnes":3.1793
       }
     },
     {
@@ -25371,7 +25371,7 @@
       "properties": {
         "ADMIN": "Gambia",
         "ISO_A3": "GMB",
-        "ISO_A2": "GM"
+        "ISO_A2": "GM","MTonnes":0.61063
       }
     },
     {
@@ -25450,7 +25450,7 @@
       "properties": {
         "ADMIN": "Guinea Bissau",
         "ISO_A3": "GNB",
-        "ISO_A2": "GW"
+        "ISO_A2": "GW","MTonnes":0.33958
       }
     },
     {
@@ -25523,7 +25523,7 @@
       "properties": {
         "ADMIN": "Equatorial Guinea",
         "ISO_A3": "GNQ",
-        "ISO_A2": "GQ"
+        "ISO_A2": "GQ","MTonnes":5.6874
       }
     },
     {
@@ -25884,7 +25884,7 @@
       "properties": {
         "ADMIN": "Greece",
         "ISO_A3": "GRC",
-        "ISO_A2": "GR"
+        "ISO_A2": "GR","MTonnes":73.8868
       }
     },
     {
@@ -25919,7 +25919,7 @@
       "properties": {
         "ADMIN": "Grenada",
         "ISO_A3": "GRD",
-        "ISO_A2": "GD"
+        "ISO_A2": "GD","MTonnes":0.27059
       }
     },
     {
@@ -27068,7 +27068,7 @@
       "properties": {
         "ADMIN": "Greenland",
         "ISO_A3": "GRL",
-        "ISO_A2": "GL"
+        "ISO_A2": "GL","MTonnes":0.51138
       }
     },
     {
@@ -27183,7 +27183,7 @@
       "properties": {
         "ADMIN": "Guatemala",
         "ISO_A3": "GTM",
-        "ISO_A2": "GT"
+        "ISO_A2": "GT","MTonnes":18.365
       }
     },
     {
@@ -27218,7 +27218,7 @@
       "properties": {
         "ADMIN": "Guam",
         "ISO_A3": "GUM",
-        "ISO_A2": "GU"
+        "ISO_A2": "GU","MTonnes":0
       }
     },
     {
@@ -27433,7 +27433,7 @@
       "properties": {
         "ADMIN": "Guyana",
         "ISO_A3": "GUY",
-        "ISO_A2": "GY"
+        "ISO_A2": "GY","MTonnes":2.4309
       }
     },
     {
@@ -27472,7 +27472,7 @@
       "properties": {
         "ADMIN": "Hong Kong S.A.R.",
         "ISO_A3": "HKG",
-        "ISO_A2": "HK"
+        "ISO_A2": "HK","MTonnes":43.1444
       }
     },
     {
@@ -27507,7 +27507,7 @@
       "properties": {
         "ADMIN": "Heard Island and McDonald Islands",
         "ISO_A3": "HMD",
-        "ISO_A2": "HM"
+        "ISO_A2": "HM","MTonnes":0
       }
     },
     {
@@ -27654,7 +27654,7 @@
       "properties": {
         "ADMIN": "Honduras",
         "ISO_A3": "HND",
-        "ISO_A2": "HN"
+        "ISO_A2": "HN","MTonnes":9.9155
       }
     },
     {
@@ -27841,7 +27841,7 @@
       "properties": {
         "ADMIN": "Croatia",
         "ISO_A3": "HRV",
-        "ISO_A2": "HR"
+        "ISO_A2": "HR","MTonnes":18.6001
       }
     },
     {
@@ -27952,7 +27952,7 @@
       "properties": {
         "ADMIN": "Haiti",
         "ISO_A3": "HTI",
-        "ISO_A2": "HT"
+        "ISO_A2": "HT","MTonnes":2.9992
       }
     },
     {
@@ -28095,7 +28095,7 @@
       "properties": {
         "ADMIN": "Hungary",
         "ISO_A3": "HUN",
-        "ISO_A2": "HU"
+        "ISO_A2": "HU","MTonnes":49.8568
       }
     },
     {
@@ -30964,7 +30964,7 @@
       "properties": {
         "ADMIN": "Indonesia",
         "ISO_A3": "IDN",
-        "ISO_A2": "ID"
+        "ISO_A2": "ID","MTonnes":614.9164
       }
     },
     {
@@ -30999,7 +30999,7 @@
       "properties": {
         "ADMIN": "Isle of Man",
         "ISO_A3": "IMN",
-        "ISO_A2": "IM"
+        "ISO_A2": "IM","MTonnes":0
       }
     },
     {
@@ -32184,7 +32184,7 @@
       "properties": {
         "ADMIN": "India",
         "ISO_A3": "IND",
-        "ISO_A2": "IN"
+        "ISO_A2": "IN","MTonnes":2654.101
       }
     },
     {
@@ -32254,7 +32254,7 @@
       "properties": {
         "ADMIN": "British Indian Ocean Territory",
         "ISO_A3": "IOT",
-        "ISO_A2": "IO"
+        "ISO_A2": "IO","MTonnes":0
       }
     },
     {
@@ -32393,7 +32393,7 @@
       "properties": {
         "ADMIN": "Ireland",
         "ISO_A3": "IRL",
-        "ISO_A2": "IE"
+        "ISO_A2": "IE","MTonnes":38.9311
       }
     },
     {
@@ -32940,7 +32940,7 @@
       "properties": {
         "ADMIN": "Iran",
         "ISO_A3": "IRN",
-        "ISO_A2": "IR"
+        "ISO_A2": "IR","MTonnes":720.4144
       }
     },
     {
@@ -33139,7 +33139,7 @@
       "properties": {
         "ADMIN": "Iraq",
         "ISO_A3": "IRQ",
-        "ISO_A2": "IQ"
+        "ISO_A2": "IQ","MTonnes":204.1749
       }
     },
     {
@@ -33314,7 +33314,7 @@
       "properties": {
         "ADMIN": "Iceland",
         "ISO_A3": "ISL",
-        "ISO_A2": "IS"
+        "ISO_A2": "IS","MTonnes":3.6306
       }
     },
     {
@@ -33425,7 +33425,7 @@
       "properties": {
         "ADMIN": "Israel",
         "ISO_A3": "ISR",
-        "ISO_A2": "IL"
+        "ISO_A2": "IL","MTonnes":64.2638
       }
     },
     {
@@ -33914,7 +33914,7 @@
       "properties": {
         "ADMIN": "Italy",
         "ISO_A3": "ITA",
-        "ISO_A2": "IT"
+        "ISO_A2": "IT","MTonnes":338.0267
       }
     },
     {
@@ -33981,7 +33981,7 @@
       "properties": {
         "ADMIN": "Jamaica",
         "ISO_A3": "JAM",
-        "ISO_A2": "JM"
+        "ISO_A2": "JM","MTonnes":8.1907
       }
     },
     {
@@ -34016,7 +34016,7 @@
       "properties": {
         "ADMIN": "Jersey",
         "ISO_A3": "JEY",
-        "ISO_A2": "JE"
+        "ISO_A2": "JE","MTonnes":0
       }
     },
     {
@@ -34119,7 +34119,7 @@
       "properties": {
         "ADMIN": "Jordan",
         "ISO_A3": "JOR",
-        "ISO_A2": "JO"
+        "ISO_A2": "JO","MTonnes":24.0864
       }
     },
     {
@@ -34832,7 +34832,7 @@
       "properties": {
         "ADMIN": "Japan",
         "ISO_A3": "JPN",
-        "ISO_A2": "JP"
+        "ISO_A2": "JP","MTonnes":1161.9811
       }
     },
     {
@@ -35751,7 +35751,7 @@
       "properties": {
         "ADMIN": "Kazakhstan",
         "ISO_A3": "KAZ",
-        "ISO_A2": "KZ"
+        "ISO_A2": "KZ","MTonnes":321.7868
       }
     },
     {
@@ -35990,7 +35990,7 @@
       "properties": {
         "ADMIN": "Kenya",
         "ISO_A3": "KEN",
-        "ISO_A2": "KE"
+        "ISO_A2": "KE","MTonnes":18.4862
       }
     },
     {
@@ -36245,7 +36245,7 @@
       "properties": {
         "ADMIN": "Kyrgyzstan",
         "ISO_A3": "KGZ",
-        "ISO_A2": "KG"
+        "ISO_A2": "KG","MTonnes":10.0812
       }
     },
     {
@@ -36448,7 +36448,7 @@
       "properties": {
         "ADMIN": "Cambodia",
         "ISO_A3": "KHM",
-        "ISO_A2": "KH"
+        "ISO_A2": "KH","MTonnes":10.3962
       }
     },
     {
@@ -36491,7 +36491,7 @@
       "properties": {
         "ADMIN": "Kiribati",
         "ISO_A3": "KIR",
-        "ISO_A2": "KI"
+        "ISO_A2": "KI","MTonnes":0.069576
       }
     },
     {
@@ -36526,7 +36526,7 @@
       "properties": {
         "ADMIN": "Saint Kitts and Nevis",
         "ISO_A3": "KNA",
-        "ISO_A2": "KN"
+        "ISO_A2": "KN","MTonnes":0.24197
       }
     },
     {
@@ -36675,7 +36675,7 @@
       "properties": {
         "ADMIN": "South Korea",
         "ISO_A3": "KOR",
-        "ISO_A2": "KR"
+        "ISO_A2": "KR","MTonnes":658.7877
       }
     },
     {
@@ -36793,7 +36793,7 @@
       "properties": {
         "ADMIN": "Kuwait",
         "ISO_A3": "KWT",
-        "ISO_A2": "KW"
+        "ISO_A2": "KW","MTonnes":98.0619
       }
     },
     {
@@ -37124,7 +37124,7 @@
       "properties": {
         "ADMIN": "Laos",
         "ISO_A3": "LAO",
-        "ISO_A2": "LA"
+        "ISO_A2": "LA","MTonnes":19.3198
       }
     },
     {
@@ -37179,7 +37179,7 @@
       "properties": {
         "ADMIN": "Lebanon",
         "ISO_A3": "LBN",
-        "ISO_A2": "LB"
+        "ISO_A2": "LB","MTonnes":24.2271
       }
     },
     {
@@ -37322,7 +37322,7 @@
       "properties": {
         "ADMIN": "Liberia",
         "ISO_A3": "LBR",
-        "ISO_A2": "LR"
+        "ISO_A2": "LR","MTonnes":1.5585
       }
     },
     {
@@ -37653,7 +37653,7 @@
       "properties": {
         "ADMIN": "Libya",
         "ISO_A3": "LBY",
-        "ISO_A2": "LY"
+        "ISO_A2": "LY","MTonnes":54.0157
       }
     },
     {
@@ -37684,7 +37684,7 @@
       "properties": {
         "ADMIN": "Saint Lucia",
         "ISO_A3": "LCA",
-        "ISO_A2": "LC"
+        "ISO_A2": "LC","MTonnes":0.42065
       }
     },
     {
@@ -37715,7 +37715,7 @@
       "properties": {
         "ADMIN": "Liechtenstein",
         "ISO_A3": "LIE",
-        "ISO_A2": "LI"
+        "ISO_A2": "LI","MTonnes":0.15271
       }
     },
     {
@@ -37802,7 +37802,7 @@
       "properties": {
         "ADMIN": "Sri Lanka",
         "ISO_A3": "LKA",
-        "ISO_A2": "LK"
+        "ISO_A2": "LK","MTonnes":23.3685
       }
     },
     {
@@ -37881,7 +37881,7 @@
       "properties": {
         "ADMIN": "Lesotho",
         "ISO_A3": "LSO",
-        "ISO_A2": "LS"
+        "ISO_A2": "LS","MTonnes":2.6593
       }
     },
     {
@@ -37980,7 +37980,7 @@
       "properties": {
         "ADMIN": "Lithuania",
         "ISO_A3": "LTU",
-        "ISO_A2": "LT"
+        "ISO_A2": "LT","MTonnes":13.5545
       }
     },
     {
@@ -38015,7 +38015,7 @@
       "properties": {
         "ADMIN": "Luxembourg",
         "ISO_A3": "LUX",
-        "ISO_A2": "LU"
+        "ISO_A2": "LU","MTonnes":9.5817
       }
     },
     {
@@ -38150,7 +38150,7 @@
       "properties": {
         "ADMIN": "Latvia",
         "ISO_A3": "LVA",
-        "ISO_A2": "LV"
+        "ISO_A2": "LV","MTonnes":7.1906
       }
     },
     {
@@ -38185,7 +38185,7 @@
       "properties": {
         "ADMIN": "Macao S.A.R",
         "ISO_A3": "MAC",
-        "ISO_A2": "MO"
+        "ISO_A2": "MO","MTonnes":2.0932
       }
     },
     {
@@ -38595,7 +38595,7 @@
       "properties": {
         "ADMIN": "Morocco",
         "ISO_A3": "MAR",
-        "ISO_A2": "MA"
+        "ISO_A2": "MA","MTonnes":66.3098
       }
     },
     {
@@ -38630,7 +38630,7 @@
       "properties": {
         "ADMIN": "Monaco",
         "ISO_A3": "MCO",
-        "ISO_A2": "MC"
+        "ISO_A2": "MC","MTonnes":0
       }
     },
     {
@@ -38721,7 +38721,7 @@
       "properties": {
         "ADMIN": "Moldova",
         "ISO_A3": "MDA",
-        "ISO_A2": "MD"
+        "ISO_A2": "MD","MTonnes":5.1272
       }
     },
     {
@@ -39024,7 +39024,7 @@
       "properties": {
         "ADMIN": "Madagascar",
         "ISO_A3": "MDG",
-        "ISO_A2": "MG"
+        "ISO_A2": "MG","MTonnes":4.2813
       }
     },
     {
@@ -39059,7 +39059,7 @@
       "properties": {
         "ADMIN": "Maldives",
         "ISO_A3": "MDV",
-        "ISO_A2": "MV"
+        "ISO_A2": "MV","MTonnes":1.5229
       }
     },
     {
@@ -39928,7 +39928,7 @@
       "properties": {
         "ADMIN": "Mexico",
         "ISO_A3": "MEX",
-        "ISO_A2": "MX"
+        "ISO_A2": "MX","MTonnes":477.3222
       }
     },
     {
@@ -39963,7 +39963,7 @@
       "properties": {
         "ADMIN": "Marshall Islands",
         "ISO_A3": "MHL",
-        "ISO_A2": "MH"
+        "ISO_A2": "MH","MTonnes":0.15075
       }
     },
     {
@@ -40034,7 +40034,7 @@
       "properties": {
         "ADMIN": "Macedonia",
         "ISO_A3": "MKD",
-        "ISO_A2": "MK"
+        "ISO_A2": "MK","MTonnes":7.2684
       }
     },
     {
@@ -40449,7 +40449,7 @@
       "properties": {
         "ADMIN": "Mali",
         "ISO_A3": "MLI",
-        "ISO_A2": "ML"
+        "ISO_A2": "ML","MTonnes":3.5602
       }
     },
     {
@@ -40484,7 +40484,7 @@
       "properties": {
         "ADMIN": "Malta",
         "ISO_A3": "MLT",
-        "ISO_A2": "MT"
+        "ISO_A2": "MT","MTonnes":1.5834
       }
     },
     {
@@ -40991,7 +40991,7 @@
       "properties": {
         "ADMIN": "Myanmar",
         "ISO_A3": "MMR",
-        "ISO_A2": "MM"
+        "ISO_A2": "MM","MTonnes":26.3346
       }
     },
     {
@@ -41062,7 +41062,7 @@
       "properties": {
         "ADMIN": "Montenegro",
         "ISO_A3": "MNE",
-        "ISO_A2": "ME"
+        "ISO_A2": "ME","MTonnes":2.0084
       }
     },
     {
@@ -41601,7 +41601,7 @@
       "properties": {
         "ADMIN": "Mongolia",
         "ISO_A3": "MNG",
-        "ISO_A2": "MN"
+        "ISO_A2": "MN","MTonnes":28.1127
       }
     },
     {
@@ -41632,7 +41632,7 @@
       "properties": {
         "ADMIN": "Northern Mariana Islands",
         "ISO_A3": "MNP",
-        "ISO_A2": "MP"
+        "ISO_A2": "MP","MTonnes":0
       }
     },
     {
@@ -42107,7 +42107,7 @@
       "properties": {
         "ADMIN": "Mozambique",
         "ISO_A3": "MOZ",
-        "ISO_A2": "MZ"
+        "ISO_A2": "MZ","MTonnes":8.286
       }
     },
     {
@@ -42350,7 +42350,7 @@
       "properties": {
         "ADMIN": "Mauritania",
         "ISO_A3": "MRT",
-        "ISO_A2": "MR"
+        "ISO_A2": "MR","MTonnes":2.6615
       }
     },
     {
@@ -42381,7 +42381,7 @@
       "properties": {
         "ADMIN": "Montserrat",
         "ISO_A3": "MSR",
-        "ISO_A2": "MS"
+        "ISO_A2": "MS","MTonnes":0.029781
       }
     },
     {
@@ -42416,7 +42416,7 @@
       "properties": {
         "ADMIN": "Mauritius",
         "ISO_A3": "MUS",
-        "ISO_A2": "MU"
+        "ISO_A2": "MU","MTonnes":4.855
       }
     },
     {
@@ -42615,7 +42615,7 @@
       "properties": {
         "ADMIN": "Malawi",
         "ISO_A3": "MWI",
-        "ISO_A2": "MW"
+        "ISO_A2": "MW","MTonnes":1.3809
       }
     },
     {
@@ -43076,7 +43076,7 @@
       "properties": {
         "ADMIN": "Malaysia",
         "ISO_A3": "MYS",
-        "ISO_A2": "MY"
+        "ISO_A2": "MY","MTonnes":254.5265
       }
     },
     {
@@ -43355,7 +43355,7 @@
       "properties": {
         "ADMIN": "Namibia",
         "ISO_A3": "NAM",
-        "ISO_A2": "NA"
+        "ISO_A2": "NA","MTonnes":4.2724
       }
     },
     {
@@ -43460,7 +43460,7 @@
       "properties": {
         "ADMIN": "New Caledonia",
         "ISO_A3": "NCL",
-        "ISO_A2": "NC"
+        "ISO_A2": "NC","MTonnes":5.7565
       }
     },
     {
@@ -43791,7 +43791,7 @@
       "properties": {
         "ADMIN": "Niger",
         "ISO_A3": "NER",
-        "ISO_A2": "NE"
+        "ISO_A2": "NE","MTonnes":2.3191
       }
     },
     {
@@ -43826,7 +43826,7 @@
       "properties": {
         "ADMIN": "Norfolk Island",
         "ISO_A3": "NFK",
-        "ISO_A2": "NF"
+        "ISO_A2": "NF","MTonnes":0
       }
     },
     {
@@ -44185,7 +44185,7 @@
       "properties": {
         "ADMIN": "Nigeria",
         "ISO_A3": "NGA",
-        "ISO_A2": "NG"
+        "ISO_A2": "NG","MTonnes":127.2942
       }
     },
     {
@@ -44344,7 +44344,7 @@
       "properties": {
         "ADMIN": "Nicaragua",
         "ISO_A3": "NIC",
-        "ISO_A2": "NI"
+        "ISO_A2": "NI","MTonnes":5.5714
       }
     },
     {
@@ -44379,7 +44379,7 @@
       "properties": {
         "ADMIN": "Niue",
         "ISO_A3": "NIU",
-        "ISO_A2": "NU"
+        "ISO_A2": "NU","MTonnes":0.0077307
       }
     },
     {
@@ -44496,7 +44496,7 @@
       "properties": {
         "ADMIN": "Netherlands",
         "ISO_A3": "NLD",
-        "ISO_A2": "NL"
+        "ISO_A2": "NL","MTonnes":161.624
       }
     },
     {
@@ -45261,7 +45261,7 @@
       "properties": {
         "ADMIN": "Norway",
         "ISO_A3": "NOR",
-        "ISO_A2": "NO"
+        "ISO_A2": "NO","MTonnes":44.3263
       }
     },
     {
@@ -45476,7 +45476,7 @@
       "properties": {
         "ADMIN": "Nepal",
         "ISO_A3": "NPL",
-        "ISO_A2": "NP"
+        "ISO_A2": "NP","MTonnes":9.4478
       }
     },
     {
@@ -45511,7 +45511,7 @@
       "properties": {
         "ADMIN": "Nauru",
         "ISO_A3": "NRU",
-        "ISO_A2": "NR"
+        "ISO_A2": "NR","MTonnes":0.050249
       }
     },
     {
@@ -45964,7 +45964,7 @@
       "properties": {
         "ADMIN": "New Zealand",
         "ISO_A3": "NZL",
-        "ISO_A2": "NZ"
+        "ISO_A2": "NZ","MTonnes":34.7658
       }
     },
     {
@@ -46189,7 +46189,7 @@
       "properties": {
         "ADMIN": "Oman",
         "ISO_A3": "OMN",
-        "ISO_A2": "OM"
+        "ISO_A2": "OM","MTonnes":67.2911
       }
     },
     {
@@ -46700,7 +46700,7 @@
       "properties": {
         "ADMIN": "Pakistan",
         "ISO_A3": "PAK",
-        "ISO_A2": "PK"
+        "ISO_A2": "PK","MTonnes":223.5404
       }
     },
     {
@@ -46899,7 +46899,7 @@
       "properties": {
         "ADMIN": "Panama",
         "ISO_A3": "PAN",
-        "ISO_A2": "PA"
+        "ISO_A2": "PA","MTonnes":10.9382
       }
     },
     {
@@ -46934,7 +46934,7 @@
       "properties": {
         "ADMIN": "Pitcairn Islands",
         "ISO_A3": "PCN",
-        "ISO_A2": "PN"
+        "ISO_A2": "PN","MTonnes":0
       }
     },
     {
@@ -47441,7 +47441,7 @@
       "properties": {
         "ADMIN": "Peru",
         "ISO_A3": "PER",
-        "ISO_A2": "PE"
+        "ISO_A2": "PE","MTonnes":55.5314
       }
     },
     {
@@ -48357,7 +48357,7 @@
       "properties": {
         "ADMIN": "Philippines",
         "ISO_A3": "PHL",
-        "ISO_A2": "PH"
+        "ISO_A2": "PH","MTonnes":135.0691
       }
     },
     {
@@ -48392,7 +48392,7 @@
       "properties": {
         "ADMIN": "Palau",
         "ISO_A3": "PLW",
-        "ISO_A2": "PW"
+        "ISO_A2": "PW","MTonnes":0.23579
       }
     },
     {
@@ -48917,7 +48917,7 @@
       "properties": {
         "ADMIN": "Papua New Guinea",
         "ISO_A3": "PNG",
-        "ISO_A2": "PG"
+        "ISO_A2": "PG","MTonnes":7.8379
       }
     },
     {
@@ -49156,7 +49156,7 @@
       "properties": {
         "ADMIN": "Poland",
         "ISO_A3": "POL",
-        "ISO_A2": "PL"
+        "ISO_A2": "PL","MTonnes":343.538
       }
     },
     {
@@ -49203,7 +49203,7 @@
       "properties": {
         "ADMIN": "Puerto Rico",
         "ISO_A3": "PRI",
-        "ISO_A2": "PR"
+        "ISO_A2": "PR","MTonnes":0
       }
     },
     {
@@ -49414,7 +49414,7 @@
       "properties": {
         "ADMIN": "North Korea",
         "ISO_A3": "PRK",
-        "ISO_A2": "KP"
+        "ISO_A2": "KP","MTonnes":30.2186
       }
     },
     {
@@ -49573,7 +49573,7 @@
       "properties": {
         "ADMIN": "Portugal",
         "ISO_A3": "PRT",
-        "ISO_A2": "PT"
+        "ISO_A2": "PT","MTonnes":50.9254
       }
     },
     {
@@ -49804,7 +49804,7 @@
       "properties": {
         "ADMIN": "Paraguay",
         "ISO_A3": "PRY",
-        "ISO_A2": "PY"
+        "ISO_A2": "PY","MTonnes":7.4312
       }
     },
     {
@@ -49881,7 +49881,7 @@
       "properties": {
         "ADMIN": "Palestine",
         "ISO_A3": "PSE",
-        "ISO_A2": "PS"
+        "ISO_A2": "PS","MTonnes":3.2095
       }
     },
     {
@@ -49916,7 +49916,7 @@
       "properties": {
         "ADMIN": "French Polynesia",
         "ISO_A3": "PYF",
-        "ISO_A2": "PF"
+        "ISO_A2": "PF","MTonnes":0.81172
       }
     },
     {
@@ -49971,7 +49971,7 @@
       "properties": {
         "ADMIN": "Qatar",
         "ISO_A3": "QAT",
-        "ISO_A2": "QA"
+        "ISO_A2": "QA","MTonnes":105.6229
       }
     },
     {
@@ -50178,7 +50178,7 @@
       "properties": {
         "ADMIN": "Romania",
         "ISO_A3": "ROU",
-        "ISO_A2": "RO"
+        "ISO_A2": "RO","MTonnes":74.0607
       }
     },
     {
@@ -54983,7 +54983,7 @@
       "properties": {
         "ADMIN": "Russia",
         "ISO_A3": "RUS",
-        "ISO_A2": "RU"
+        "ISO_A2": "RU","MTonnes":1710.6882
       }
     },
     {
@@ -55066,7 +55066,7 @@
       "properties": {
         "ADMIN": "Rwanda",
         "ISO_A3": "RWA",
-        "ISO_A2": "RW"
+        "ISO_A2": "RW","MTonnes":1.1224
       }
     },
     {
@@ -55229,7 +55229,7 @@
       "properties": {
         "ADMIN": "Western Sahara",
         "ISO_A3": "ESH",
-        "ISO_A2": "EH"
+        "ISO_A2": "EH","MTonnes":0
       }
     },
     {
@@ -55592,7 +55592,7 @@
       "properties": {
         "ADMIN": "Saudi Arabia",
         "ISO_A3": "SAU",
-        "ISO_A2": "SA"
+        "ISO_A2": "SA","MTonnes":621.3021
       }
     },
     {
@@ -56038,7 +56038,7 @@
       "properties": {
         "ADMIN": "Sudan",
         "ISO_A3": "SDN",
-        "ISO_A2": "SD"
+        "ISO_A2": "SD","MTonnes":21.0461
       }
     },
     {
@@ -56397,7 +56397,7 @@
       "properties": {
         "ADMIN": "South Sudan",
         "ISO_A3": "SSD",
-        "ISO_A2": "SS"
+        "ISO_A2": "SS","MTonnes":1.8704
       }
     },
     {
@@ -56596,7 +56596,7 @@
       "properties": {
         "ADMIN": "Senegal",
         "ISO_A3": "SEN",
-        "ISO_A2": "SN"
+        "ISO_A2": "SN","MTonnes":11.7109
       }
     },
     {
@@ -56662,7 +56662,7 @@
       "properties": {
         "ADMIN": "Singapore",
         "ISO_A3": "SGP",
-        "ISO_A2": "SG"
+        "ISO_A2": "SG","MTonnes":40.8616
       }
     },
     {
@@ -56709,7 +56709,7 @@
       "properties": {
         "ADMIN": "South Georgia and South Sandwich Islands",
         "ISO_A3": "SGS",
-        "ISO_A2": "GS"
+        "ISO_A2": "GS","MTonnes":0
       }
     },
     {
@@ -56744,7 +56744,7 @@
       "properties": {
         "ADMIN": "Saint Helena",
         "ISO_A3": "SHN",
-        "ISO_A2": "SH"
+        "ISO_A2": "SH","MTonnes":0.011168
       }
     },
     {
@@ -56925,7 +56925,7 @@
       "properties": {
         "ADMIN": "Solomon Islands",
         "ISO_A3": "SLB",
-        "ISO_A2": "SB"
+        "ISO_A2": "SB","MTonnes":0.17781
       }
     },
     {
@@ -57032,7 +57032,7 @@
       "properties": {
         "ADMIN": "Sierra Leone",
         "ISO_A3": "SLE",
-        "ISO_A2": "SL"
+        "ISO_A2": "SL","MTonnes":1.0782
       }
     },
     {
@@ -57099,7 +57099,7 @@
       "properties": {
         "ADMIN": "El Salvador",
         "ISO_A3": "SLV",
-        "ISO_A2": "SV"
+        "ISO_A2": "SV","MTonnes":7.1302
       }
     },
     {
@@ -57134,7 +57134,7 @@
       "properties": {
         "ADMIN": "San Marino",
         "ISO_A3": "SMR",
-        "ISO_A2": "SM"
+        "ISO_A2": "SM","MTonnes":0
       }
     },
     {
@@ -57456,7 +57456,7 @@
       "properties": {
         "ADMIN": "Somalia",
         "ISO_A3": "SOM",
-        "ISO_A2": "SO"
+        "ISO_A2": "SO","MTonnes":0.69893
       }
     },
     {
@@ -57503,7 +57503,7 @@
       "properties": {
         "ADMIN": "Saint Pierre and Miquelon",
         "ISO_A3": "SPM",
-        "ISO_A2": "PM"
+        "ISO_A2": "PM","MTonnes":0.078175
       }
     },
     {
@@ -57654,7 +57654,7 @@
       "properties": {
         "ADMIN": "Republic of Serbia",
         "ISO_A3": "SRB",
-        "ISO_A2": "RS"
+        "ISO_A2": "RS","MTonnes":45.4441
       }
     },
     {
@@ -57689,7 +57689,7 @@
       "properties": {
         "ADMIN": "Sao Tome and Principe",
         "ISO_A3": "STP",
-        "ISO_A2": "ST"
+        "ISO_A2": "ST","MTonnes":0.12373
       }
     },
     {
@@ -57840,7 +57840,7 @@
       "properties": {
         "ADMIN": "Suriname",
         "ISO_A3": "SUR",
-        "ISO_A2": "SR"
+        "ISO_A2": "SR","MTonnes":1.7868
       }
     },
     {
@@ -57971,7 +57971,7 @@
       "properties": {
         "ADMIN": "Slovakia",
         "ISO_A3": "SVK",
-        "ISO_A2": "SK"
+        "ISO_A2": "SK","MTonnes":36.0283
       }
     },
     {
@@ -58050,7 +58050,7 @@
       "properties": {
         "ADMIN": "Slovenia",
         "ISO_A3": "SVN",
-        "ISO_A2": "SI"
+        "ISO_A2": "SI","MTonnes":14.4318
       }
     },
     {
@@ -58439,7 +58439,7 @@
       "properties": {
         "ADMIN": "Sweden",
         "ISO_A3": "SWE",
-        "ISO_A2": "SE"
+        "ISO_A2": "SE","MTonnes":41.0269
       }
     },
     {
@@ -58502,7 +58502,7 @@
       "properties": {
         "ADMIN": "Swaziland",
         "ISO_A3": "SWZ",
-        "ISO_A2": "SZ"
+        "ISO_A2": "SZ","MTonnes":1.1987
       }
     },
     {
@@ -58568,7 +58568,7 @@
       "properties": {
         "ADMIN": "Seychelles",
         "ISO_A3": "SYC",
-        "ISO_A2": "SC"
+        "ISO_A2": "SC","MTonnes":0.65524
       }
     },
     {
@@ -58731,7 +58731,7 @@
       "properties": {
         "ADMIN": "Syria",
         "ISO_A3": "SYR",
-        "ISO_A2": "SY"
+        "ISO_A2": "SY","MTonnes":28.2768
       }
     },
     {
@@ -58766,7 +58766,7 @@
       "properties": {
         "ADMIN": "Turks and Caicos Islands",
         "ISO_A3": "TCA",
-        "ISO_A2": "TC"
+        "ISO_A2": "TC","MTonnes":0.21963
       }
     },
     {
@@ -59093,7 +59093,7 @@
       "properties": {
         "ADMIN": "Chad",
         "ISO_A3": "TCD",
-        "ISO_A2": "TD"
+        "ISO_A2": "TD","MTonnes":1.0143
       }
     },
     {
@@ -59212,7 +59212,7 @@
       "properties": {
         "ADMIN": "Togo",
         "ISO_A3": "TGO",
-        "ISO_A2": "TG"
+        "ISO_A2": "TG","MTonnes":3.418
       }
     },
     {
@@ -59703,7 +59703,7 @@
       "properties": {
         "ADMIN": "Thailand",
         "ISO_A3": "THA",
-        "ISO_A2": "TH"
+        "ISO_A2": "TH","MTonnes":288.2292
       }
     },
     {
@@ -60002,7 +60002,7 @@
       "properties": {
         "ADMIN": "Tajikistan",
         "ISO_A3": "TJK",
-        "ISO_A2": "TJ"
+        "ISO_A2": "TJ","MTonnes":5.4846
       }
     },
     {
@@ -60361,7 +60361,7 @@
       "properties": {
         "ADMIN": "Turkmenistan",
         "ISO_A3": "TKM",
-        "ISO_A2": "TM"
+        "ISO_A2": "TM","MTonnes":79.8937
       }
     },
     {
@@ -60446,7 +60446,7 @@
       "properties": {
         "ADMIN": "East Timor",
         "ISO_A3": "TLS",
-        "ISO_A2": "TL"
+        "ISO_A2": "TL","MTonnes":0.52182
       }
     },
     {
@@ -60485,7 +60485,7 @@
       "properties": {
         "ADMIN": "Tonga",
         "ISO_A3": "TON",
-        "ISO_A2": "TO"
+        "ISO_A2": "TO","MTonnes":0.13529
       }
     },
     {
@@ -60532,7 +60532,7 @@
       "properties": {
         "ADMIN": "Trinidad and Tobago",
         "ISO_A3": "TTO",
-        "ISO_A2": "TT"
+        "ISO_A2": "TT","MTonnes":43.4771
       }
     },
     {
@@ -60719,7 +60719,7 @@
       "properties": {
         "ADMIN": "Tunisia",
         "ISO_A3": "TUN",
-        "ISO_A2": "TN"
+        "ISO_A2": "TN","MTonnes":31.5766
       }
     },
     {
@@ -61244,7 +61244,7 @@
       "properties": {
         "ADMIN": "Turkey",
         "ISO_A3": "TUR",
-        "ISO_A2": "TR"
+        "ISO_A2": "TR","MTonnes":428.1796
       }
     },
     {
@@ -61279,7 +61279,7 @@
       "properties": {
         "ADMIN": "Tuvalu",
         "ISO_A3": "TUV",
-        "ISO_A2": "TV"
+        "ISO_A2": "TV","MTonnes":0.011596
       }
     },
     {
@@ -61350,7 +61350,7 @@
       "properties": {
         "ADMIN": "Taiwan",
         "ISO_A3": "TWN",
-        "ISO_A2": "TW"
+        "ISO_A2": "TW","MTonnes":274.643
       }
     },
     {
@@ -61675,7 +61675,7 @@
       "properties": {
         "ADMIN": "United Republic of Tanzania",
         "ISO_A3": "TZA",
-        "ISO_A2": "TZ"
+        "ISO_A2": "TZ","MTonnes":12.4989
       }
     },
     {
@@ -61862,7 +61862,7 @@
       "properties": {
         "ADMIN": "Uganda",
         "ISO_A3": "UGA",
-        "ISO_A2": "UG"
+        "ISO_A2": "UG","MTonnes":5.771
       }
     },
     {
@@ -62273,7 +62273,7 @@
       "properties": {
         "ADMIN": "Ukraine",
         "ISO_A3": "UKR",
-        "ISO_A2": "UA"
+        "ISO_A2": "UA","MTonnes":225.0182
       }
     },
     {
@@ -62304,7 +62304,7 @@
       "properties": {
         "ADMIN": "United States Minor Outlying Islands",
         "ISO_A3": "UMI",
-        "ISO_A2": "UM"
+        "ISO_A2": "UM","MTonnes":0
       }
     },
     {
@@ -62459,7 +62459,7 @@
       "properties": {
         "ADMIN": "Uruguay",
         "ISO_A3": "URY",
-        "ISO_A2": "UY"
+        "ISO_A2": "UY","MTonnes":6.9439
       }
     },
     {
@@ -64908,7 +64908,7 @@
       "properties": {
         "ADMIN": "United States of America",
         "ISO_A3": "USA",
-        "ISO_A2": "US"
+        "ISO_A2": "US","MTonnes":5416.2779
       }
     },
     {
@@ -65334,7 +65334,7 @@
       "properties": {
         "ADMIN": "Uzbekistan",
         "ISO_A3": "UZB",
-        "ISO_A2": "UZ"
+        "ISO_A2": "UZ","MTonnes":91.2652
       }
     },
     {
@@ -65369,7 +65369,7 @@
       "properties": {
         "ADMIN": "Vatican",
         "ISO_A3": "VAT",
-        "ISO_A2": "VA"
+        "ISO_A2": "VA","MTonnes":0
       }
     },
     {
@@ -65404,7 +65404,7 @@
       "properties": {
         "ADMIN": "Saint Vincent and the Grenadines",
         "ISO_A3": "VCT",
-        "ISO_A2": "VC"
+        "ISO_A2": "VC","MTonnes":0.22336
       }
     },
     {
@@ -65943,7 +65943,7 @@
       "properties": {
         "ADMIN": "Venezuela",
         "ISO_A3": "VEN",
-        "ISO_A2": "VE"
+        "ISO_A2": "VE","MTonnes":138.7646
       }
     },
     {
@@ -65986,7 +65986,7 @@
       "properties": {
         "ADMIN": "British Virgin Islands",
         "ISO_A3": "VGB",
-        "ISO_A2": "VG"
+        "ISO_A2": "VG","MTonnes":0.21591
       }
     },
     {
@@ -66017,7 +66017,7 @@
       "properties": {
         "ADMIN": "United States Virgin Islands",
         "ISO_A3": "VIR",
-        "ISO_A2": "VI"
+        "ISO_A2": "VI","MTonnes":0
       }
     },
     {
@@ -66464,7 +66464,7 @@
       "properties": {
         "ADMIN": "Vietnam",
         "ISO_A3": "VNM",
-        "ISO_A2": "VN"
+        "ISO_A2": "VN","MTonnes":206.6609
       }
     },
     {
@@ -66529,7 +66529,7 @@
       "properties": {
         "ADMIN": "Vanuatu",
         "ISO_A3": "VUT",
-        "ISO_A2": "VU"
+        "ISO_A2": "VU","MTonnes":0.15461
       }
     },
     {
@@ -66560,7 +66560,7 @@
       "properties": {
         "ADMIN": "Wallis and Futuna",
         "ISO_A3": "WLF",
-        "ISO_A2": "WF"
+        "ISO_A2": "WF","MTonnes":0.027057
       }
     },
     {
@@ -66634,7 +66634,7 @@
       "properties": {
         "ADMIN": "Samoa",
         "ISO_A3": "WSM",
-        "ISO_A2": "WS"
+        "ISO_A2": "WS","MTonnes":0.25898
       }
     },
     {
@@ -66895,7 +66895,7 @@
       "properties": {
         "ADMIN": "Yemen",
         "ISO_A3": "YEM",
-        "ISO_A2": "YE"
+        "ISO_A2": "YE","MTonnes":10.1406
       }
     },
     {
@@ -67372,7 +67372,7 @@
       "properties": {
         "ADMIN": "South Africa",
         "ISO_A3": "ZAF",
-        "ISO_A2": "ZA"
+        "ISO_A2": "ZA","MTonnes":467.5621
       }
     },
     {
@@ -67735,7 +67735,7 @@
       "properties": {
         "ADMIN": "Zambia",
         "ISO_A3": "ZMB",
-        "ISO_A2": "ZM"
+        "ISO_A2": "ZM","MTonnes":5.228
       }
     },
     {
@@ -67950,7 +67950,7 @@
       "properties": {
         "ADMIN": "Zimbabwe",
         "ISO_A3": "ZWE",
-        "ISO_A2": "ZW"
+        "ISO_A2": "ZW","MTonnes":12.2627
       }
     }
   ]

@@ -228,7 +228,7 @@ function returnTogglePollutantFilter(button) {
     }
 }
 
-var scale_legend = document.getElementById("scale")
+//var scale_legend = document.getElementById("scale")
 
 function toggleFilterEmittersByPollutant(pollutant) {
     if (map.hasLayer(markers[pollutant])) {
