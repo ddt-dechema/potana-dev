@@ -220,7 +220,8 @@ legend_power.onAdd = function(map) {
 	// loop through our density intervals and generate a label with a colored square for each interval
 	for (var i = 0; i < grades_power.length; i++) {
 		div_power.innerHTML +=
-			'<i style="background:' + grades_power[i] + '"></i> ' + labels_power[i] + "<br>";
+			'<i style="background:' + grades_power[i] + '"></i> ' + 
+			labels_power[i] + '<br>';
 	}
 	return div_power;
 };
