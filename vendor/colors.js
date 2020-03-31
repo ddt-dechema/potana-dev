@@ -29,7 +29,7 @@ var powerplantsColors = {
     Wind: "#99D1E1", //Kopernikus 40%
     Coal: "#be5599", // Coal
     Cogeneration: "#AB4C89", // Cogeneration
-    "Gas:": "#98447A", // Gas
+    Gas: "#98447A", // Gas
     Geothermal: "#853B6B", // Geothermal
     Nuclear: "#72335B", // Nuclear
     Oil: "#5F2A4C", // Oil
