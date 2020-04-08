@@ -2,7 +2,7 @@
     "features": [
         {
             "properties": {
-                "id": 1678848,
+                "id": "1678848",
                 "color": "#FF8800",
                 "name": "Ludwigshafen-Karlsruhe-Pipeline-Propylene",
                 "ort": "Ludwigshafen",
@@ -28,7 +28,7 @@
         },
         {
             "properties": {
-                "id": 1680110,
+                "id": "1680110",
                 "color": "#FF8800",
                 "name": "Marl-Gelsenkirchen-Pipeline-Propylene",
                 "ort": "Marl",
@@ -54,7 +54,7 @@
         },
         {
             "properties": {
-                "id": 1680122,
+                "id": "1680122",
                 "color": "#FF8800",
                 "name": "Oberhausen-Duisburg-Pipeline-Propylene",
                 "ort": "Oberhausen",
@@ -80,7 +80,7 @@
         },
         {
             "properties": {
-                "id": 1680120,
+                "id": "1680120",
                 "color": "#FF8800",
                 "name": "Gelsenkirchen-Oberhausen-Pipeline-Propylene",
                 "ort": "Gelsenkirchen",
@@ -106,7 +106,7 @@
         },
         {
             "properties": {
-                "id": 1680124,
+                "id": "1680124",
                 "color": "#FF8800",
                 "name": "Moers-Duisburg-Pipeline-Propylene",
                 "ort": "Moers",
@@ -132,7 +132,7 @@
         },
         {
             "properties": {
-                "id": 1737102,
+                "id": "1737102",
                 "name": "Rotterdam-Moerdijk-Pipeline-Ethylene",
                 "ort": "Rotterdam",
                 "type": [
@@ -157,7 +157,7 @@
         },
         {
             "properties": {
-                "id": 1737102,
+                "id": "1737102",
                 "name": "Moerdijk-Antwerpen-Pipeline-Ethylene",
                 "ort": "Moerdijk",
                 "type": [
@@ -182,7 +182,7 @@
         },
         {
             "properties": {
-                "id": 1680178,
+                "id": "1680178",
                 "name": "Antwerpen-Feluy-Pipeline-Ethylene",
                 "ort": "Antwerpen",
                 "type": [
@@ -207,7 +207,7 @@
         },
         {
             "properties": {
-                "id": 1680178,
+                "id": "1680178",
                 "name": "Antwerpen-Beringen-Pipeline-Ethylene",
                 "ort": "Antwerpen",
                 "type": [
@@ -230,5 +230,8 @@
             },
             "type": "Feature"
         }
-    ]
+    ],  "type": "FeatureCollection",
+  "limit": 100,
+  "page": 0,
+  "sort": null
 }

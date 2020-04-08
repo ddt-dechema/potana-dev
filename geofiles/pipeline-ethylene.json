@@ -2,7 +2,7 @@
   "features": [
     {
       "properties": {
-        "id": 1678428,
+        "id": "1678428",
         "name": "Stade-Schkopau-Pipeline-Ethylene",
         "ort": "Stade",
         "type": [
@@ -27,7 +27,7 @@
     },
     {
       "properties": {
-        "id": 1679194,
+        "id": "1679194",
         "name": "Münchsmünster-Gendorf-Pipeline-Ethylene",
         "ort": "Münchmünster",
         "type": [
