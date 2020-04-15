@@ -2,19 +2,19 @@
 let map, format1Dec, formatSI;
 /***********************/
 /* Einladen der Button-Informationen */
-let ethyleneButton = document.getElementById("ethylene-button"),
-	propyleneButton = document.getElementById("propylene-button"),
+let ethylenePipelineButton = document.getElementById("ethylene-button"),
+	propylenePipelineButton = document.getElementById("propylene-button"),
 	pvButton = document.getElementById("pv-button"),
 	windButton = document.getElementById("wind-button"),
 	waterButton = document.getElementById("water-button"),
 	waterStressButton = document.getElementById("water-stress"),
 	emitterButton = document.getElementById("emitter-button"),
-	pipelineButton = document.getElementById("pipeline-button"),
-	kenyaButton = document.getElementById("kenya-button"),
+	totalPipelineButton = document.getElementById("total-pipeline-button"),
+	kenyaPipelineButton = document.getElementById("kenya-button"),
 	protectedareaButton = document.getElementById("protectedarea-button"),
 	countryButton = document.getElementById("country-button"),
 	renewablesButton = document.getElementById("renewables-button"),
-	usaButton = document.getElementById("usa-button"),
+	usaPipelineButton = document.getElementById("usa-button"),
 	powerplantsButton = document.getElementById("powerplants-button"),
 	GHGUSAButton = document.getElementById("GHG-USA-button"),
 	CO2globalButton = document.getElementById("CO2-global-button"),
@@ -374,7 +374,7 @@ function addPowerPlantPopupHandler(feature) {
 // GHG USA - data from EPA
 // legend-toggability should be changed when  main_emissions.js and main.js are merged
 
-var GHG_USA = new L.GeoJSON.AJAX(["geofiles/GHG_USA.geojson"], {
+var GHG_USA = new L.GeoJSON.AJAX(["geofiles/emmissions-USA.geojson"], {
 	pointToLayer: function(feature, latlng) {
 		return L.circleMarker(latlng, {
 			radius: Math.sqrt(feature.properties.MTonnes / 37.6) * 50, // statt 37.6 sollte dort die totalMax der Emissionen stehen - hier wurde nun der Wert der E-PRTR Json genommen.
@@ -412,7 +412,7 @@ function addGHGUSAPopupHandler(feature) {
 // Global CO2 emissions, grouped by country 
 
 // as points
-var CO2_global = new L.GeoJSON.AJAX(['geofiles/countries_CO2.geojson'], {
+var CO2_global = new L.GeoJSON.AJAX(['geofiles/emissions_global-points.geojson'], {
 	pointToLayer: function(feature, latlng) {
 		return L.circleMarker(latlng, {
 			radius: Math.sqrt(feature.properties.MTonnes / 10065) * 50, // statt 37.6 sollte dort die totalMax der Emissionen stehen - hier wurde nun der Wert der E-PRTR Json genommen.
@@ -447,7 +447,7 @@ function addCO2globalPopupHandler(feature) {
 }
 
 // as panes
-var CO2_global_panes = new L.GeoJSON.AJAX(['geofiles/countries_large_woAntartica_simplified0.025.json'], {
+var CO2_global_panes = new L.GeoJSON.AJAX(['geofiles/emissions_global-panes_simplified0.025.json'], {
 	style: style,
 	onEachFeature: function(feature, layer) {
 		layer.bindPopup('<h2>' + feature.properties.ADMIN +
@@ -529,7 +529,7 @@ legend_co2panes.onAdd = function (map) {
 // ////////////////////////////
 // protected area layer
 
-var areaLayer = new L.GeoJSON.AJAX(['geofiles/protected-areas-africa.json'], {
+var areaLayer = new L.GeoJSON.AJAX(['geofiles/protected-areas_africa.json'], {
 	style: areaStyle,
 	onEachFeature: function(feature, layer) {
 		layer.bindPopup(feature.properties.iso);
@@ -564,7 +564,7 @@ function pipelineStyle(feature) {
 function togglePipeline(event, type) {
 	event.target.classList.toggle("is-info");
 	if (event.target.classList.contains("is-info")) {
-		fetch("geofiles/pipeline-" + type + ".json")
+		fetch("geofiles/pipelines-" + type + ".json")
 			.then(
 				response => {
 					return response.json();
@@ -575,7 +575,7 @@ function togglePipeline(event, type) {
 			)
 			.then(geojson => {
 				globalPipelines[type] = L.geoJson(geojson, {
-					style: pipelineStyle
+					// style: pipelineStyle
 				});
 				globalPipelines[type].addTo(map);
 			});
@@ -647,19 +647,19 @@ protectedareaButton.addEventListener("click", toggleLayer(protectedareaButton, a
 countryButton.addEventListener("click", toggleLayer(countryButton, country_layers));
 renewablesButton.addEventListener("click", toggleLayerLegend(renewablesButton, renewables_plants, legend_EE));
 
-ethyleneButton.addEventListener("click", event => {
+ethylenePipelineButton.addEventListener("click", event => {
 	togglePipeline(event, "ethylene");
 });
-propyleneButton.addEventListener("click", event => {
+propylenePipelineButton.addEventListener("click", event => {
 	togglePipeline(event, "propylene");
 });
-pipelineButton.addEventListener("click", event => {
-	togglePipeline(event, "total");
+totalPipelineButton.addEventListener("click", event => {
+	togglePipeline(event, "total-simplified1percent");
 });
-kenyaButton.addEventListener("click", event => {
+kenyaPipelineButton.addEventListener("click", event => {
 	togglePipeline(event, "kenya");
 });
-usaButton.addEventListener("click", event => {
+usaPipelineButton.addEventListener("click", event => {
 	togglePipeline(event, "usa");
 });
 

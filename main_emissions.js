@@ -334,7 +334,7 @@ var markers = {}
 document.addEventListener('DOMContentLoaded', (event) => {
     //showMap()
     loadGlobalDefs()
-    fetch('geofiles/emissions.json')
+    fetch('geofiles/emissions-EU.json')
         .then((response) => {
                 return response.json()
             },
