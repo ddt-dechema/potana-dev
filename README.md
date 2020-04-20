@@ -6,6 +6,7 @@ See live example: https://ddt-dechema.github.io/potana-dev/
 * available (Geo)JSONs were partly converted via free online tools <span style="color:red">not cited yet</span>
 * CSVs (containing lat,lon) were converted via https://www.convertcsv.com/csv-to-geojson.htm (at least the first line of lat, lon must be wrapped in `" "`) or via https://odileeds.github.io/CSV2GeoJSON/ which has the option to rename properties
 * Some data (mostly geotiffs and shapefiles) were uploaded to http://studio.mapbox.com and formated therein. The resulting styles are then used in this map for a faster loading time
+* Files for the "protected areas" were simplified to result in files with a size of beloww ca. 5 MB - simplification factors for each region/country are mentioned below
 
 # Sources
 ## General
@@ -41,7 +42,24 @@ as taken from European Pollutant Release and Transfer Register (E-PRTR) https://
 * Global dataset was retrieved by Luisa (@Dechema)
 
 ## protected areas
-* africa https://energydata.info/dataset/protected-areas
+* africa (simplified to 10%) https://energydata.info/dataset/protected-areas 
+* China (10%) https://www.protectedplanet.net/country/CN
+* Kazakhstan (100%) https://www.protectedplanet.net/country/KZ
+* Mexico (1%) https://www.protectedplanet.net/country/MX
+* Argentina (50%) https://www.protectedplanet.net/country/AR
+* Chile (1%) https://www.protectedplanet.net/country/CL
+* South Europe - simplified (x%) and then grouped with QGis (precision level 15) and then simplified again (1%)
+  * France (1%) https://www.protectedplanet.net/country/FR
+  * Spain https://www.protectedplanet.net/country/ES
+  * Italy (1%) https://www.protectedplanet.net/country/IT
+  * Greece (1%) https://www.protectedplanet.net/country/GR
+  * Portugal https://www.protectedplanet.net/country/PT
+* North Europe - grouped with QGis, then simplified by %
+  * Norway (1%) https://www.protectedplanet.net/country/NO
+  * Iceland (100%) https://www.protectedplanet.net/country/IS
+  * Denmark (1%) https://www.protectedplanet.net/country/DK
+  * Great Britain https://www.protectedplanet.net/country/GB 
+
 
 ## SVGs
 SVGS were created from JPGs, PNGs, etc. with https://convertio.co/de/svg-umwandeln/ or other free online tools.

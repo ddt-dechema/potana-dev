@@ -1,6 +1,6 @@
 var areaStyle = {
     color: "#19fa28",
-    weight: 5,
+    weight: 1,
     opacity: 0.65
 };
 

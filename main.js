@@ -11,7 +11,14 @@ let ethylenePipelineButton = document.getElementById("ethylene-button"),
 	emitterButton = document.getElementById("emitter-button"),
 	totalPipelineButton = document.getElementById("total-pipeline-button"),
 	kenyaPipelineButton = document.getElementById("kenya-button"),
-	protectedareaButton = document.getElementById("protectedarea-button"),
+	protectedAfricaButton = document.getElementById("protectedafrica-button"),
+	protectedMexicoButton = document.getElementById("protectedmexico-button"),
+	protectedArgentinaButton = document.getElementById("protectedargentina-button"),
+	protectedChileButton = document.getElementById("protectedchile-button"),
+	protectedChinaButton = document.getElementById("protectedchina-button"),
+	protectedKazakhstanButton = document.getElementById("protectedkazakhstan-button"),
+	protectedNorthEuropeButton = document.getElementById("protectednortheurope-button"),
+	protectedSouthEuropeButton = document.getElementById("protectedsoutheurope-button"),
 	countryButton = document.getElementById("country-button"),
 	renewablesButton = document.getElementById("renewables-button"),
 	usaPipelineButton = document.getElementById("usa-button"),
@@ -529,7 +536,56 @@ legend_co2panes.onAdd = function (map) {
 // ////////////////////////////
 // protected area layer
 
-var areaLayer = new L.GeoJSON.AJAX(['geofiles/protected-areas_africa.json'], {
+var protectedAfricaLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-africa.json'], {
+	style: areaStyle,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup(feature.properties.iso);
+	}
+}); //.addTo(map)
+
+var protectedMexicoLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-mexico.json'], {
+	style: areaStyle,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup(feature.properties.iso);
+	}
+}); //.addTo(map)
+
+var protectedChinaLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-china.json'], {
+	style: areaStyle,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup(feature.properties.iso);
+	}
+}); //.addTo(map)
+
+var protectedKazakhstanLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-kazahkstan.json'], {
+	style: areaStyle,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup(feature.properties.iso);
+	}
+}); //.addTo(map)
+
+var protectedArgentinaLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-argentina.json'], {
+	style: areaStyle,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup(feature.properties.iso);
+	}
+}); //.addTo(map)
+
+var protectedChileLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-chile.json'], {
+	style: areaStyle,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup(feature.properties.iso);
+	}
+}); //.addTo(map)
+
+var protectedNorthEuropeLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-northeurope.json'], {
+	style: areaStyle,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup(feature.properties.iso);
+	}
+}); //.addTo(map)
+
+var protectedSouthEuropeLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-southeurope.json'], {
 	style: areaStyle,
 	onEachFeature: function(feature, layer) {
 		layer.bindPopup(feature.properties.iso);
@@ -643,7 +699,15 @@ emitterButton.addEventListener("click", event => {
 	toggleEmitter(event, "emitter");
 });
 
-protectedareaButton.addEventListener("click", toggleLayer(protectedareaButton, areaLayer));
+protectedAfricaButton.addEventListener("click", toggleLayer(protectedAfricaButton, protectedAfricaLayer));
+protectedArgentinaButton.addEventListener("click", toggleLayer(protectedArgentinaButton, protectedArgentinaLayer));
+protectedChileButton.addEventListener("click", toggleLayer(protectedChileButton, protectedChileLayer));
+protectedChinaButton.addEventListener("click", toggleLayer(protectedChinaButton, protectedChinaLayer));
+protectedKazakhstanButton.addEventListener("click", toggleLayer(protectedKazakhstanButton, protectedKazakhstanLayer));
+protectedMexicoButton.addEventListener("click", toggleLayer(protectedMexicoButton, protectedMexicoLayer));
+protectedNorthEuropeButton.addEventListener("click", toggleLayer(protectedNorthEuropeButton, protectedNorthEuropeLayer));
+protectedSouthEuropeButton.addEventListener("click", toggleLayer(protectedSouthEuropeButton, protectedSouthEuropeLayer));
+
 countryButton.addEventListener("click", toggleLayer(countryButton, country_layers));
 renewablesButton.addEventListener("click", toggleLayerLegend(renewablesButton, renewables_plants, legend_EE));
 
