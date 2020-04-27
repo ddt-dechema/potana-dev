@@ -546,7 +546,7 @@ var protectedSouthAfricaLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-af
 var protectedNorthAfricaLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-northafrica.json'], {
 	style: areaStyle,
 	onEachFeature: function(feature, layer) {
-		layer.bindPopup(feature.properties.iso);
+		layer.bindPopup(feature.properties.NAME);
 	}
 }); //.addTo(map)
 
@@ -557,56 +557,56 @@ var protectedAfricaLayer = L.layerGroup([protectedNorthAfricaLayer, protectedSou
 var protectedMexicoLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-mexico.json'], {
 	style: areaStyle,
 	onEachFeature: function(feature, layer) {
-		layer.bindPopup(feature.properties.iso);
+		layer.bindPopup(feature.properties.NAME);
 	}
 }); //.addTo(map)
 
 var protectedChinaLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-china.json'], {
 	style: areaStyle,
 	onEachFeature: function(feature, layer) {
-		layer.bindPopup(feature.properties.iso);
+		layer.bindPopup(feature.properties.NAME);
 	}
 }); //.addTo(map)
 
 var protectedKazakhstanLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-kazahkstan.json'], {
 	style: areaStyle,
 	onEachFeature: function(feature, layer) {
-		layer.bindPopup(feature.properties.iso);
+		layer.bindPopup(feature.properties.NAME);
 	}
 }); //.addTo(map)
 
 var protectedArgentinaLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-argentina.json'], {
 	style: areaStyle,
 	onEachFeature: function(feature, layer) {
-		layer.bindPopup(feature.properties.iso);
+		layer.bindPopup(feature.properties.NAME);
 	}
 }); //.addTo(map)
 
 var protectedChileLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-chile.json'], {
 	style: areaStyle,
 	onEachFeature: function(feature, layer) {
-		layer.bindPopup(feature.properties.iso);
+		layer.bindPopup(feature.properties.NAME);
 	}
 }); //.addTo(map)
 
 var protectedGermanyLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-germany.json'], {
 	style: areaStyle,
 	onEachFeature: function(feature, layer) {
-		layer.bindPopup(feature.properties.iso);
+		layer.bindPopup(feature.properties.NAME);
 	}
 }); //.addTo(map)
 
 var protectedNorthEuropeLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-northeurope.json'], {
 	style: areaStyle,
 	onEachFeature: function(feature, layer) {
-		layer.bindPopup(feature.properties.iso);
+		layer.bindPopup(feature.properties.NAME);
 	}
 }); //.addTo(map)
 
 var protectedSouthEuropeLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-southeurope.json'], {
 	style: areaStyle,
 	onEachFeature: function(feature, layer) {
-		layer.bindPopup(feature.properties.iso);
+		layer.bindPopup(feature.properties.NAME);
 	}
 }); //.addTo(map)
 
