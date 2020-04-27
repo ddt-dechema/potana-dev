@@ -11,6 +11,7 @@ let ethylenePipelineButton = document.getElementById("ethylene-button"),
 	emitterButton = document.getElementById("emitter-button"),
 	totalPipelineButton = document.getElementById("total-pipeline-button"),
 	kenyaPipelineButton = document.getElementById("kenya-button"),
+	protectedGermanyButton = document.getElementById("protectedgermany-button"),
 	protectedAfricaButton = document.getElementById("protectedafrica-button"),
 	protectedMexicoButton = document.getElementById("protectedmexico-button"),
 	protectedArgentinaButton = document.getElementById("protectedargentina-button"),
@@ -536,12 +537,22 @@ legend_co2panes.onAdd = function (map) {
 // ////////////////////////////
 // protected area layer
 
-var protectedAfricaLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-africa.json'], {
+var protectedSouthAfricaLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-africa.json'], { // additional Madagascar shapefile is included here via QGis
 	style: areaStyle,
 	onEachFeature: function(feature, layer) {
 		layer.bindPopup(feature.properties.iso);
 	}
 }); //.addTo(map)
+var protectedNorthAfricaLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-northafrica.json'], {
+	style: areaStyle,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup(feature.properties.iso);
+	}
+}); //.addTo(map)
+
+// Group both layers
+var protectedAfricaLayer = L.layerGroup([protectedNorthAfricaLayer, protectedSouthAfricaLayer]);
+
 
 var protectedMexicoLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-mexico.json'], {
 	style: areaStyle,
@@ -572,6 +583,13 @@ var protectedArgentinaLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-arge
 }); //.addTo(map)
 
 var protectedChileLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-chile.json'], {
+	style: areaStyle,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup(feature.properties.iso);
+	}
+}); //.addTo(map)
+
+var protectedGermanyLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-germany.json'], {
 	style: areaStyle,
 	onEachFeature: function(feature, layer) {
 		layer.bindPopup(feature.properties.iso);
@@ -705,6 +723,7 @@ protectedChileButton.addEventListener("click", toggleLayer(protectedChileButton,
 protectedChinaButton.addEventListener("click", toggleLayer(protectedChinaButton, protectedChinaLayer));
 protectedKazakhstanButton.addEventListener("click", toggleLayer(protectedKazakhstanButton, protectedKazakhstanLayer));
 protectedMexicoButton.addEventListener("click", toggleLayer(protectedMexicoButton, protectedMexicoLayer));
+protectedGermanyButton.addEventListener("click", toggleLayer(protectedGermanyButton, protectedGermanyLayer));
 protectedNorthEuropeButton.addEventListener("click", toggleLayer(protectedNorthEuropeButton, protectedNorthEuropeLayer));
 protectedSouthEuropeButton.addEventListener("click", toggleLayer(protectedSouthEuropeButton, protectedSouthEuropeLayer));
 

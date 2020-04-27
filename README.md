@@ -43,6 +43,15 @@ as taken from European Pollutant Release and Transfer Register (E-PRTR) https://
 
 ## protected areas
 * africa (simplified to 10%) https://energydata.info/dataset/protected-areas 
+additionally added: 
+  * Madagascar (100%) https://www.protectedplanet.net/country/MG
+  * Algeria (100%) https://www.protectedplanet.net/country/DZ
+  * Tunisia (10%) https://www.protectedplanet.net/country/TN
+  * Morocco (10%)  https://www.protectedplanet.net/country/MAR
+  * Mauritania (100%) https://www.protectedplanet.net/country/MR
+  * Egypt (100%) https://www.protectedplanet.net/country/EG
+  * Sudan (100%) https://www.protectedplanet.net/country/SD
+
 * China (10%) https://www.protectedplanet.net/country/CN
 * Kazakhstan (100%) https://www.protectedplanet.net/country/KZ
 * Mexico (1%) https://www.protectedplanet.net/country/MX
@@ -54,11 +63,13 @@ as taken from European Pollutant Release and Transfer Register (E-PRTR) https://
   * Italy (1%) https://www.protectedplanet.net/country/IT
   * Greece (1%) https://www.protectedplanet.net/country/GR
   * Portugal https://www.protectedplanet.net/country/PT
-* North Europe - grouped with QGis, then simplified by %
+* North Europe - simplified grouped with QGis (precision level 15) and then simplified by (1%)
   * Norway (1%) https://www.protectedplanet.net/country/NO
   * Iceland (100%) https://www.protectedplanet.net/country/IS
   * Denmark (1%) https://www.protectedplanet.net/country/DK
   * Great Britain https://www.protectedplanet.net/country/GB 
+* Germany (1%) https://www.protectedplanet.net/country/DE
+
 
 
 ## SVGs
