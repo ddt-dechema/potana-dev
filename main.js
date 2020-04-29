@@ -7,6 +7,7 @@ let ethylenePipelineButton = document.getElementById("ethylene-button"),
 	pvButton = document.getElementById("pv-button"),
 	windButton = document.getElementById("wind-button"),
 	waterButton = document.getElementById("water-button"),
+	waterEUButton = document.getElementById("water-eu-button"),
 	waterStressButton = document.getElementById("water-stress"),
 	emitterButton = document.getElementById("emitter-button"),
 	totalPipelineButton = document.getElementById("total-pipeline-button"),
@@ -532,6 +533,24 @@ legend_co2panes.onAdd = function (map) {
     return div_co2legend;
 };
 
+var legend_water = L.control({position: 'topright'});
+
+legend_water.onAdd = function (map) {
+
+    var div_waterlegend = L.DomUtil.create('div', 'info legend_water'),
+        watergrades = [0, 20, 40, 60, 80],
+        labels = [];
+		div_waterlegend.innerHTML += 'Annual freshwater withdrawals [% of internal resources]<br>'
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < watergrades.length; i++) {
+        div_waterlegend.innerHTML +=
+            '<i style="background:' + getEUwaterColor(watergrades[i] + 1) + '"></i> ' +
+            watergrades[i] + (watergrades[i + 1] ? '&ndash;' + watergrades[i + 1] + '<br>' : '+');
+    }
+
+    return div_waterlegend;
+};
+
 // legend_co2panes.addTo(map);
 
 // ////////////////////////////
@@ -620,6 +639,31 @@ var waterLayer = new L.GeoJSON.AJAX(['geofiles/water-africa.json'], {
 	//    }
 }); //.addTo(map)
 
+var waterEuropeLayer = new L.GeoJSON.AJAX(['geofiles/water_stress-europe.json'], {
+	style: waterEUstyle,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup('<h2>' + feature.properties.admin +
+		' (' + feature.properties.gu_a3 + ')</h2><p>' + feature.properties['fresh-water-withdrawals_%'] + ' % of internal resources')
+	}
+	//     onEachFeature: function (feature, layer ) {
+	//      layer.bindPopup(feature.properties.NAME_OF_WA)
+	//    }
+}); //.addTo(map)
+
+
+
+function waterEUstyle(feature) {
+	return {
+		fillColor: getEUwaterColor(feature.properties['fresh-water-withdrawals_%']),
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7
+	};
+}
+
+
 // ////////////////////////////
 // PIPELINES
 
@@ -707,6 +751,7 @@ pvButton.addEventListener("click", toggleLayer(pvButton, pvTileLayer));
 windButton.addEventListener("click", toggleLayer(windButton, windTileLayer));
 waterStressButton.addEventListener("click", toggleLayer(waterStressButton, waterTileLayer));
 waterButton.addEventListener("click", toggleLayer(waterButton, waterLayer));
+waterEUButton.addEventListener("click", toggleLayerLegend(waterEUButton, waterEuropeLayer, legend_water));
 
 CO2globalButton.addEventListener("click", toggleLayerScale(CO2globalButton, CO2_global, scale_global));
 CO2globalpanesButton.addEventListener("click", toggleLayerLegend(CO2globalpanesButton, CO2_global_panes, legend_co2panes));

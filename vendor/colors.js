@@ -19,6 +19,17 @@ function getColor(d) {
            d > 10   ? '#FED976' :
                       '#FFEDA0';
 }
+
+function getEUwaterColor(d) {
+    return d > 80  ? '#06303B' :
+           d > 60  ? '#0C647A' :
+           d > 40  ? '#1399BA' :
+           d > 20   ? '#16B8E0' :
+           d > 10   ? '#19CDFA' :
+                      '#ffffff';
+}
+
+
 var powerplantsColors = {
     //"Biomass": 'rgb(0, 141, 180)', //Kopernikus 100%
     Biomass: "#09B57C", // greeny

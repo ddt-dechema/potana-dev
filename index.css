@@ -247,7 +247,7 @@ body .sidebar-tabs>li.active, .sidebar-tabs>ul>li.active {
   padding: 3px;
   bottom: 120px !important;
 } */
-.legend_EE i, .legend_power i {
+.legend_EE i, .legend_power i, .legend_water i {
   width: 18px;
   height: 18px;
   float: left;
