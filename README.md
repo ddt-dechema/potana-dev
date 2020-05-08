@@ -22,6 +22,9 @@ the lines were simplified for faster loading with https://mapshaper.org/
 * Europe - Carbon4Pur Project https://carbon4pur.github.io/mapping/index.html
 as taken from European Pollutant Release and Transfer Register (E-PRTR) https://prtr.eea.europa.eu/
 * USA - taken from EPA - Facility Level Information on GreenHouse Gases Tool (Flight) https://ghgdata.epa.gov/ghgp/main.do#/facility/; Reporting Year: 2018
+* global: http://www.globalcarbonatlas.org/en/CO2-emissions
+  additional notes: Somaliland was grouped together with Somalia
+
 
 ## pipelines
 * usa 
@@ -37,6 +40,8 @@ as taken from European Pollutant Release and Transfer Register (E-PRTR) https://
 ## water
 * Africa https://energydata.info/dataset/africa-water-bodies-2015
 * Global water stress: World Resources Institute (WRI) https://www.wri.org/resources/data-sets/aqueduct-water-stress-projections-data
+   - Global data (as of 2014) takes "Level of water stress: freshwater withdrawal as a proportion of available freshwater resources" (indicator code ER.H2O.FWST.ZS)
+   - alternatively, "Annual freshwater withdrawals, total (% of internal resources)" could be taken: https://www.indexmundi.com/facts/indicators/ER.H2O.FWTL.ZS 
 
 ## Renewable Power plants
 * Global dataset was retrieved by Luisa (@Dechema)
