@@ -4,11 +4,33 @@ var areaStyle = {
     opacity: 0.65
 };
 
-var waterStyle = {
+var waterResourcesStyle = {
     color: "#19cdfa",
     weight: 5,
     opacity: 0.65
 };
+
+function waterStyle(feature) {
+	return {
+		fillColor: getWaterColor(feature.properties.water_stress),
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7
+	};
+}
+function waterBWSstyle(feature) {
+    return {
+        fillColor: getwaterBWSColor(feature.properties.bws_indicator),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+}
+
 function getColor(d) {
     return d > 1000 ? '#800026' :
            d > 500  ? '#BD0026' :
@@ -19,8 +41,7 @@ function getColor(d) {
            d > 10   ? '#FED976' :
                       '#FFEDA0';
 }
-
-function getEUwaterColor(d) {
+function getWaterColor(d) {
     return d > 80  ? '#06303B' :
            d > 60  ? '#0C647A' :
            d > 40  ? '#1399BA' :
@@ -28,7 +49,20 @@ function getEUwaterColor(d) {
            d > 10   ? '#19CDFA' :
                       '#ffffff';
 }
+function getwaterBWSColor(d) {
+    return d > 4  ? '#06303B' :
+           d > 3  ? '#0C647A' :
+           d > 2  ? '#1399BA' :
+           d > 1  ? '#16B8E0' :
+                   '#ffffff';
+}
 
+function pipelineStyle(feature) {
+	return {
+		color: feature.properties.type[1] == 54 ? "green" : "red" //Outline color
+		// 54 = propylene, 52 = ethylene
+	};
+}
 
 var powerplantsColors = {
     //"Biomass": 'rgb(0, 141, 180)', //Kopernikus 100%

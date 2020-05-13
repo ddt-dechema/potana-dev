@@ -7,20 +7,25 @@ let ethylenePipelineButton = document.getElementById("ethylene-button"),
 	pvButton = document.getElementById("pv-button"),
 	windButton = document.getElementById("wind-button"),
 	waterButton = document.getElementById("water-button"),
-	waterEUButton = document.getElementById("water-eu-button"),
-	waterStressButton = document.getElementById("water-stress"),
+	//waterEUButton = document.getElementById("water-eu-button"),
+	waterStressButton = document.getElementById("water-stress-button"),
+	waterBWSButton = document.getElementById("water-bws-button"),
+	waterAfricaButton = document.getElementById("water-africa-button"),
 	emitterButton = document.getElementById("emitter-button"),
 	totalPipelineButton = document.getElementById("total-pipeline-button"),
 	kenyaPipelineButton = document.getElementById("kenya-button"),
-	protectedGermanyButton = document.getElementById("protectedgermany-button"),
+	// protectedGermanyButton = document.getElementById("protectedgermany-button"),
+	protectedSouthmericaButton = document.getElementById("protectedsouthamerica-button"),
+	protectedAsiaButton = document.getElementById("protectedasia-button"),
+	protectedEuropeButton = document.getElementById("protectedeurope-button"),
 	protectedAfricaButton = document.getElementById("protectedafrica-button"),
-	protectedMexicoButton = document.getElementById("protectedmexico-button"),
+/* 	protectedMexicoButton = document.getElementById("protectedmexico-button"),
 	protectedArgentinaButton = document.getElementById("protectedargentina-button"),
 	protectedChileButton = document.getElementById("protectedchile-button"),
 	protectedChinaButton = document.getElementById("protectedchina-button"),
 	protectedKazakhstanButton = document.getElementById("protectedkazakhstan-button"),
 	protectedNorthEuropeButton = document.getElementById("protectednortheurope-button"),
-	protectedSouthEuropeButton = document.getElementById("protectedsoutheurope-button"),
+	protectedSouthEuropeButton = document.getElementById("protectedsoutheurope-button"), */
 	countryButton = document.getElementById("country-button"),
 	renewablesButton = document.getElementById("renewables-button"),
 	usaPipelineButton = document.getElementById("usa-button"),
@@ -32,7 +37,7 @@ let ethylenePipelineButton = document.getElementById("ethylene-button"),
 	scale_legend = document.getElementById("scale");
 
 function showMap() {
-	/* allows us to create filters within a Leaflet GeoJSON layer */
+	/* allowsf us to create filters within a Leaflet GeoJSON layer */
 	L.GeoJSON.include({
 		setFilter: function(originalData, _) {
 			this.options.filter = _;
@@ -456,14 +461,14 @@ function addCO2globalPopupHandler(feature) {
 }
 
 // as panes
-var CO2_global_panes = new L.GeoJSON.AJAX(['geofiles/emissions_global-panes_simplified0.025.json'], {
+// var CO2_global_panes = new L.GeoJSON.AJAX(['geofiles/emissions_global-panes_simplified0.025.json'], {
+var CO2_global_panes = new L.GeoJSON.AJAX(['geojson_co2.php'], {
 	style: style,
 	onEachFeature: function(feature, layer) {
-		layer.bindPopup('<h2>' + feature.properties.ADMIN +
-				' (' + feature.properties.ISO_A3 + ')</h2><p>' + feature.properties.MTonnes + ' MTonnes CO<sub>2</sub>/year'),
-			layer.bindTooltip('<h2>' + feature.properties.ADMIN +
-				' (' + feature.properties.ISO_A3 + ')</h2><p>' + feature.properties.MTonnes + ' MTonnes CO<sub>2</sub>/year'),
-			// layer.on({  // originally taken from leaflet-documentation
+		layer.bindPopup('<h2>' + feature.properties.country_name_en +
+			' (' + feature.properties.iso_a3 + ')</h2><p>' + feature.properties.MTonnes + ' MTonnes CO<sub>2</sub>/year'),
+		layer.bindTooltip('<h2>' + feature.properties.country_name_en +
+			' (' + feature.properties.iso_a3 + ')</h2><p>' + feature.properties.MTonnes + ' MTonnes CO<sub>2</sub>/year')
 			// mouseover: highlightFeature,
 			// // mouseout: resetHighlight,
 			// //click: zoomToFeature
@@ -473,8 +478,8 @@ var CO2_global_panes = new L.GeoJSON.AJAX(['geofiles/emissions_global-panes_simp
 			CO2_global_panes.resetStyle(this);
 		});
 	}
-}) //.addTo(map)
-;
+	})//.addTo(map)
+	;
 
 function style(feature) {
 	return {
@@ -536,21 +541,34 @@ legend_co2panes.onAdd = function (map) {
 var legend_water = L.control({position: 'topright'});
 
 legend_water.onAdd = function (map) {
-
     var div_waterlegend = L.DomUtil.create('div', 'info legend_water'),
         watergrades = [0, 20, 40, 60, 80],
         labels = [];
-		div_waterlegend.innerHTML += 'Annual freshwater withdrawals [% of internal resources]<br>'
+		div_waterlegend.innerHTML += 'Annual freshwater withdrawals<br> [% of internal resources]<br>'
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < watergrades.length; i++) {
         div_waterlegend.innerHTML +=
-            '<i style="background:' + getEUwaterColor(watergrades[i] + 1) + '"></i> ' +
+            '<i style="background:' + getWaterColor(watergrades[i] + 1) + '"></i> ' +
             watergrades[i] + (watergrades[i + 1] ? '&ndash;' + watergrades[i + 1] + '<br>' : '+');
     }
-
     return div_waterlegend;
 };
 
+var legend_BWS = L.control({position: 'topright'});
+
+legend_BWS.onAdd = function (map) {
+    var div_BWSlegend = L.DomUtil.create('div', 'info legend_water'),
+        watergrades = [0, 1, 2, 3, 4],
+        labels = [];
+		div_BWSlegend.innerHTML += 'Baseline water stress score<br>'
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < watergrades.length; i++) {
+        div_BWSlegend.innerHTML +=
+            '<i style="background:' + getwaterBWSColor(watergrades[i] + 1) + '"></i> ' +
+            watergrades[i] + (watergrades[i + 1] ? '&ndash;' + watergrades[i + 1] + '<br>' : '+');
+    }
+    return div_BWSlegend;
+};
 // legend_co2panes.addTo(map);
 
 // ////////////////////////////
@@ -580,6 +598,23 @@ var protectedMexicoLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-mexico.
 	}
 }); //.addTo(map)
 
+var protectedArgentinaLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-argentina.json'], {
+	style: areaStyle,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup(feature.properties.NAME);
+	}
+}); //.addTo(map)
+
+var protectedChileLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-chile.json'], {
+	style: areaStyle,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup(feature.properties.NAME);
+	}
+}); //.addTo(map)
+// Group layers
+var protectedSouthamericaLayer = L.layerGroup([protectedMexicoLayer, protectedArgentinaLayer, protectedChileLayer]);
+
+
 var protectedChinaLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-china.json'], {
 	style: areaStyle,
 	onEachFeature: function(feature, layer) {
@@ -594,19 +629,9 @@ var protectedKazakhstanLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-kaz
 	}
 }); //.addTo(map)
 
-var protectedArgentinaLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-argentina.json'], {
-	style: areaStyle,
-	onEachFeature: function(feature, layer) {
-		layer.bindPopup(feature.properties.NAME);
-	}
-}); //.addTo(map)
+// Group layers
+var protectedAsiaLayer = L.layerGroup([protectedChinaLayer, protectedKazakhstanLayer]);
 
-var protectedChileLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-chile.json'], {
-	style: areaStyle,
-	onEachFeature: function(feature, layer) {
-		layer.bindPopup(feature.properties.NAME);
-	}
-}); //.addTo(map)
 
 var protectedGermanyLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-germany.json'], {
 	style: areaStyle,
@@ -628,41 +653,62 @@ var protectedSouthEuropeLayer = new L.GeoJSON.AJAX(['geofiles/protected_areas-so
 		layer.bindPopup(feature.properties.NAME);
 	}
 }); //.addTo(map)
+// Group layers
+var protectedEuropeLayer = L.layerGroup([protectedGermanyLayer, protectedNorthEuropeLayer, protectedSouthEuropeLayer]);
 
+// water stress withdrawal
+// Europe
+// var waterEULayer = new L.GeoJSON.AJAX(['geofiles/water_stress-europe.json'], {
+// 	style: waterEUstyle,
+// 	onEachFeature: function(feature, layer) {
+// 		layer.bindPopup('<h2>' + feature.properties.admin +
+// 		' (' + feature.properties.gu_a3 + ')</h2><p>' + feature.properties.water_stress + ' % of internal resources')
+// 	}
+// 	//     onEachFeature: function (feature, layer ) {
+// 	//      layer.bindPopup(feature.properties.NAME_OF_WA)
+// 	//    }
+// }); //.addTo(map)
+
+//global
+// var waterGlobalLayer = new L.GeoJSON.AJAX(['geofiles/water_stress-global.json'], {
+	var waterGlobalLayer = new L.GeoJSON.AJAX(['geojson_water.php'], {
+	style: waterStyle,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup('<h2>' + feature.properties.country_name_en +
+		' (' + feature.properties.iso_a3 + ')</h2><p>' + feature.properties.water_stress + ' % of internal resources'),
+		layer.bindTooltip('<h2>' + feature.properties.country_name_en +
+		' (' + feature.properties.iso_a3 + ')</h2><p>' + feature.properties.water_stress + ' % of internal resources'),
+			layer.on('mouseover', highlightFeature);
+		layer.on('mouseout', function() {
+			waterGlobalLayer.resetStyle(this);
+		});
+	}
+}); //.addTo(map)
+
+//BWS
+// var waterBWSLayer = new L.GeoJSON.AJAX(['geofiles/water_stress-global_bws.json'], {
+	var waterBWSLayer = new L.GeoJSON.AJAX(['geojson_water_bws.php'], {
+	style: waterBWSstyle,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup('<h2>' + feature.properties.country_name_en +
+		' (' + feature.properties.iso_a3 + ')</h2><p>' + feature.properties.bws_indicator + ' % of internal resources'),
+		layer.bindTooltip('<h2>' + feature.properties.country_name_en +
+		' (' + feature.properties.iso_a3 + ')</h2><p>' + feature.properties.bws_indicator + ' % of internal resources'),
+		layer.on('mouseover', highlightFeature);
+		layer.on('mouseout', function() {
+			waterBWSLayer.resetStyle(this);
+		});
+	}
+}); //.addTo(map)
 
 // water resources layer in africa
 
-var waterLayer = new L.GeoJSON.AJAX(['geofiles/water-africa.json'], {
-	style: waterStyle,
+var waterAfricaLayer = new L.GeoJSON.AJAX(['geofiles/water-africa.json'], {
+	style: waterResourcesStyle,
 	//     onEachFeature: function (feature, layer ) {
 	//      layer.bindPopup(feature.properties.NAME_OF_WA)
 	//    }
 }); //.addTo(map)
-
-var waterEuropeLayer = new L.GeoJSON.AJAX(['geofiles/water_stress-europe.json'], {
-	style: waterEUstyle,
-	onEachFeature: function(feature, layer) {
-		layer.bindPopup('<h2>' + feature.properties.admin +
-		' (' + feature.properties.gu_a3 + ')</h2><p>' + feature.properties['fresh-water-withdrawals_%'] + ' % of internal resources')
-	}
-	//     onEachFeature: function (feature, layer ) {
-	//      layer.bindPopup(feature.properties.NAME_OF_WA)
-	//    }
-}); //.addTo(map)
-
-
-
-function waterEUstyle(feature) {
-	return {
-		fillColor: getEUwaterColor(feature.properties['fresh-water-withdrawals_%']),
-		weight: 2,
-		opacity: 1,
-		color: 'white',
-		dashArray: '3',
-		fillOpacity: 0.7
-	};
-}
-
 
 // ////////////////////////////
 // PIPELINES
@@ -670,13 +716,7 @@ function waterEUstyle(feature) {
 
 /*pollutantFilterCO2Button = document.getElementById('pollutant-filter-CO2-button'),
 pollutantFilterCOButton = document.getElementById('pollutant-filter-CO-button')
-/* Farbe der Pipelines*/
-function pipelineStyle(feature) {
-	return {
-		color: feature.properties.type[1] == 54 ? "green" : "red" //Outline color
-		// 54 = propylene, 52 = ethylene
-	};
-}
+
 
 /* toggle-bility von Linien Daten */
 function togglePipeline(event, type) {
@@ -749,9 +789,11 @@ function addPopupHandler(feature) {
 
 pvButton.addEventListener("click", toggleLayer(pvButton, pvTileLayer));
 windButton.addEventListener("click", toggleLayer(windButton, windTileLayer));
-waterStressButton.addEventListener("click", toggleLayer(waterStressButton, waterTileLayer));
-waterButton.addEventListener("click", toggleLayer(waterButton, waterLayer));
-waterEUButton.addEventListener("click", toggleLayerLegend(waterEUButton, waterEuropeLayer, legend_water));
+waterButton.addEventListener("click", toggleLayer(waterButton, waterTileLayer));
+waterAfricaButton.addEventListener("click", toggleLayer(waterAfricaButton, waterAfricaLayer));
+//waterEUButton.addEventListener("click", toggleLayerLegend(waterEUButton, waterEULayer, legend_water));
+waterStressButton.addEventListener("click", toggleLayerLegend(waterStressButton, waterGlobalLayer, legend_water));
+waterBWSButton.addEventListener("click", toggleLayerLegend(waterBWSButton, waterBWSLayer, legend_BWS));
 
 CO2globalButton.addEventListener("click", toggleLayerScale(CO2globalButton, CO2_global, scale_global));
 CO2globalpanesButton.addEventListener("click", toggleLayerLegend(CO2globalpanesButton, CO2_global_panes, legend_co2panes));
@@ -763,14 +805,17 @@ emitterButton.addEventListener("click", event => {
 });
 
 protectedAfricaButton.addEventListener("click", toggleLayer(protectedAfricaButton, protectedAfricaLayer));
-protectedArgentinaButton.addEventListener("click", toggleLayer(protectedArgentinaButton, protectedArgentinaLayer));
-protectedChileButton.addEventListener("click", toggleLayer(protectedChileButton, protectedChileLayer));
-protectedChinaButton.addEventListener("click", toggleLayer(protectedChinaButton, protectedChinaLayer));
-protectedKazakhstanButton.addEventListener("click", toggleLayer(protectedKazakhstanButton, protectedKazakhstanLayer));
-protectedMexicoButton.addEventListener("click", toggleLayer(protectedMexicoButton, protectedMexicoLayer));
-protectedGermanyButton.addEventListener("click", toggleLayer(protectedGermanyButton, protectedGermanyLayer));
-protectedNorthEuropeButton.addEventListener("click", toggleLayer(protectedNorthEuropeButton, protectedNorthEuropeLayer));
-protectedSouthEuropeButton.addEventListener("click", toggleLayer(protectedSouthEuropeButton, protectedSouthEuropeLayer));
+protectedSouthmericaButton.addEventListener("click", toggleLayer(protectedSouthmericaButton, protectedSouthamericaLayer));
+protectedAsiaButton.addEventListener("click", toggleLayer(protectedAsiaButton, protectedAsiaLayer));
+protectedEuropeButton.addEventListener("click", toggleLayer(protectedEuropeButton, protectedEuropeLayer));
+// protectedArgentinaButton.addEventListener("click", toggleLayer(protectedArgentinaButton, protectedArgentinaLayer));
+// protectedChileButton.addEventListener("click", toggleLayer(protectedChileButton, protectedChileLayer));
+// protectedChinaButton.addEventListener("click", toggleLayer(protectedChinaButton, protectedChinaLayer));
+// protectedKazakhstanButton.addEventListener("click", toggleLayer(protectedKazakhstanButton, protectedKazakhstanLayer));
+// protectedMexicoButton.addEventListener("click", toggleLayer(protectedMexicoButton, protectedMexicoLayer));
+// protectedGermanyButton.addEventListener("click", toggleLayer(protectedGermanyButton, protectedGermanyLayer));
+// protectedNorthEuropeButton.addEventListener("click", toggleLayer(protectedNorthEuropeButton, protectedNorthEuropeLayer));
+// protectedSouthEuropeButton.addEventListener("click", toggleLayer(protectedSouthEuropeButton, protectedSouthEuropeLayer));
 
 countryButton.addEventListener("click", toggleLayer(countryButton, country_layers));
 renewablesButton.addEventListener("click", toggleLayerLegend(renewablesButton, renewables_plants, legend_EE));
