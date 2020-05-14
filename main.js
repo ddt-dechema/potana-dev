@@ -34,7 +34,10 @@ let ethylenePipelineButton = document.getElementById("ethylene-button"),
 	CO2globalButton = document.getElementById("CO2-global-button"),
 	CO2globalpanesButton = document.getElementById("CO2-global-panes-button"),
 	scale_global = document.getElementById("scale_global"),
-	scale_legend = document.getElementById("scale");
+	scale_legend = document.getElementById("scale"),
+	chemicalparksEuButton = document.getElementById("chemicalparks-eu-button"),
+	refineriesEuButton = document.getElementById("refineries-eu-button")
+	;
 
 function showMap() {
 	/* allowsf us to create filters within a Leaflet GeoJSON layer */
@@ -571,6 +574,62 @@ legend_BWS.onAdd = function (map) {
 };
 // legend_co2panes.addTo(map);
 
+
+
+////////////////////////////////////////
+// Chemical parks
+var chemicalparks_eu = new L.GeoJSON.AJAX(
+	["geofiles/chemicalparks-europe.geojson"], {
+		pointToLayer: function(feature, latlng) {
+			return L.circleMarker(latlng, {
+				radius: 4,
+				// color: powerplantsColors[feature.properties.primary_fuel],
+				/*fillColor: feature.properties.color,*/
+				// fillColor: powerplantsColors[feature.properties.primary_fuel],
+				weight: 1,
+				opacity: 0.7,
+				fillOpacity: 0.4
+			}).bindPopup(addParkPopupHandler(feature))
+			;
+		}
+	}
+);
+function addParkPopupHandler(feature) {
+	// let nace = globalModel.emissions.categories.naceCategories.items
+	if (feature.properties) {
+		return `<h2>${feature.properties.FacilityName}</h2>
+                        ${feature.properties.Country} `;
+	} else {
+		console.log(feature);
+	}
+}
+////////////////////////////////////////
+// Refineries
+var refineries_eu = new L.GeoJSON.AJAX(
+	["geofiles/refineries_europe.geojson"], {
+		pointToLayer: function(feature, latlng) {
+			return L.circleMarker(latlng, {
+				radius: 4,
+				// color: powerplantsColors[feature.properties.primary_fuel],
+				/*fillColor: feature.properties.color,*/
+				// fillColor: powerplantsColors[feature.properties.primary_fuel],
+				weight: 1,
+				opacity: 0.7,
+				fillOpacity: 0.4
+			}).bindPopup(addRefineryPopupHandler(feature))
+			;
+		}
+	}
+);
+function addRefineryPopupHandler(feature) {
+	// let nace = globalModel.emissions.categories.naceCategories.items
+	if (feature.properties) {
+		return `<h2>${feature.properties.Name} (${feature.properties.Country})</h2>
+		Owners: ${feature.properties.Owners}; `;
+	} else {
+		console.log(feature);
+	}
+}
 // ////////////////////////////
 // protected area layer
 
@@ -819,6 +878,10 @@ protectedEuropeButton.addEventListener("click", toggleLayer(protectedEuropeButto
 
 countryButton.addEventListener("click", toggleLayer(countryButton, country_layers));
 renewablesButton.addEventListener("click", toggleLayerLegend(renewablesButton, renewables_plants, legend_EE));
+refineriesEuButton.addEventListener("click", toggleLayer(refineriesEuButton, refineries_eu));
+chemicalparksEuButton.addEventListener("click", toggleLayer(chemicalparksEuButton, chemicalparks_eu));
+
+
 
 ethylenePipelineButton.addEventListener("click", event => {
 	togglePipeline(event, "ethylene");
