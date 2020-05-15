@@ -642,7 +642,7 @@ var petro_ref_global_off = new L.GeoJSON.AJAX(["geofiles/refineries_petro-global
 );
 
 // var petro_ref_global_on = new L.GeoJSON.AJAX(["geojson_petro_on.php"], {
-var petro_ref_global_off = new L.GeoJSON.AJAX(["geofiles/refineries_petro-global_on.geojson"], {
+var petro_ref_global_on = new L.GeoJSON.AJAX(["geofiles/refineries_petro-global_on.geojson"], {
 	pointToLayer: function(feature, latlng) {
 		return L.circleMarker(latlng, {
 			radius: 4,
