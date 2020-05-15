@@ -36,7 +36,9 @@ let ethylenePipelineButton = document.getElementById("ethylene-button"),
 	scale_global = document.getElementById("scale_global"),
 	scale_legend = document.getElementById("scale"),
 	chemicalparksEuButton = document.getElementById("chemicalparks-eu-button"),
-	refineriesEuButton = document.getElementById("refineries-eu-button")
+	refineriesEuButton = document.getElementById("refineries-eu-button"),
+	petroGlobalOffButton = document.getElementById("petro-ref-global-off-button"),
+	petroGlobalOnButton = document.getElementById("petro-ref-global-on-button")
 	;
 
 function showMap() {
@@ -464,8 +466,8 @@ function addCO2globalPopupHandler(feature) {
 }
 
 // as panes
-// var CO2_global_panes = new L.GeoJSON.AJAX(['geofiles/emissions_global-panes_simplified0.025.json'], {
-var CO2_global_panes = new L.GeoJSON.AJAX(['geojson_co2.php'], {
+var CO2_global_panes = new L.GeoJSON.AJAX(['geofiles/emissions_global-panes_simplified0.025.json'], {
+// var CO2_global_panes = new L.GeoJSON.AJAX(['geojson_co2.php'], {
 	style: style,
 	onEachFeature: function(feature, layer) {
 		layer.bindPopup('<h2>' + feature.properties.country_name_en +
@@ -621,11 +623,55 @@ var refineries_eu = new L.GeoJSON.AJAX(
 		}
 	}
 );
+
+// var petro_ref_global_off = new L.GeoJSON.AJAX(["geojson_petro_off.php"], {
+var petro_ref_global_off = new L.GeoJSON.AJAX(["geofiles/refineries_petro-global_off.geojson"], {
+		pointToLayer: function(feature, latlng) {
+			return L.circleMarker(latlng, {
+				radius: 4,
+				// color: powerplantsColors[feature.properties.primary_fuel],
+				fillColor: '#16B8E0',
+				// fillColor: powerplantsColors[feature.properties.primary_fuel],
+				weight: 1,
+				opacity: 0.7,
+				fillOpacity: 0.4
+			}).bindPopup(PetroRefPopupHandler(feature))
+			;
+		}
+	}
+);
+
+// var petro_ref_global_on = new L.GeoJSON.AJAX(["geojson_petro_on.php"], {
+var petro_ref_global_off = new L.GeoJSON.AJAX(["geofiles/refineries_petro-global_on.geojson"], {
+	pointToLayer: function(feature, latlng) {
+		return L.circleMarker(latlng, {
+			radius: 4,
+			// color: powerplantsColors[feature.properties.primary_fuel],
+			fillColor: '#fffff',
+			// fillColor: powerplantsColors[feature.properties.primary_fuel],
+			weight: 1,
+			opacity: 0.7,
+			fillOpacity: 0.4
+		}).bindPopup(PetroRefPopupHandler(feature))
+		;
+	}
+}
+);
 function addRefineryPopupHandler(feature) {
 	// let nace = globalModel.emissions.categories.naceCategories.items
 	if (feature.properties) {
 		return `<h2>${feature.properties.Name} (${feature.properties.Country})</h2>
-		Owners: ${feature.properties.Owners}; `;
+		Owners: ${feature.properties.Owners}`;
+	} else {
+		console.log(feature);
+	}
+}
+function PetroRefPopupHandler(feature) {
+	// let nace = globalModel.emissions.categories.naceCategories.items
+	if (feature.properties) {
+		return `<h2>${feature.properties.refinery_name} </h2>
+		Type of Hydrocarbon Reserve: ${feature.properties.reserve_info},<br>
+		located in ${feature.properties.country_name_en} (${feature.properties.iso_a3})`;
 	} else {
 		console.log(feature);
 	}
@@ -729,8 +775,8 @@ var protectedEuropeLayer = L.layerGroup([protectedGermanyLayer, protectedNorthEu
 // }); //.addTo(map)
 
 //global
-// var waterGlobalLayer = new L.GeoJSON.AJAX(['geofiles/water_stress-global.json'], {
-	var waterGlobalLayer = new L.GeoJSON.AJAX(['geojson_water.php'], {
+var waterGlobalLayer = new L.GeoJSON.AJAX(['geofiles/water_stress-global.json'], {
+	// var waterGlobalLayer = new L.GeoJSON.AJAX(['geojson_water.php'], {
 	style: waterStyle,
 	onEachFeature: function(feature, layer) {
 		layer.bindPopup('<h2>' + feature.properties.country_name_en +
@@ -745,8 +791,8 @@ var protectedEuropeLayer = L.layerGroup([protectedGermanyLayer, protectedNorthEu
 }); //.addTo(map)
 
 //BWS
-// var waterBWSLayer = new L.GeoJSON.AJAX(['geofiles/water_stress-global_bws.json'], {
-	var waterBWSLayer = new L.GeoJSON.AJAX(['geojson_water_bws.php'], {
+var waterBWSLayer = new L.GeoJSON.AJAX(['geofiles/water_stress-global_bws.json'], {
+	// var waterBWSLayer = new L.GeoJSON.AJAX(['geojson_water_bws.php'], {
 	style: waterBWSstyle,
 	onEachFeature: function(feature, layer) {
 		layer.bindPopup('<h2>' + feature.properties.country_name_en +
@@ -880,7 +926,8 @@ countryButton.addEventListener("click", toggleLayer(countryButton, country_layer
 renewablesButton.addEventListener("click", toggleLayerLegend(renewablesButton, renewables_plants, legend_EE));
 refineriesEuButton.addEventListener("click", toggleLayer(refineriesEuButton, refineries_eu));
 chemicalparksEuButton.addEventListener("click", toggleLayer(chemicalparksEuButton, chemicalparks_eu));
-
+petroGlobalOffButton.addEventListener("click", toggleLayer(petroGlobalOffButton, petro_ref_global_off));
+petroGlobalOnButton.addEventListener("click", toggleLayer(petroGlobalOnButton, petro_ref_global_on));
 
 
 ethylenePipelineButton.addEventListener("click", event => {

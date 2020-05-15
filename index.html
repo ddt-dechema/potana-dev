@@ -7,6 +7,13 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta charset="utf-8">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+      <script> 
+         $(function(){
+           $("#includedContent").load("modals.html"); 
+         });
+         </script> 
       <link href="vendor/leaflet.css" rel="stylesheet" />
       <!-- <script src="https://unpkg.com/leaflet-sidebar-v2@3.0.0/js/leaflet-sidebar.min.js" defer></script> -->
       <script src="vendor/leaflet-sidebar2.min.js" defer></script>
@@ -15,7 +22,7 @@
       <link href="vendor/bulma.min.css" rel="stylesheet" />
       <link href="index.css" rel="stylesheet">
    </head>
-   <body onLoad="document.getElementById('CO2-global-panes-button').click();">
+   <body><!-- onLoad="document.getElementById('CO2-global-panes-button').click();">  clicking on button when loading page-->
       <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg">
          <defs>
             <!-- Symbol definition -->
@@ -98,6 +105,8 @@
             </symbol>
          </defs>
       </svg>
+      
+
       <!-- Map takes whole screen -->
       <div id="map"></div>
       <!-- Size legend -->
@@ -195,6 +204,10 @@
                      <a class="button is-info is-small" id="map-layout-light">Light Grey</a>
                   </div>
                </div>
+
+               Die maritimen Ländergrenzen können zusätzlich angezeigt werden:<br>
+               <button class="button is-small" style="width:50%" id="country-button">Show layer</button>
+ 
             </div>
             <div class="sidebar-pane" id="cluster-i-content">
                <h1 class="sidebar-header">
@@ -243,7 +256,7 @@
                         </div>
                         <div class="col-xs-6">
                            <h3>Freshwater withdrawals</h3>
-                           <!-- source: <a href="http://www.globalcarbonatlas.org/en/" target="_blank">Global Wind Atlas</a> -->
+                           Quelle: <a href="https://datacatalog.worldbank.org/dataset/world-development-indicators" target="_blank">World Bank</a><br>
                            <!-- <div class="buttons">
                               <button class="button is-small btn-block" id="water-eu-button">Europe</a>
                               </div>--> 
@@ -253,7 +266,8 @@
                         </div>
                         <div class="col-xs-6">
                            <h3>Baseline water stress</h3>
-                           <!-- source: <a href="http://www.globalcarbonatlas.org/en/" target="_blank">Global Solar Atlas</a> -->
+                           <a type="button" data-toggle="modal" data-target="#BWSmodal">Berechnungsgrundlage</a><!-- Button trigger modal -->
+                           <div id="includedContent"></div> 
                            <div class="buttons">
                               <button class="button is-small btn-block" id="water-bws-button">Global</button>
                            </div>
@@ -262,7 +276,7 @@
                            <h3>Wasser Quellen</h3>
                            <!-- source: <a href="http://www.globalcarbonatlas.org/en/" target="_blank">Global Solar Atlas</a> -->
                            <div class="buttons">
-                              <button class="button is-small btn-block" id="water-africa-button">Africa</button>
+                              <button class="button is-small btn-block" id="water-africa-button">Afrika</button>
                            </div>
                         </div>
                      </div>
@@ -324,13 +338,13 @@
                            Quelle: <a href="https://www.protectedplanet.net/" target="_blank">Protected Planet</a><br>
                            <div class="col-xs-6">
                               
-                                 <button class="button is-small btn-block" id="protectedafrica-button">Africa</button>
+                                 <button class="button is-small btn-block" id="protectedafrica-button">Afrika</button>
                                  <button class="button is-small btn-block" id="protectedsouthamerica-button">Mexiko, Argentinien, Chile</button>
                               
                            </div>
                            <div class="col-xs-6">
                               
-                                 <button class="button is-small btn-block" id="protectedasia-button">Kazakhstan, China</button>
+                                 <button class="button is-small btn-block" id="protectedasia-button">Kasachstan, China</button>
                                  <button class="button is-small btn-block" id="protectedeurope-button">Europa</button>
                               
                            </div>
@@ -450,24 +464,28 @@
                     <div class="filterGroup">
                        <div class="row col-xs-12">
                                <!-- <h3>Geschützte Flächen</h3> -->
-                               Quelle: <a href="https://www.protectedplanet.net/" target="_blank">Luisa</a><br>
+
                                <div class="col-xs-6">
+                                 Quelle: <a href="https://www.concawe.eu/refineries-map/" target="_blank">Luisa ??</a><br>
                                    <div class="buttons">
                                        <button class="button is-small btn-block" id="refineries-eu-button">Europa</button>
                                    </div>
                                </div>
+                               
                                <div class="col-xs-6">
-                                   <!-- <div class="buttons">
-                                       <button class="button is-small btn-block" id="protectedeurope-button">Europa</button>
-                                   </div> -->
-                               </div>
+                                 Quelle: <a href="https://www.prio.org/Data/Geographical-and-Resource-Datasets/Petroleum-Dataset/Petroleum-Dataset-v11/" target="_blank">PRIO</a>
+                                   <div class="buttons">
+                                    <button class="button is-small btn-block" id="petro-ref-global-off-button">Petroleum Global (offshore)</button>
+                                    <button class="button is-small btn-block" id="petro-ref-global-on-button">Petroleum Global (onshore)</button>
+                                 </div>
+                             </div>
                        </div>
                      </div>
                     <h2>Chemieparks</h2>
                     <div class="filterGroup">
                        <div class="row col-xs-12">
                                <!-- <h3>Geschützte Flächen</h3> -->
-                               Quelle: <a href="https://www.protectedplanet.net/" target="_blank">Luisa</a><br>
+                               Quelle: <a href="https://chemicalparks.com/chemical-parks/list-of-chemical-parks" target="_blank">Luisa ??</a><br>
                                <div class="col-xs-6">
                                    <div class="buttons">
                                        <button class="button is-small btn-block" id="chemicalparks-eu-button">Europa</button>
@@ -736,7 +754,7 @@
                <p>Click on this button to toggle the visibility of the layer:<br>
                   it contains country borders and exclusive economic zones.
                </p>
-               <button class="button is-small" id="country-button">Show layer</button>
+               <!-- <button class="button is-small" id="country-button">Show layer</button> -->
             </div>
  
 

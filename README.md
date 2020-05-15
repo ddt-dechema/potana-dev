@@ -41,12 +41,20 @@ as taken from European Pollutant Release and Transfer Register (E-PRTR) https://
 * Africa https://energydata.info/dataset/africa-water-bodies-2015
 * Global water stress: World Resources Institute (WRI) https://www.wri.org/resources/data-sets/aqueduct-water-stress-projections-data
   * Global data (as of 2014) takes "Level of water stress: freshwater withdrawal as a proportion of available freshwater resources" (indicator code ER.H2O.FWST.ZS)
+  taken from world bank (https://datacatalog.worldbank.org/dataset/world-development-indicators)
   * alternatively, "Annual freshwater withdrawals, total (% of internal resources)" could be taken: https://www.indexmundi.com/facts/indicators/ER.H2O.FWTL.ZS 
   * https://wri.org/applications/aqueduct/country-rankings/
   * baseline water stress (BWS) with the total withdrawal (tot) as gridded weight
 
 ## Renewable Power plants
 * Global dataset was retrieved by Luisa (@Dechema)
+
+## Refineries
+* European dataset was retrieved by Luisa (@Dechema)
+* Data for Petroleum (global) was taken from https://www.prio.org/Data/Geographical-and-Resource-Datasets/Petroleum-Dataset/Petroleum-Dataset-v11/
+
+## Chemical Parks
+* European dataset was retrieved by Luisa (@Dechema)
 
 ## protected areas
 * africa (simplified to 10%) https://energydata.info/dataset/protected-areas 
