@@ -14,6 +14,7 @@ let ethylenePipelineButton = document.getElementById("ethylene-button"),
 	emitterButton = document.getElementById("emitter-button"),
 	totalPipelineButton = document.getElementById("total-pipeline-button"),
 	kenyaPipelineButton = document.getElementById("kenya-button"),
+	pipelineDEButton = document.getElementById("pipeline-de-button"),
 	// protectedGermanyButton = document.getElementById("protectedgermany-button"),
 	protectedSouthmericaButton = document.getElementById("protectedsouthamerica-button"),
 	protectedAsiaButton = document.getElementById("protectedasia-button"),
@@ -37,8 +38,10 @@ let ethylenePipelineButton = document.getElementById("ethylene-button"),
 	scale_legend = document.getElementById("scale"),
 	chemicalparksEuButton = document.getElementById("chemicalparks-eu-button"),
 	refineriesEuButton = document.getElementById("refineries-eu-button"),
+	refineriesGlobalButton = document.getElementById("refineries-global-button"),
 	petroGlobalOffButton = document.getElementById("petro-ref-global-off-button"),
-	petroGlobalOnButton = document.getElementById("petro-ref-global-on-button")
+	petroGlobalOnButton = document.getElementById("petro-ref-global-on-button"),
+	GridDEButton = document.getElementById("grid-de-button")
 	;
 
 function showMap() {
@@ -390,6 +393,20 @@ function addPowerPlantPopupHandler(feature) {
 	}
 }
 
+
+////////////////////////////////////////
+// Electrical Grid
+// Germany
+var grid_de_layer = new L.GeoJSON.AJAX(["geofiles/Hochspannungsnetze_DE.geojson"], {
+// var CO2_global_panes = new L.GeoJSON.AJAX(['geojson_co2.php'], {
+	// style: pipelineStyle,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup('<h2>' + feature.properties.name + '(' + feature.properties.short_name +')</h2>Operator: ' +feature.properties.operator+ '<br>Voltage: ' +feature.properties.voltage + '(' + feature.properties.frequency+ 'Hz)'),
+		layer.bindTooltip('<h2>' + feature.properties.name + '(' + feature.properties.short_name +')</h2>Operator: ' +feature.properties.operator+ '<br>Voltage: ' +feature.properties.voltage + '(' + feature.properties.frequency+ 'Hz)')
+		}})
+		//.addTo(map)
+		;
+
 // GHG USA - data from EPA
 // legend-toggability should be changed when  main_emissions.js and main.js are merged
 
@@ -606,7 +623,7 @@ function addParkPopupHandler(feature) {
 	}
 }
 ////////////////////////////////////////
-// Refineries
+// Refineries EUROPE
 var refineries_eu = new L.GeoJSON.AJAX(
 	["geofiles/refineries_europe.geojson"], {
 		pointToLayer: function(feature, latlng) {
@@ -623,6 +640,24 @@ var refineries_eu = new L.GeoJSON.AJAX(
 		}
 	}
 );
+// Refineries GLOBAL (OSM)
+
+var refineries_global = new L.GeoJSON.AJAX(["geofiles/refineries_global.geojson"], {
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup(feature.properties.name),
+		layer.bindTooltip(feature.properties.name)
+			// mouseover: highlightFeature,
+			// // mouseout: resetHighlight,
+			// //click: zoomToFeature
+			// });
+			layer.on('mouseover', highlightFeature);
+		layer.on('mouseout', function() {
+			CO2_global_panes.resetStyle(this);
+		});
+	}
+}
+);
+
 
 // var petro_ref_global_off = new L.GeoJSON.AJAX(["geojson_petro_off.php"], {
 var petro_ref_global_off = new L.GeoJSON.AJAX(["geofiles/refineries_petro-global_off.geojson"], {
@@ -666,6 +701,7 @@ function addRefineryPopupHandler(feature) {
 		console.log(feature);
 	}
 }
+
 function PetroRefPopupHandler(feature) {
 	// let nace = globalModel.emissions.categories.naceCategories.items
 	if (feature.properties) {
@@ -817,7 +853,19 @@ var waterAfricaLayer = new L.GeoJSON.AJAX(['geofiles/water-africa.json'], {
 
 // ////////////////////////////
 // PIPELINES
-
+//BWS
+var pipeline_de = new L.GeoJSON.AJAX(['geofiles/pipelines_gas_DE.geojson'], {
+	// var waterBWSLayer = new L.GeoJSON.AJAX(['geojson_water_bws.php'], {
+	// style: waterBWSstyle,
+	onEachFeature: function(feature, layer) {
+		layer.bindPopup('<h2>' + feature.properties.name + '</h2>Operator: ' +feature.properties.operator+ '<br>Substance: ' +feature.properties.substance),
+		layer.bindTooltip('<h2>' + feature.properties.name + '</h2>Operator: ' +feature.properties.operator+ '<br>Substance: ' +feature.properties.substance),
+		layer.on('mouseover', highlightFeature);
+		layer.on('mouseout', function() {
+			pipeline_de.resetStyle(this);
+		});
+	}
+}); //.addTo(map)
 
 /*pollutantFilterCO2Button = document.getElementById('pollutant-filter-CO2-button'),
 pollutantFilterCOButton = document.getElementById('pollutant-filter-CO-button')
@@ -925,10 +973,12 @@ protectedEuropeButton.addEventListener("click", toggleLayer(protectedEuropeButto
 countryButton.addEventListener("click", toggleLayer(countryButton, country_layers));
 renewablesButton.addEventListener("click", toggleLayerLegend(renewablesButton, renewables_plants, legend_EE));
 refineriesEuButton.addEventListener("click", toggleLayer(refineriesEuButton, refineries_eu));
+refineriesGlobalButton.addEventListener("click", toggleLayer(refineriesGlobalButton, refineries_global));
 chemicalparksEuButton.addEventListener("click", toggleLayer(chemicalparksEuButton, chemicalparks_eu));
 petroGlobalOffButton.addEventListener("click", toggleLayer(petroGlobalOffButton, petro_ref_global_off));
 petroGlobalOnButton.addEventListener("click", toggleLayer(petroGlobalOnButton, petro_ref_global_on));
-
+GridDEButton.addEventListener("click", toggleLayer(GridDEButton, grid_de_layer));
+pipelineDEButton.addEventListener("click", toggleLayer(pipelineDEButton, pipeline_de));
 
 ethylenePipelineButton.addEventListener("click", event => {
 	togglePipeline(event, "ethylene");

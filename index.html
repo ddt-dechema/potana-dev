@@ -361,7 +361,7 @@
                         </div>
                         <div class="col-xs-6">
                            <div class="buttons">
-                                 <!-- <button class="button is-small btn-block" id="grid-button">Stromnetz</button> -->
+                                 <button class="button is-small btn-block" id="grid-de-button">Deutschland (380kV, 220kV)</button> 
                            </div>
                         </div>
                      </div>
@@ -370,15 +370,17 @@
                   <div class="filterGroup">
                      <div class="row">
                          <div class="col-xs-12">
-                             <h3>Platzhalter</h3>
-                             Quelle: <a href="https://www.protectedplanet.net/" target="_blank">xxx</a><br>
+                             Erdölspeicher<br>
                              <div class="col-xs-6">
-                                 <div class="buttons">
-                                     <button class="button is-small btn-block" id="a-button">xxx</button>
-                                     <button class="button is-small btn-block" id="z-button">xxx</button>
-                                 </div>
-                             </div>
+                              Quelle: <a href="https://www.prio.org/Data/Geographical-and-Resource-Datasets/Petroleum-Dataset/Petroleum-Dataset-v11/" target="_blank">PRIO</a>
+                                <div class="buttons">
+                                 <button class="button is-small btn-block" id="petro-ref-global-off-button">Petroleum Global (offshore)</button>
+                                 <button class="button is-small btn-block" id="petro-ref-global-on-button">Petroleum Global (onshore)</button>
+                               </div>
+                            </div>
+                             Platzhalter
                              <div class="col-xs-6">
+                              Quelle: <a href="https://www.protectedplanet.net/" target="_blank">xxx</a><br>
                                  <div class="buttons">
                                      <button class="button is-small btn-block" id="x-button">xxx</button>
                                      <button class="button is-small btn-block" id="y-button">xxx</button>
@@ -411,16 +413,18 @@
                   <h2>Pipelines</h2>
                   <div class="filterGroup">
                      <div class="row col-xs-12">
-                             <h3>Global</h3>
-                             Quelle: <a href="https://www.protectedplanet.net/" target="_blank">Platzhalter</a><br>
+                             <!-- <h3>Global</h3> -->
+                             <!-- Quelle: <a href="https://www.protectedplanet.net/" target="_blank">Platzhalter</a><br> -->
                              <div class="col-xs-6">
                                  <div class="buttons">
-                                     <button class="button is-small btn-block" id="protectedafrica-button">Flüssig</button>
+                                     <!-- <button class="button is-small btn-block" id="protectedafrica-button">Flüssig</button> -->
                                  </div>
                              </div>
                              <div class="col-xs-6">
+                                Gasförmig
                                  <div class="buttons">
-                                     <button class="button is-small btn-block" id="protectedeurope-button">gasförmig</button>
+                                    Quelle: OSM / Abfrage
+                                     <button class="button is-small btn-block" id="pipeline-de-button">Deutschland</button>
                                  </div>
                              </div>
                            </div>
@@ -473,20 +477,59 @@
                                </div>
                                
                                <div class="col-xs-6">
-                                 Quelle: <a href="https://www.prio.org/Data/Geographical-and-Resource-Datasets/Petroleum-Dataset/Petroleum-Dataset-v11/" target="_blank">PRIO</a>
+                                 Quelle: OSM / <a type="button" data-toggle="modal" data-target="#refinerymodal">Abfrage</a><!-- Button trigger modal -->
+                                 <div class="modal fade" id="refinerymodal" role="dialog">
+                                    <div class="modal-dialog" style="padding-left: 150px;">
+                                    
+                                      <!-- Modal content-->
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                          <h4 class="modal-title">Query in Overpass-Turbo</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                          Die Daten wurden via <a href="http://overpass-turbo.eu/" target="_blank">http://overpass-turbo.eu/</a> mit folgender Query abgefragt:<br>
+                                  
+                                          <code>&lt;/*
+                                          This has been generated by the overpass-turbo wizard.
+                                          The original search was:
+                                          “industrial=refinery”
+                                          */
+                                          [out:json][timeout:25];
+                                          // gather results
+                                          (
+                                            // query part for: “industrial=refinery”
+                                            node["industrial"="refinery"]({{bbox}});
+                                            way["industrial"="refinery"]({{bbox}});
+                                            //relation["industrial"="refinery"]({{bbox}});
+                                          );
+                                          // print results
+                                          out body;
+                                          &gt;;
+                                          out skel qt;</code>
+                                          </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                      </div>
+                                      
+                                    </div>
+                                  </div> 
+                                 <br>
                                    <div class="buttons">
-                                    <button class="button is-small btn-block" id="petro-ref-global-off-button">Petroleum Global (offshore)</button>
-                                    <button class="button is-small btn-block" id="petro-ref-global-on-button">Petroleum Global (onshore)</button>
-                                 </div>
-                             </div>
+                                       <button class="button is-small btn-block" id="refineries-global-button">Global</button>
+                                   </div>
+                               </div>
+
+  
                        </div>
                      </div>
                     <h2>Chemieparks</h2>
                     <div class="filterGroup">
                        <div class="row col-xs-12">
                                <!-- <h3>Geschützte Flächen</h3> -->
-                               Quelle: <a href="https://chemicalparks.com/chemical-parks/list-of-chemical-parks" target="_blank">Luisa ??</a><br>
                                <div class="col-xs-6">
+                                 Quelle: <a href="https://chemicalparks.com/chemical-parks/list-of-chemical-parks" target="_blank">Luisa ??</a><br>
                                    <div class="buttons">
                                        <button class="button is-small btn-block" id="chemicalparks-eu-button">Europa</button>
                                    </div>
