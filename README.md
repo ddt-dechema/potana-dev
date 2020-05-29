@@ -50,7 +50,7 @@ as taken from European Pollutant Release and Transfer Register (E-PRTR) https://
 * Global dataset was retrieved by Luisa (@Dechema)
 
 ## Refineries
-* European dataset was retrieved by Luisa (@Dechema)
+* European dataset was retrieved by Luisa (@Dechema) via https://www.concawe.eu/refineries-map/
 * Data for Petroleum (global) was taken from https://www.prio.org/Data/Geographical-and-Resource-Datasets/Petroleum-Dataset/Petroleum-Dataset-v11/
 
 ## Chemical Parks

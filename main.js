@@ -11,6 +11,7 @@ let ethylenePipelineButton = document.getElementById("ethylene-button"),
 	waterStressButton = document.getElementById("water-stress-button"),
 	waterBWSButton = document.getElementById("water-bws-button"),
 	waterAfricaButton = document.getElementById("water-africa-button"),
+	waterGermanyButton = document.getElementById("water-germany-button"),
 	emitterButton = document.getElementById("emitter-button"),
 	totalPipelineButton = document.getElementById("total-pipeline-button"),
 	kenyaPipelineButton = document.getElementById("kenya-button"),
@@ -397,9 +398,18 @@ function addPowerPlantPopupHandler(feature) {
 ////////////////////////////////////////
 // Electrical Grid
 // Germany
+function gridStyle(feature) {
+    return {
+		color: feature.properties.voltage == 380000 ? "orange" : "green", //Outline color
+		weight: 1,
+    };
+}
+
+
+
 var grid_de_layer = new L.GeoJSON.AJAX(["geofiles/Hochspannungsnetze_DE.geojson"], {
 // var CO2_global_panes = new L.GeoJSON.AJAX(['geojson_co2.php'], {
-	// style: pipelineStyle,
+	style: gridStyle,
 	onEachFeature: function(feature, layer) {
 		layer.bindPopup('<h2>' + feature.properties.name + '(' + feature.properties.short_name +')</h2>Operator: ' +feature.properties.operator+ '<br>Voltage: ' +feature.properties.voltage + '(' + feature.properties.frequency+ 'Hz)'),
 		layer.bindTooltip('<h2>' + feature.properties.name + '(' + feature.properties.short_name +')</h2>Operator: ' +feature.properties.operator+ '<br>Voltage: ' +feature.properties.voltage + '(' + feature.properties.frequency+ 'Hz)')
@@ -851,6 +861,40 @@ var waterAfricaLayer = new L.GeoJSON.AJAX(['geofiles/water-africa.json'], {
 	//    }
 }); //.addTo(map)
 
+// water resources germany
+var waterAfricaLayer = new L.GeoJSON.AJAX(['geofiles/water-africa.json'], {
+	style: waterResourcesStyle,
+	//     onEachFeature: function (feature, layer ) {
+	//      layer.bindPopup(feature.properties.NAME_OF_WA)
+	//    }
+}); //.addTo(map)
+
+
+var waterGermanyReservoir = new L.GeoJSON.AJAX(['geofiles/water_reservoir_Germany.geojson'], {
+	style: waterResourcesStyle,
+	//     onEachFeature: function (feature, layer ) {
+	//      layer.bindPopup(feature.properties.NAME_OF_WA)
+	//    }
+}); //.addTo(map)
+var waterGermanyRivers = new L.GeoJSON.AJAX(['geofiles/water_rivers_Germany.geojson'], {
+	style: waterResourcesStyle,
+	//     onEachFeature: function (feature, layer ) {
+	//      layer.bindPopup(feature.properties.NAME_OF_WA)
+	//    }
+}); //.addTo(map)
+var waterGermanyLakes = new L.GeoJSON.AJAX(['geofiles/water_lakes_Germany.geojson'], {
+	style: waterResourcesStyle,
+	//     onEachFeature: function (feature, layer ) {
+	//      layer.bindPopup(feature.properties.NAME_OF_WA)
+	//    }
+}); //.addTo(map)
+
+var waterGermanyLayer = L.layerGroup([waterGermanyReservoir, waterGermanyRivers,waterGermanyLakes]);
+
+
+
+
+
 // ////////////////////////////
 // PIPELINES
 //BWS
@@ -944,6 +988,7 @@ pvButton.addEventListener("click", toggleLayer(pvButton, pvTileLayer));
 windButton.addEventListener("click", toggleLayer(windButton, windTileLayer));
 waterButton.addEventListener("click", toggleLayer(waterButton, waterTileLayer));
 waterAfricaButton.addEventListener("click", toggleLayer(waterAfricaButton, waterAfricaLayer));
+waterGermanyButton.addEventListener("click", toggleLayer(waterGermanyButton, waterGermanyLayer));
 //waterEUButton.addEventListener("click", toggleLayerLegend(waterEUButton, waterEULayer, legend_water));
 waterStressButton.addEventListener("click", toggleLayerLegend(waterStressButton, waterGlobalLayer, legend_water));
 waterBWSButton.addEventListener("click", toggleLayerLegend(waterBWSButton, waterBWSLayer, legend_BWS));
